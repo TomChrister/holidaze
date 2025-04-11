@@ -1,4 +1,6 @@
-export const API_BASE:string = 'https://v2.api.noroff.dev/holidaze';
+export const API_BASE:string = 'https://v2.api.noroff.dev';
+
+export const API_BASE_HOLIDAZE = 'https://v2.api.noroff.dev/holidaze';
 
 export const API_KEY:string = import.meta.env.VITE_API_KEY;
 
