@@ -1,3 +1,3 @@
-import { Home } from "./home.tsx";
+import { Home } from "../pages/Home.tsx";
 
 export { Home }

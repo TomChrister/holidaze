@@ -1,7 +1,7 @@
-import { API_BASE } from "../../utils/constants.tsx";
-import { authHeaders } from "../../utils/headers.tsx";
+import { API_BASE } from "../utils/constants.tsx";
+import { authHeaders } from "../utils/headers.tsx";
 
-export async function allVenues() {
+export async function venues() {
     try {
         const response = await fetch(`${API_BASE}/venues`, {
             method: "GET",
