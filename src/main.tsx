@@ -4,6 +4,7 @@ import { Layout } from "./layout";
 import { Home } from "./routes";
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { VenuePage } from "./pages/VenuePage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />
             },
+            {
+                path: '/venues/:id',
+                element: <VenuePage />
+            }
         ]
     }
 ])

@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 export function Header() {
     return (
         <>
             <header>
-                <p>
+                <Link to={'/'}>
                     Header
-                </p>
+                </Link>
             </header>
         </>
     )
