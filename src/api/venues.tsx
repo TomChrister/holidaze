@@ -1,10 +1,10 @@
-import { API_BASE } from "../utils/constants.tsx";
+import { API_BASE_HOLIDAZE } from "../utils/constants.tsx";
 import { authHeaders } from "../utils/headers.tsx";
 
 // Fetch all venues
 export async function allVenues() {
     try {
-        const response = await fetch(`${API_BASE}/venues?sort=created`, {
+        const response = await fetch(`${API_BASE_HOLIDAZE}/venues?sort=created`, {
             method: "GET",
             headers: authHeaders()
         });
@@ -26,7 +26,7 @@ export async function allVenues() {
 
 // Fetch venue by ID
 export async function singleVenue(id: string) {
-    const response = await fetch(`${API_BASE}/venues/${id}`, {
+    const response = await fetch(`${API_BASE_HOLIDAZE}/venues/${id}`, {
         headers: authHeaders()
     });
     const { data } = await response.json();
