@@ -1,9 +1,10 @@
 import { API_BASE } from "../utils/constants.tsx";
 import { authHeaders } from "../utils/headers.tsx";
 
-export async function venues() {
+// Fetch all venues
+export async function allVenues() {
     try {
-        const response = await fetch(`${API_BASE}/venues`, {
+        const response = await fetch(`${API_BASE}/venues?sort=created`, {
             method: "GET",
             headers: authHeaders()
         });
@@ -21,4 +22,13 @@ export async function venues() {
         console.error('Error:', error);
         throw error;
     }
+}
+
+// Fetch venue by ID
+export async function singleVenue(id: string) {
+    const response = await fetch(`${API_BASE}/venues/${id}`, {
+        headers: authHeaders()
+    });
+    const { data } = await response.json();
+    return data;
 }
