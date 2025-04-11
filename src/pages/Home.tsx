@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { allVenues } from "../api/venues/AllVenues.tsx";
+import { venues } from "../api/venues.tsx";
 
 export function Home() {
     useEffect(() => {
-        allVenues();
+        venues();
     }, [])
 
     return (
