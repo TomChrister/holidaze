@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { capitalizeLetter, truncate } from "../utils/helpers.ts";
+import { capitalizeLetter, truncate } from "../utils/helperFunctions.ts";
 
 export type VenueProps = {
     id: string;

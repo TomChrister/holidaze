@@ -8,9 +8,9 @@ export default function RegisterForm() {
     const onSubmit = async (data: RegisterFormData) => {
         try {
             const result = await registerUser(data);
-            localStorage.setItem('userName', data.name)
-            console.log('Registering successfull', result);
-            window.location.href="/";
+            localStorage.setItem('name', result.data.name);
+            localStorage.setItem('accessToken', result.data.accessToken);
+            window.location.href = "/";
         } catch (err) {
             console.error('Registration failed', err);
         }
@@ -41,7 +41,5 @@ export default function RegisterForm() {
                 Register
             </button>
         </form>
-
     );
 }
-

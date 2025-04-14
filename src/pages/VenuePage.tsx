@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { singleVenue } from '../api/venues.tsx';
-import { formatDate } from '../utils/helpers.ts';
+import { formatDate } from '../utils/helperFunctions.ts';
 import { VenueProps } from '../components/VenueCard.tsx';
 import { Wifi, CarFront, PawPrint, Utensils, Star } from 'lucide-react';
 
