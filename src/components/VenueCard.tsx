@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { capitalizeLetter, truncate } from "../utils/helpers.ts";
 
 export type VenueProps = {
     id: string;
@@ -25,18 +26,35 @@ export type VenueProps = {
     };
 };
 
+
 export default function VenueCard({
-    id, name, price, location, media, description, meta
+    id, name, price, media, meta
 }: VenueProps) {
     return (
-        <div>
-            <h2>{name}</h2>
-            <p>Price: {price}$</p>
-            <p>Location: {location.city}, {location.country}</p>
-            {media[0] && <img src={media[0].url} alt={media[0].alt || name}/>}
-            <p>{description}</p>
-            <p>Wifi: {meta.wifi ? 'Yes' : 'No'}</p>
-            <Link to={`/venues/${id}`}>View details</Link>
+        <div className="@container">
+            <div className="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
+                <div className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style={{ backgroundImage: `url(${media[0]?.url || '/default-img.jpg' })` }}
+                ></div>
+                <div className="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
+                    <p className="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">
+                        {capitalizeLetter(truncate(name))}
+                    </p>
+                    <div className="flex items-end gap-3 justify-between">
+                        <div className="flex flex-col gap-1">
+                            <p className="text-[#617b89] text-base font-normal leading-normal">
+                                Wifi: {meta.wifi ? 'Yes' : 'No'}
+                            </p>
+                            <p className="text-[#617b89] text-base font-normal leading-normal">
+                                ${price}/night
+                            </p>
+                        </div>
+                        <Link to={`/venues/${id}`} className="text-[#F14016] hover:underline text-sm font-medium">
+                            View details
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

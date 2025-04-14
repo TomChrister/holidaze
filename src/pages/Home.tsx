@@ -11,7 +11,7 @@ export function Home() {
 
     return (
         <div>
-            <h1 className="text-3xl">Home Page</h1>
+            <h1 className="text-3xl">Homes</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {venues.map((venue) => (
                     <VenueCard key={venue.id} {...venue} />
