@@ -8,26 +8,26 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout />,
+        element: <Layout/>,
         children: [
             {
                 index: true,
-                element: <Home />
+                element: <Home/>
             },
             {
                 path: '/venues/:id',
-                element: <VenuePage />
+                element: <VenuePage/>
             },
             {
                 path: '/register',
-                element: <Register />
-            }
+                element: <Register/>
+            },
         ]
     }
 ])
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-      <RouterProvider router={router} />
-  </StrictMode>,
+    <StrictMode>
+        <RouterProvider router={router}/>
+    </StrictMode>,
 )
