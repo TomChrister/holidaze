@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { GetUserName } from "../utils/authHelpers.ts";
+import { GetUserName, isLoggedIn } from "../utils/authHelpers.ts";
 
 const userName = GetUserName();
+const loggedIn = isLoggedIn();
 
 export function Header() {
     return (
@@ -12,13 +13,26 @@ export function Header() {
                 </Link>
 
                 <div className="flex items-center gap-6">
-                    <Link to="/register" className="text-gray-700 hover:text-[#F14016]">
-                        Login/Register
-                    </Link>
-                    {userName && <span className="text-gray-600">Welcome {userName}</span>}
+                    {loggedIn ? (
+                        <>
+                            <button
+                                onClick={() => {
+                                localStorage.clear();
+                                window.location.href = '/';
+                                }}
+                                className="text-gray-700 hover:text-[#F14016]"
+                            >
+                                Logout
+                            </button>
+                            {userName && <span className="text-gray-600">Welcome {userName}</span>}
+                        </>
+                    ) : (
+                        <Link to="/login" className="text-gray-700 hover:text-[#F14016]">
+                            Login
+                        </Link>
+                    )}
                 </div>
             </header>
-
         </>
     )
 }

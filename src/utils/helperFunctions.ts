@@ -1,4 +1,4 @@
-// Help functions
+// Helper functions
 
 // Big first letter in titles
 export const capitalizeLetter = (name: string): string => {
