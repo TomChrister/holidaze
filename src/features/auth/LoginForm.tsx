@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../api/auth.tsx";
-import { LoginFormData } from "../../api/auth.tsx";
+import { LoginFormData } from "../../types/auth";
 
 export default function LoginForm() {
     const { register, handleSubmit } = useForm<LoginFormData>();
