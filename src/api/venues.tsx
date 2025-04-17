@@ -2,9 +2,11 @@ import { API_BASE_HOLIDAZE } from "../utils/constants.tsx";
 import { authHeaders } from "../utils/headers.tsx";
 
 // Fetch all venues
-export async function allVenues() {
+export async function allVenues(limit = 15, page = 1) {
     try {
-        const response = await fetch(`${API_BASE_HOLIDAZE}/venues?sort=created`, {
+        const response = await fetch(
+            `${API_BASE_HOLIDAZE}/venues?sort=created&sortOrder=asc&limit=${limit}&page=${page}`,
+            {
             method: "GET",
             headers: authHeaders()
         });
