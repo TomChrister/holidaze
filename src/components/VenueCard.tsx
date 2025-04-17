@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { capitalizeLetter, truncate } from "../utils/helperFunctions.ts";
+import { capitalizeLetter, truncate } from "../utils";
 
 export type VenueProps = {
     id: string;
@@ -28,7 +28,7 @@ export type VenueProps = {
 
 
 export default function VenueCard({
-    id, name, price, media, meta
+    id, name, price, media, location
 }: VenueProps) {
     return (
         <div className="@container">
@@ -43,7 +43,7 @@ export default function VenueCard({
                     <div className="flex items-end gap-3 justify-between">
                         <div className="flex flex-col gap-1">
                             <p className="text-[#617b89] text-base font-normal leading-normal">
-                                Wifi: {meta.wifi ? 'Yes' : 'No'}
+                                {location.city || 'Koh Samui'}, {location.country || 'Thailand'}
                             </p>
                             <p className="text-[#617b89] text-base font-normal leading-normal">
                                 ${price}/night

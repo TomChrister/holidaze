@@ -1,9 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { singleVenue } from '../api/venues.tsx';
-import { formatDate } from '../utils/helperFunctions.ts';
 import { VenueProps } from '../components/VenueCard.tsx';
 import { Wifi, CarFront, PawPrint, Utensils, Star } from 'lucide-react';
+import { NextArrow, PrevArrow, formatDate, capitalizeLetter } from "../utils";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export function VenuePage() {
     const { id } = useParams();
@@ -15,22 +18,39 @@ export function VenuePage() {
 
     if (!venue) return <p>Loading..</p>;
 
+    const settings = {
+        dots: true,
+        infinite: venue.media && venue.media.length > 1,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <NextArrow/>,
+        prevArrow: <PrevArrow/>,
+    };
+
     return (
         <div>
             <div className='flex items-center bg-white p-4 pb-2 justify-between'>
                 <h2 className='text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12'>
-                    {venue.name}
+                    {capitalizeLetter(venue.name)}
                 </h2>
             </div>
 
-            <img src={venue.media?.[0]?.url || '/default-img.jpg'}
-                 alt={venue.media?.[0]?.alt || venue.name}
-                 className='w-full h-[218px] object-cover'
-            />
+            <Slider {...settings}>
+                {(venue.media?.length > 0 ? venue.media : [{ url: '/default-img.jpg' }]).map((img, i) => (
+                    <div key={i} className='w-full h-[218px]'>
+                        <img
+                            src={img.url}
+                            alt={img.alt || venue.name}
+                            className='w-full h-full object-cover'
+                        />
+                    </div>
+                ))}
+            </Slider>
 
             <div className='p-2'>
                 <h1 className='text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 text-left pb-3 pt-5'>
-                    {venue.name}
+                    {capitalizeLetter(venue.name)}
                 </h1>
                 <p className='text-[#111518] text-base font-normal leading-normal pb-3 pt-1 px-4'>
                     {venue.location?.address || 'Oslo, Norway'}
@@ -68,7 +88,7 @@ export function VenuePage() {
                         <Wifi/>
                     </div>
                     <p className='text-[#111518] text-base font-normal leading-normal flex-1'>
-                        {venue.meta.wifi || 'WiFi available'}
+                        {venue.meta.wifi ? 'WiFi available' : 'No WiFi'}
                     </p>
                 </div>
 
@@ -78,7 +98,7 @@ export function VenuePage() {
                         <CarFront/>
                     </div>
                     <p className='text-[#111518] text-base font-normal leading-normal flex-1'>
-                        {venue.meta.parking || 'Free parking'}
+                        {venue.meta.parking ? 'Free parking' : 'Parking not possible'}
                     </p>
                 </div>
 
@@ -88,7 +108,7 @@ export function VenuePage() {
                         <Utensils/>
                     </div>
                     <p className='text-[#111518] text-base font-normal leading-normal flex-1'>
-                        {venue.meta.breakfast || 'Breakfast included'}
+                        {venue.meta.breakfast ? 'Breakfast included' : 'Breakfast not included'}
                     </p>
                 </div>
 
@@ -98,7 +118,7 @@ export function VenuePage() {
                         <PawPrint/>
                     </div>
                     <p className='text-[#111518] text-base font-normal leading-normal flex-1'>
-                        {venue.meta.pets || 'Pets allowed'}
+                        {venue.meta.pets ? 'Pets allowed' : 'Pets not allowed'}
                     </p>
                 </div>
 
@@ -112,7 +132,6 @@ export function VenuePage() {
                         loading="lazy"
                     ></iframe>
                 </div>
-
 
                 <div className='flex items-center gap-4 bg-white px-4 min-h-14'>
                     <div
