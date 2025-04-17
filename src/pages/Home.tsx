@@ -10,13 +10,22 @@ export function Home() {
     const limit = 15;
 
     useEffect(() => {
-        allVenues(limit, page).then(setVenues);
-    }, [page]);
+        const timeout = setTimeout(() => {
+            if (search.length > 0) {
+                allVenues(100).then(setVenues);
+            } else {
+                allVenues(limit, page).then(setVenues);
+            }
+        }, 300);
+
+        return () => clearTimeout(timeout);
+    }, [search, page]);
 
     const filteredVenues = venues.filter((venue) =>
-        venue.name.toLowerCase().includes(search.toLowerCase()) ||
+        venue.name?.toLowerCase().includes(search.toLowerCase()) ||
         venue.location?.address?.toLowerCase().includes(search.toLowerCase()) ||
-        venue.location?.city?.toLowerCase().includes(search.toLowerCase())
+        venue.location?.city?.toLowerCase().includes(search.toLowerCase()) ||
+        venue.location?.country?.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
@@ -25,11 +34,15 @@ export function Home() {
 
             <SearchBar search={search} onSearchChange={setSearch} />
 
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-                {filteredVenues.map((venue) => (
-                    <VenueCard key={venue.id} {...venue} />
-                ))}
-            </div>
+            {filteredVenues.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {filteredVenues.map((venue) => (
+                        <VenueCard key={venue.id} {...venue} />
+                    ))}
+                </div>
+            ) : (
+                <p className="text-center text-gray-500 mt-8">No matches found</p>
+            )}
 
             <div className="flex justify-center gap-4 my-6">
                 <button

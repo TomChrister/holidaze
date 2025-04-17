@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../api/auth";
-import { RegisterFormData } from "../../api/auth";
+import { RegisterFormData } from "../../types/auth";
 
 export default function RegisterForm() {
     const { register, handleSubmit } = useForm<RegisterFormData>();
@@ -34,6 +34,8 @@ export default function RegisterForm() {
                 placeholder="Password"
                 className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <input type="checkbox" {...register("venueManager", { value: true })} />
+            I want to list venues (Venue Manager)
             <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer"

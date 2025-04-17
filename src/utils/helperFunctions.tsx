@@ -12,7 +12,7 @@ export function truncate(text: string, maxLength = 30) {
     return text.length > maxLength ? text.slice(0, maxLength) + '..' : text
 }
 
-// Display better date format
+// Display a better date format
 export function formatDate(dateSting: string) {
     const data = new Date(dateSting);
     return data.toLocaleDateString('no-NO', {
