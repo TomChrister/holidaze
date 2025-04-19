@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
-import { createVenue } from "../api/venues.tsx";
-import { VenueFormData } from "../types/venues";
+import { createVenue } from '../api/venues.tsx';
+import { VenueProps } from '../types/venue';
 
 export function CreateVenueForm() {
     const {
         register,
         handleSubmit,
         reset,
-    } = useForm<VenueFormData>({
+    } = useForm<VenueProps>({
         defaultValues: {
             name: '',
             description: '',
@@ -30,15 +30,15 @@ export function CreateVenueForm() {
         },
     });
 
-    const onSubmit = async (data: VenueFormData) => {
+    const onSubmit = async (data: VenueProps) => {
         try {
             await createVenue(data);
-            alert("Venue created!");
+            alert('Venue created!');
             reset();
-            window.location.href = "/";
+            window.location.href = '/';
         } catch (err) {
             console.error(err);
-            alert("Failed to create venue.");
+            alert('Failed to create venue.');
         }
     };
 

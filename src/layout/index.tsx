@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import { Header } from "./header.tsx";
-import { Footer } from "./footer.tsx";
+import { Outlet } from 'react-router-dom';
+import { Header } from './header.tsx';
+import { Footer } from './footer.tsx';
 import { useLocation } from 'react-router-dom';
 
 export function Layout() {

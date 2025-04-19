@@ -1,8 +1,8 @@
-import { API_KEY } from "./constants.tsx";
+import { API_KEY } from './constants.tsx';
 
 // No auth required
 export const defaultHeaders = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
 }
 
 // Auth required
