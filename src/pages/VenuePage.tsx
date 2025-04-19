@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { singleVenue } from '../api/venues.tsx';
-import { VenueProps } from '../components/VenueCard.tsx';
+import { VenueProps } from '../types/venue';
 import { Wifi, CarFront, PawPrint, Utensils, Star } from 'lucide-react';
-import { NextArrow, PrevArrow, formatDate, capitalizeLetter } from "../utils";
+import { NextArrow, PrevArrow, formatDate, capitalizeLetter } from '../utils';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -122,14 +122,14 @@ export function VenuePage() {
                     </p>
                 </div>
 
-                <h2 className="text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Where
+                <h2 className='text-[#111518] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5'>Where
                     you'll be</h2>
-                <div className="flex px-4 py-3 max-w-3xl">
+                <div className='flex px-4 py-3 max-w-3xl'>
                     <iframe
-                        className="w-full aspect-video rounded-xl"
-                        src="https://maps.google.com/maps?q=Oslo&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        className='w-full aspect-video rounded-xl'
+                        src='https://maps.google.com/maps?q=Oslo&t=&z=13&ie=UTF8&iwloc=&output=embed'
                         allowFullScreen
-                        loading="lazy"
+                        loading='lazy'
                     ></iframe>
                 </div>
 

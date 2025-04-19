@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { GetUserName, isLoggedIn } from "../utils/authHelpers.ts";
+import { Link, useNavigate } from 'react-router-dom';
+import { GetUserName, isLoggedIn } from '../utils/authHelpers.ts';
 
 const userName = GetUserName();
 const loggedIn = isLoggedIn();
@@ -9,12 +9,12 @@ export function Header() {
 
     return (
         <>
-            <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
+            <header className='flex items-center justify-between px-6 py-4 bg-white shadow-md'>
                 <span onClick={() => navigate('/')}
-                      className="text-2xl font-bold text-[#F14016] cursor-pointer">
+                      className='text-2xl font-bold text-[#F14016] cursor-pointer'>
                     Holidaze
                 </span>
-                <div className="flex items-center gap-6">
+                <div className='flex items-center gap-6'>
                     {loggedIn ? (
                         <>
                             <button
@@ -22,14 +22,14 @@ export function Header() {
                                     localStorage.clear();
                                     window.location.href = '/';
                                 }}
-                                className="text-gray-700 hover:text-[#F14016]"
+                                className='text-gray-700 hover:text-[#F14016]'
                             >
                                 Logout
                             </button>
-                            {userName && <span className="text-gray-600">Welcome {userName}</span>}
+                            {userName && <span className='text-gray-600'>{userName}</span>}
                         </>
                     ) : (
-                        <Link to="/login" className="text-gray-700 hover:text-[#F14016]">
+                        <Link to='/login' className='text-gray-700 hover:text-[#F14016]'>
                             Login
                         </Link>
                     )}

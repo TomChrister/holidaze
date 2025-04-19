@@ -1,4 +1,4 @@
-import { CreateVenueForm } from "../components/CreateVenueForm.tsx";
+import { CreateVenueForm } from '../components/CreateVenueForm.tsx';
 
 export function CreateVenue() {
     return (

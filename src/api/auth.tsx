@@ -1,10 +1,10 @@
-import { API_REGISTER, API_LOGIN } from "../utils/constants.tsx";
-import { defaultHeaders } from "../utils/headers.tsx";
-import { LoginFormData, RegisterFormData } from "../types/auth";
+import { API_REGISTER, API_LOGIN } from '../utils/constants.tsx';
+import { defaultHeaders } from '../utils/headers.tsx';
+import { LoginFormData, RegisterFormData } from '../types/auth';
 
 export async function loginUser(data: LoginFormData) {
     const response = await fetch(`${API_LOGIN}`, {
-        method: "POST",
+        method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
     });
@@ -15,7 +15,7 @@ export async function loginUser(data: LoginFormData) {
 
 export async function registerUser(data: RegisterFormData) {
     const response = await fetch(`${API_REGISTER}`, {
-        method: "POST",
+        method: 'POST',
         headers: defaultHeaders,
         body: JSON.stringify(data),
     });
