@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './header.tsx';
 import { Footer } from './footer.tsx';
 import { useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 export function Layout() {
     const location = useLocation();
@@ -10,11 +11,12 @@ export function Layout() {
     return (
         <>
             <div>
-                <Header />
+                <Toaster position='top-center' />
+                <Header/>
                 <main className={isVenuePage ? '' : 'p-8'}>
-                    <Outlet />
+                    <Outlet/>
                 </main>
-                <Footer />
+                <Footer/>
             </div>
         </>
     );
