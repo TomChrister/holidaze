@@ -1,4 +1,4 @@
-import { API_BASE_HOLIDAZE } from '../utils/constants.tsx';
+import { API_BASE_HOLIDAZE, API_VENUES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
 import { VenueProps } from '../types/venue';
 
@@ -36,7 +36,7 @@ export async function allVenues(): Promise<VenueProps[]> {
     }
 }
 
-// Fetch venue by ID
+// Fetch single venue by ID
 export async function singleVenue(id: string) {
     const response = await fetch(`${API_BASE_HOLIDAZE}/venues/${id}`, {
         headers: authHeaders()
@@ -47,7 +47,7 @@ export async function singleVenue(id: string) {
 
 // Create venue
 export async function createVenue(data: VenueProps) {
-    const res = await fetch(`${API_BASE_HOLIDAZE}/venues`, {
+    const res = await fetch(`${API_VENUES}`, {
         method: 'POST',
         headers: authHeaders(),
         body: JSON.stringify(data),
@@ -62,9 +62,8 @@ export async function createVenue(data: VenueProps) {
 }
 
 // Search venues via API
-export async function searchVenues(query: string): Promise<VenueProps[]> {
-    const response = await fetch(
-        `${API_BASE_HOLIDAZE}/venues?search=${encodeURIComponent(query)}&limit=100`,
+/*export async function searchVenues(query: string): Promise<VenueProps[]> {
+    const response = await fetch(`${API_BASE_HOLIDAZE}/venues?search=${encodeURIComponent(query)}&limit=100`,
         {
             method: 'GET',
             headers: {
@@ -74,9 +73,20 @@ export async function searchVenues(query: string): Promise<VenueProps[]> {
     );
 
     if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
+        throw new Error (`HTTP error ${response.status}`);
     }
 
     const { data } = await response.json();
     return data;
+}*/
+
+// My venues
+export async function ownVenues(name: string) {
+    const response = await fetch(`${API_BASE_HOLIDAZE}/profiles/${name}/venues`, {
+        method: 'GET',
+        headers: authHeaders(),
+    });
+    const json = await response.json();
+    return json.data;
 }
+

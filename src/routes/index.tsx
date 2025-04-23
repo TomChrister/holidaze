@@ -4,6 +4,8 @@ import { VenuePage } from '../pages/VenuePage.tsx';
 import { Login } from '../pages/Login.tsx';
 import { Register } from '../pages/Register.tsx';
 import { CreateVenue } from '../pages/CreateVenue.tsx';
+import { Profile } from "../pages/Profile.tsx";
+import { MyVenues } from "../pages/MyVenues.tsx";
 
 export {
     Home,
@@ -12,4 +14,6 @@ export {
     Login,
     Register,
     CreateVenue,
+    Profile,
+    MyVenues
 };

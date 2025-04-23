@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Layout } from './layout';
-import { Home, VenuePage, Login, Register, CreateVenue, Explore } from './routes';
+import { Home, VenuePage, Login, Register, CreateVenue, Explore, Profile, MyVenues } from './routes';
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <Login/>
             },
             {
                 path: '/register',
@@ -32,8 +32,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/create',
-                element: <CreateVenue />
+                element: <CreateVenue/>
             },
+            {
+                path: '/profile',
+                element: <Profile/>
+            },
+            {
+                path: '/MyVenues',
+                element: <MyVenues/>
+            }
         ]
     }
 ])
