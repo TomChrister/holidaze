@@ -16,5 +16,5 @@ export function VenuePage() {
 
     if (!venue) return <p>Loading...</p>;
 
-    return <VenueDetails venue={venue} />;
+    return <VenueDetails venue={venue} venueId={id!} />;
 }
