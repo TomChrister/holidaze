@@ -2,15 +2,17 @@ import React from 'react';
 import { VenueProps } from '../types/venue';
 import { Wifi, CarFront, PawPrint, Utensils, Star } from 'lucide-react';
 import { NextArrow, PrevArrow, formatDate, capitalizeLetter } from '../utils';
+import { BookingForm } from './BookingForm.tsx';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 interface Props {
     venue: VenueProps;
+    venueId: string;
 }
 
-export function VenueDetails({ venue }: Props) {
+export function VenueDetails({ venue, venueId }: Props) {
     const settings = {
         dots: true,
         infinite: venue.media && venue.media.length > 1,
@@ -62,6 +64,9 @@ export function VenueDetails({ venue }: Props) {
                 <Feature icon={<CarFront />} text={venue.meta.parking ? 'Free parking' : 'Parking not possible'} />
                 <Feature icon={<Utensils />} text={venue.meta.breakfast ? 'Breakfast included' : 'Breakfast not included'} />
                 <Feature icon={<PawPrint />} text={venue.meta.pets ? 'Pets allowed' : 'Pets not allowed'} />
+
+                <BookingForm venueId={venueId} />
+
 
                 <Section title='Where you`ll be'/>
                 <div className='flex px-4 py-3 max-w-3xl'>
