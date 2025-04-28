@@ -1,10 +1,10 @@
-// Login data types
+// LoginPage data types
 export type LoginFormData = {
     email: string;
     password: string;
 };
 
-// Register data types
+// RegisterPage data types
 export type RegisterFormData = {
     name: string;
     email: string;

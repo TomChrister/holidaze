@@ -61,6 +61,16 @@ export async function createVenue(data: VenueProps) {
     return await res.json();
 }
 
+// My venues
+export async function ownVenues(name: string) {
+    const response = await fetch(`${API_PROFILES}/${name}/venues?_bookings=true`, {
+        method: 'GET',
+        headers: authHeaders(),
+    });
+    const json = await response.json();
+    return json.data;
+}
+
 // Search venues via API
 /*export async function searchVenues(query: string): Promise<VenueProps[]> {
     const response = await fetch(`${API_BASE_HOLIDAZE}/venues?search=${encodeURIComponent(query)}&limit=100`,
@@ -79,14 +89,3 @@ export async function createVenue(data: VenueProps) {
     const { data } = await response.json();
     return data;
 }*/
-
-// My venues
-export async function ownVenues(name: string) {
-    const response = await fetch(`${API_PROFILES}/${name}/venues`, {
-        method: 'GET',
-        headers: authHeaders(),
-    });
-    const json = await response.json();
-    return json.data;
-}
-

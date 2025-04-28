@@ -1,3 +1,4 @@
+// Loader used globally
 export function Loader() {
     return (
         <div className='flex justify-center items-center h-64'>

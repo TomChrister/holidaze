@@ -1,6 +1,6 @@
 import { CreateVenueForm } from '../components/CreateVenueForm.tsx';
 
-export function CreateVenue() {
+export function CreateVenuePage() {
     return (
         <>
             <h1>Create venue</h1>

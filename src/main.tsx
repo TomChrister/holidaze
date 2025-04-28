@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Layout } from './layout';
-import { Home, VenuePage, Login, Register, CreateVenue, Explore, ProfilePage, MyVenues } from './routes';
+import { HomePage, VenuePage, LoginPage, RegisterPage, CreateVenuePage, ExplorePage, ProfilePage } from './routes';
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -12,11 +12,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home/>
+                element: <HomePage/>
             },
             {
                 path: '/explore',
-                element: <Explore/>
+                element: <ExplorePage/>
             },
             {
                 path: '/venues/:id',
@@ -24,24 +24,20 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login/>
+                element: <LoginPage/>
             },
             {
                 path: '/register',
-                element: <Register/>
+                element: <RegisterPage/>
             },
             {
                 path: '/create',
-                element: <CreateVenue/>
+                element: <CreateVenuePage/>
             },
             {
                 path: '/profile',
                 element: <ProfilePage/>
             },
-            {
-                path: '/MyVenues',
-                element: <MyVenues/>
-            }
         ]
     }
 ])
