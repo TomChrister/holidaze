@@ -24,7 +24,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
         try {
             await updateProfile(name, profileData);
-            toast.success('Profile updated');
+            toast.success('ProfilePage updated');
             setShowForm(false);
             window.location.reload();
         } catch (error: any) {
@@ -65,12 +65,12 @@ export function UpdateProfileForm({ name }: { name: string }) {
             </div>
 
             {avatarUrl && (
-                <div className="mt-4">
-                    <p className="text-sm text-gray-600">Preview</p>
+                <div className='mt-4'>
+                    <p className='text-sm text-gray-600'>Preview</p>
                     <img
                         src={avatarUrl}
                         alt='Avatar URL'
-                        className="w-32 h-32 rounded-full mt-2 object-cover"
+                        className='w-32 h-32 rounded-full mt-2 object-cover'
                     />
                 </div>
             )}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createBooking } from "../api/bookings.tsx";
+import { createBooking } from '../api/bookings.tsx';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -34,7 +34,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
     }
 
     return (
-        <form onSubmit={handleBooking} className="space-y-4">
+        <form onSubmit={handleBooking} className='space-y-4'>
             <div>
                 <label>Choose date</label>
                 <DatePicker
@@ -54,14 +54,14 @@ export function BookingForm({ venueId }: BookingFormProps) {
             <div>
                 <label>Guests</label>
                 <input
-                    type="number"
+                    type='number'
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
-                    min="1"
+                    min='1'
                     required
                 />
             </div>
-            <button type="submit">Book now</button>
+            <button type='submit'>Book now</button>
         </form>
     );
 }
