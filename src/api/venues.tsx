@@ -1,4 +1,4 @@
-import { API_BASE_HOLIDAZE, API_VENUES } from '../utils/constants.tsx';
+import { API_BASE_HOLIDAZE, API_VENUES, API_PROFILES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
 import { VenueProps } from '../types/venue';
 
@@ -38,7 +38,7 @@ export async function allVenues(): Promise<VenueProps[]> {
 
 // Fetch single venue by ID
 export async function singleVenue(id: string) {
-    const response = await fetch(`${API_BASE_HOLIDAZE}/venues/${id}`, {
+    const response = await fetch(`${API_VENUES}/${id}`, {
         headers: authHeaders()
     });
     const { data } = await response.json();
@@ -82,7 +82,7 @@ export async function createVenue(data: VenueProps) {
 
 // My venues
 export async function ownVenues(name: string) {
-    const response = await fetch(`${API_BASE_HOLIDAZE}/profiles/${name}/venues`, {
+    const response = await fetch(`${API_PROFILES}/${name}/venues`, {
         method: 'GET',
         headers: authHeaders(),
     });
