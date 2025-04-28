@@ -13,7 +13,7 @@ export default function LoginForm() {
             localStorage.setItem('accessToken', result.data.accessToken);
             window.location.href = '/';
         } catch (err) {
-            console.error('Login failed', err);
+            console.error('LoginPage failed', err);
         }
     };
 

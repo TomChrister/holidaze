@@ -1,19 +1,17 @@
-import { Home } from '../pages/Home.tsx';
-import { Explore } from '../pages/Explore.tsx';
+import { HomePage } from '../pages/HomePage.tsx';
+import { ExplorePage } from '../pages/ExplorePage.tsx';
 import { VenuePage } from '../pages/VenuePage.tsx';
-import { Login } from '../pages/Login.tsx';
-import { Register } from '../pages/Register.tsx';
-import { CreateVenue } from '../pages/CreateVenue.tsx';
+import { LoginPage } from '../pages/LoginPage.tsx';
+import { RegisterPage } from '../pages/RegisterPage.tsx';
+import { CreateVenuePage } from '../pages/CreateVenuePage.tsx';
 import { ProfilePage } from "../pages/ProfilePage.tsx";
-import { MyVenues } from "../pages/MyVenues.tsx";
 
 export {
-    Home,
-    Explore,
+    HomePage,
+    ExplorePage,
     VenuePage,
-    Login,
-    Register,
-    CreateVenue,
+    LoginPage,
+    RegisterPage,
+    CreateVenuePage,
     ProfilePage,
-    MyVenues
 };

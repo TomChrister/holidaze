@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SearchBar } from '../components/SearchBar';
 
-export function Home() {
+export function HomePage() {
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
 
