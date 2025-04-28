@@ -1,7 +1,8 @@
-import { API_BOOKINGS } from '../utils/constants.tsx';
+import { API_BOOKINGS, API_PROFILES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
 import { BookingData } from '../types/bookings';
 
+// Create booking
 export async function createBooking(data: BookingData) {
     const response = await fetch(API_BOOKINGS, {
         method: 'POST',
@@ -15,4 +16,14 @@ export async function createBooking(data: BookingData) {
     }
 
     return await response.json();
+}
+
+// Upcoming bookings
+export async function upcomingBookings(name:string) {
+    const response = await fetch(`${API_PROFILES}/${name}/bookings?_venue=true`, {
+        method: 'GET',
+        headers: authHeaders(),
+    });
+    const json = await response.json();
+    return json.data;
 }

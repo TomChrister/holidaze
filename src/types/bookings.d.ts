@@ -5,3 +5,8 @@ export type BookingData = {
     guests: number;
     venueId: string;
 };
+
+// Upcoming bookings data types
+export type UpcomingData = {
+
+}
