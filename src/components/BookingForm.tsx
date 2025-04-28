@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
+import { createBooking } from "../api/bookings.tsx";
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
-import { authHeaders } from '../utils/headers.tsx';
-import { API_BOOKINGS } from '../utils/constants.tsx';
+import 'react-datepicker/dist/react-datepicker.css';
 
 type BookingFormProps = {
     venueId: string;
-}
+};
 
 export function BookingForm({ venueId }: BookingFormProps) {
     const [startDate, setStartDate] = useState<Date | null>(null);
@@ -17,31 +16,25 @@ export function BookingForm({ venueId }: BookingFormProps) {
         e.preventDefault();
 
         if (!startDate || !endDate) {
-            console.error('Please enter start date');
+            console.error('Please select dates');
             return;
         }
 
-        const response = await fetch(`${API_BOOKINGS}`, {
-            method: 'POST',
-            headers: authHeaders(),
-            body: JSON.stringify({
+        try {
+            const data = await createBooking({
                 dateFrom: startDate.toISOString(),
                 dateTo: endDate.toISOString(),
                 guests,
                 venueId,
-            }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
+            });
             console.log('Booking successful!', data);
-        } else {
-            console.error('Booking failed')
+        } catch (error) {
+            console.error('Booking failed', error);
         }
     }
 
     return (
-        <form onSubmit={handleBooking} className='space-y-4'>
+        <form onSubmit={handleBooking} className="space-y-4">
             <div>
                 <label>Choose date</label>
                 <DatePicker
@@ -61,14 +54,14 @@ export function BookingForm({ venueId }: BookingFormProps) {
             <div>
                 <label>Guests</label>
                 <input
-                    type='number'
+                    type="number"
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
-                    min='1'
+                    min="1"
                     required
                 />
             </div>
-            <button type='submit'>Book now</button>
+            <button type="submit">Book now</button>
         </form>
     );
 }

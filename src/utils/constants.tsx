@@ -10,8 +10,8 @@ export const API_REGISTER:string = `${API_BASE}/auth/register`;
 
 export const API_LOGIN:string = `${API_BASE}/auth/login`;
 
-export const API_VENUES:string = `${API_BASE}/venues`;
+export const API_VENUES:string = `${API_BASE_HOLIDAZE}/venues`;
 
 export const API_BOOKINGS:string = `${API_BASE_HOLIDAZE}/bookings`;
 
-export const API_PROFILES:string = `${API_BASE}/profiles`;
+export const API_PROFILES:string = `${API_BASE_HOLIDAZE}/profiles`;
