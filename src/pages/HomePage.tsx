@@ -1,16 +1,18 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { SearchBar } from '../components/SearchBar';
+import { buildSearchQuery } from '../utils/useQuery.ts';
 
 export function HomePage() {
-    const [search, setSearch] = useState('');
     const navigate = useNavigate();
+    const [search, setSearch] = useState('');
 
-    const handleSearch = () => {
-        if (search.trim()) {
-            navigate(`/explore?search=${encodeURIComponent(search)}`);
-        }
+    const handleSearch = (params?: {
+        startDate?: Date | null;
+        endDate?: Date | null;
+        guests?: number;
+    }) => {
+        navigate(`/explore?${buildSearchQuery(search, params)}`);
     };
 
     return (
@@ -22,6 +24,7 @@ export function HomePage() {
                     onSearchChange={setSearch}
                     onSearchSubmit={handleSearch}
                 />
+
             </div>
 
             <div>
