@@ -1,8 +1,8 @@
 import React from 'react';
 import { VenueProps } from '../types/venue';
-import { Wifi, CarFront, PawPrint, Utensils, Star } from 'lucide-react';
-import { NextArrow, PrevArrow, formatDate, capitalizeLetter } from '../utils';
-import { BookingForm } from './BookingForm.tsx';
+import { CarFront, PawPrint, Star, Utensils, Wifi } from 'lucide-react';
+import { capitalizeLetter, formatDate, NextArrow, PrevArrow } from '../utils';
+import { BookingForm } from '../features/booking/BookingForm.tsx';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
