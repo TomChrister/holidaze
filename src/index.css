@@ -3,6 +3,8 @@
 
 @theme {
     --font-primary: 'PlusJakarta', sans-serif;
+
+    --color-brand-primary: rgba(200, 200, 200, 0.16)
 }
 
 html {
@@ -12,4 +14,3 @@ html {
 .input {
     @apply w-full border rounded px-3 py-2;
 }
-

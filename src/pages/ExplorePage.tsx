@@ -48,7 +48,6 @@ export function ExplorePage() {
 
     return (
         <div>
-            <h1 className='text-3xl mb-2'>Explore</h1>
             <SearchBar
                 search={searchInput}
                 onSearchChange={setSearchInput}

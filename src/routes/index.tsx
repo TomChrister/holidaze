@@ -4,7 +4,7 @@ import { VenuePage } from '../pages/VenuePage.tsx';
 import { LoginPage } from '../pages/LoginPage.tsx';
 import { RegisterPage } from '../pages/RegisterPage.tsx';
 import { CreateVenuePage } from '../pages/CreateVenuePage.tsx';
-import { ProfilePage } from "../pages/ProfilePage.tsx";
+import { ProfilePage } from '../pages/ProfilePage.tsx';
 
 export {
     HomePage,

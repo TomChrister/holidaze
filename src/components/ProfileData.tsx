@@ -31,15 +31,19 @@ export function ProfileData() {
     if (!profile) return <p>No profile found</p>
 
     return (
-        <div className='p-4'>
-            <h1 className='text-2xl font-bold'>{profile.name}</h1>
-            <p className='text-gray-600'>{profile.email}</p>
-            <p className='text-gray-500'>{profile.bio || 'No bio available'}</p>
-            <img
-                src={profile.avatar?.url || '/default-avatar.jpg'}
-                alt={profile.avatar?.alt || 'Avatar'}
-                className='w-32 h-32 rounded-full mt-4'
-            />
+        <div className='flex self-center justify-center gap-6 4'>
+            <div>
+                <img
+                    src={profile.avatar?.url || '/default-avatar.jpg'}
+                    alt={profile.avatar?.alt || 'Avatar'}
+                    className='w-32 h-32 rounded-full mt-4'
+                />
+            </div>
+            <div className='self-center'>
+                <h1 className='text-2xl font-bold'>{profile.name}</h1>
+                <p className='text-gray-600 ml-1'>{profile.email}</p>
+                <p className='text-gray-500 ml-1'>{profile.bio || 'No bio available'}</p>
+            </div>
         </div>
     )
 }

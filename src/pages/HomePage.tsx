@@ -18,7 +18,9 @@ export function HomePage() {
     return (
         <>
             <div>
-                <h1 className='text-3xl mb-2'>Home</h1>
+                <div>
+                    <img src='/appartment.png' alt='appartment' className='w-full h-[378px] object-cover' />
+                </div>
                 <SearchBar
                     search={search}
                     onSearchChange={setSearch}
