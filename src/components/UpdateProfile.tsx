@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { updateProfile } from '../api/profile';
 import { toast } from 'react-hot-toast';
+import { UserRoundPen } from 'lucide-react';
 
 export function UpdateProfileForm({ name }: { name: string }) {
     const [bio, setBio] = useState('');
@@ -34,16 +35,20 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
     if (!showForm) {
         return (
-            <button onClick={() => setShowForm(true)}
-                    className='bg-blue-600 text-white py-2 px-4 rounded'
-            >
-                Update profile
-            </button>
+            <div className='px-6 pb-6'>
+                <button
+                    onClick={() => setShowForm(true)}
+                    className='bg-blue-600 text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center'
+                >
+                    <UserRoundPen className='w-4 h-4 mr-2' />
+                    Update profile
+                </button>
+            </div>
         );
     }
 
     return (
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form onSubmit={handleSubmit} className='space-y-4 p-6'>
             <div>
                 <label className='block font-semibold'>Ny bio:</label>
                 <textarea
@@ -75,8 +80,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
                 </div>
             )}
 
-
-            <button type='submit' className='bg-blue-600 text-white py-2 px-4 rounded'>
+            <button type='submit' className='bg-blue-600 text-white py-2 px-4 rounded w-full'>
                 Update profile
             </button>
         </form>

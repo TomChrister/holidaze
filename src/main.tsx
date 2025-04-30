@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Layout } from './layout';
-import { HomePage, VenuePage, LoginPage, RegisterPage, CreateVenuePage, ExplorePage, ProfilePage } from './routes';
+import { CreateVenuePage, ExplorePage, HomePage, LoginPage, ProfilePage, RegisterPage, VenuePage } from './routes';
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 

@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { ownVenues } from '../api/venues';
 import { formatDate } from '../utils';
+import { DeleteVenueBtn } from './DeleteVenueBtn.tsx';
 
 export function MyVenues() {
-    const [venues, setVenues] = useState([]);
+    const navigate = useNavigate();
+
+    const [venues, setVenues] = useState<any[]>([]);
     const username = localStorage.getItem('name');
 
     useEffect(() => {
@@ -21,11 +24,6 @@ export function MyVenues() {
                     <li key={venue.id} className="border p-4 rounded">
                         <Link to={`/venues/${venue.id}`} className="block mb-2">
                             <h2 className="text-xl font-semibold">{venue.name}</h2>
-                            <img
-                                src={venue.media[0]?.url}
-                                alt={venue.media[0]?.alt || venue.name}
-                                className="w-[200px] rounded-lg mt-2"
-                            />
                         </Link>
 
                         {venue.bookings && venue.bookings.length > 0 ? (
@@ -39,13 +37,26 @@ export function MyVenues() {
                                             </span>
                                             <span>for {booking.guests} guests</span>
                                         </li>
-
                                     ))}
                                 </ul>
                             </div>
                         ) : (
                             <p className="text-gray-500 text-sm mt-2">No bookings yet.</p>
                         )}
+
+                        <div className="mt-4 flex gap-2">
+                            <DeleteVenueBtn
+                                venueId={venue.id}
+                                onDelete={() => setVenues((prev) => prev.filter((v) => v.id !== venue.id))}
+                            />
+                        </div>
+                        <button
+                            onClick={() => navigate(`/edit/${venue.id}`)}
+                            className="ml-2 px-3 py-1 bg-blue-500 text-white rounded"
+                        >
+                            Edit
+                        </button>
+
                     </li>
                 ))}
             </ul>

@@ -1,4 +1,4 @@
-import { API_BASE_HOLIDAZE, API_VENUES, API_PROFILES } from '../utils/constants.tsx';
+import { API_BASE_HOLIDAZE, API_PROFILES, API_VENUES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
 import { VenueProps } from '../types/venue';
 
@@ -71,21 +71,34 @@ export async function ownVenues(name: string) {
     return json.data;
 }
 
-// Search venues via API
-/*export async function searchVenues(query: string): Promise<VenueProps[]> {
-    const response = await fetch(`${API_BASE_HOLIDAZE}/venues?search=${encodeURIComponent(query)}&limit=100`,
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
+// Delete venue
+export async function deleteVenue(id: string) {
+    const response = await fetch(`${API_VENUES}/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+    });
 
     if (!response.ok) {
-        throw new Error (`HTTP error ${response.status}`);
+        throw new Error(`Failed to delete venue`);
     }
 
-    const { data } = await response.json();
-    return data;
-}*/
+    return response.status !== 204 ? await response.json() : null;
+}
+
+// Update venue
+export async function updateVenue(id: string, data: any) {
+    const response = await fetch(`${API_VENUES}/${id}`, {
+        method: 'PUT',
+        headers: {
+            ...authHeaders(),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to update venue');
+    }
+
+    return await response.json();
+}

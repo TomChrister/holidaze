@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { upcomingBookings } from '../api/bookings.tsx';
 import { formatDate } from '../utils';
 import { Link } from 'react-router-dom';
@@ -32,19 +32,14 @@ export function UpcomingBookings() {
     if (bookings.length === 0) return <p>No bookings yet.</p>;
 
     return (
-        <div className='space-y-4'>
-            <h2 className='text-2xl font-bold'>Upcoming trips</h2>
-            <ul className='space-y-2'>
+        <div className='space-y-4 bg-brand-primary'>
+            <h2 className='text-2xl font-bold pt-6 px-6 m-0'>Upcoming trips</h2>
+            <ul className='flex flex-col space-y-4 p-6'>
                 {bookings.map((booking) => (
                     <Link to={`/venues/${booking.venue.id}`}>
-                        <li key={booking.id} className='border p-4 rounded'>
+                        <li key={booking.id} className='p-4 rounded-lg bg-white'>
                             <p><strong>{booking.venue.name}</strong></p>
-                            <img
-                                src={booking.venue.media?.[0]?.url}
-                                alt={booking.venue.media?.[0]?.alt}
-                                className='w-full h-48 object-cover rounded mb-2'
-                            />
-                            <p>{formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}</p>
+                            <p className='text-gray-500'>{formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}</p>
                             <p><strong>Guests:</strong> {booking.guests}</p>
                         </li>
                     </Link>
