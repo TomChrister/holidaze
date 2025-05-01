@@ -87,18 +87,17 @@ export async function deleteVenue(id: string) {
 
 // Update venue
 export async function updateVenue(id: string, data: any) {
-    const response = await fetch(`${API_VENUES}/${id}`, {
+    const res = await fetch(`${API_VENUES}/${id}`, {
         method: 'PUT',
-        headers: {
-            ...authHeaders(),
-            'Content-Type': 'application/json',
-        },
+        headers: authHeaders(),
         body: JSON.stringify(data),
     });
+    const body = await res.json();
+    if (!res.ok) {
 
-    if (!response.ok) {
-        throw new Error('Failed to update venue');
+        const msg = body.error || body.message || JSON.stringify(body);
+        throw new Error(msg);
     }
-
-    return await response.json();
+    return body;
 }
+
