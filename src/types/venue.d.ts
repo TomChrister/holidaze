@@ -1,3 +1,4 @@
+// Single venue props
 export type VenueProps = {
     id: string;
     name: string;
@@ -22,3 +23,24 @@ export type VenueProps = {
         continent: string;
     };
 };
+
+// Edit venue props
+export type EditVenueProps = {
+    name?: string
+    description?: string
+    media?: { url: string; alt: string }[]
+    price?: number
+    maxGuests?: number
+    meta?: {
+        wifi?: boolean
+        parking?: boolean
+        breakfast?: boolean
+        pets?: boolean
+    }
+    location?: {
+        address?: string
+        city?: string
+        zip?: string
+        country?: string
+    }
+}

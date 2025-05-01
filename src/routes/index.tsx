@@ -5,6 +5,7 @@ import { LoginPage } from '../pages/LoginPage.tsx';
 import { RegisterPage } from '../pages/RegisterPage.tsx';
 import { CreateVenuePage } from '../pages/CreateVenuePage.tsx';
 import { ProfilePage } from '../pages/ProfilePage.tsx';
+import { EditVenuePage } from '../pages/EditVenuePage.tsx';
 
 export {
     HomePage,
@@ -14,4 +15,5 @@ export {
     RegisterPage,
     CreateVenuePage,
     ProfilePage,
+    EditVenuePage
 };
