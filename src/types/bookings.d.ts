@@ -5,3 +5,8 @@ export type BookingData = {
     guests: number;
     venueId: string;
 };
+
+// Booking form type
+export type BookingFormProps = {
+    venueId: string;
+};

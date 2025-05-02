@@ -20,7 +20,6 @@ export type VenueProps = {
         city: string;
         zip: string;
         country: string;
-        continent: string;
     };
 };
 

@@ -1,4 +1,3 @@
-// Auth helpers
 import { API_BASE_HOLIDAZE } from './constants';
 import { authHeaders } from './headers.tsx';
 

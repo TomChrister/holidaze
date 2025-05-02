@@ -1,5 +1,4 @@
-// utils/useQuery.ts
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 // Gets values from the URL query on explore page
 export function useQuery() {
