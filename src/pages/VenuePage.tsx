@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { singleVenue } from '../api/venues';
 import { VenueProps } from '../types/venue';
-import { VenueDetails } from '../components/VenueDetails';
+import { VenueDetails } from '../features/venue/VenueDetails.tsx';
 
 export function VenuePage() {
     const { id } = useParams();

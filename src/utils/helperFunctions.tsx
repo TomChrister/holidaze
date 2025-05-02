@@ -1,4 +1,3 @@
-// Helper functions
 import { CustomArrowProps } from 'react-slick';
 
 // Big first letter in titles

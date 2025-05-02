@@ -17,21 +17,21 @@ export function MyVenues() {
     }, [username]);
 
     return (
-        <div>
-            <h1 className='text-3xl font-bold mb-4'>My Venues</h1>
+        <div className='px-6 bg-brand-primary'>
+            <h1 className='mb-4 text-3xl font-bold'>My Venues</h1>
             <ul className='space-y-6'>
                 {venues.map((venue: any) => (
-                    <li key={venue.id} className='border p-4 rounded'>
-                        <Link to={`/venues/${venue.id}`} className='block mb-2'>
+                    <li key={venue.id} className='rounded-lg bg-white p-4'>
+                        <Link to={`/venues/${venue.id}`} className='mb-2 block'>
                             <h2 className='text-xl font-semibold'>{venue.name}</h2>
                         </Link>
 
                         {venue.bookings && venue.bookings.length > 0 ? (
                             <div className='mt-4'>
                                 <h3 className='font-semibold'>Bookings:</h3>
-                                <ul className='list-disc ml-5'>
+                                <ul className='ml-5 list-disc'>
                                     {venue.bookings.map((booking: any) => (
-                                        <li key={booking.id} className='text-sm flex flex-wrap gap-1'>
+                                        <li key={booking.id} className='flex flex-wrap gap-1 text-sm'>
                                             <span>
                                                 {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
                                             </span>
@@ -41,23 +41,25 @@ export function MyVenues() {
                                 </ul>
                             </div>
                         ) : (
-                            <p className='text-gray-500 text-sm mt-2'>No bookings yet.</p>
+                            <p className='mt-2 text-sm text-gray-500'>No bookings yet.</p>
                         )}
 
-                        <div className='mt-4 flex gap-2'>
-                            <DeleteVenueBtn
-                                venueId={venue.id}
-                                onDelete={() => setVenues((prev) => prev.filter((v) => v.id !== venue.id))}
-                            />
+                        <div className='flex gap-2'>
+                            <div className='mt-4 flex gap-2'>
+                                <DeleteVenueBtn
+                                    venueId={venue.id}
+                                    onDelete={() => setVenues((prev) => prev.filter((v) => v.id !== venue.id))}
+                                />
+                            </div>
+                            <button
+                                onClick={() => navigate(`/venues/${venue.id}/edit`)}
+                                className='mt-4 w-28 cursor-pointer rounded bg-blue-500 px-3 text-white'
+                            >
+                                Edit
+                            </button>
                         </div>
-                        <button
-                            onClick={() => navigate(`/venues/${venue.id}/edit`)}
-                            className='ml-2 px-3 py-1 bg-blue-500 text-white rounded'
-                        >
-                            Edit
-                        </button>
                     </li>
-                ))};
+                ))}
             </ul>
         </div>
     );

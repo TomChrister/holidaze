@@ -25,9 +25,12 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
         try {
             await updateProfile(name, profileData);
-            toast.success('ProfilePage updated');
+            toast.success('Profile page updated', {duration: 1500});
+
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500)
             setShowForm(false);
-            window.location.reload();
         } catch (error: any) {
             toast.error(error.message || 'Could not update profile');
         }
@@ -38,9 +41,9 @@ export function UpdateProfileForm({ name }: { name: string }) {
             <div className='px-6 pb-6'>
                 <button
                     onClick={() => setShowForm(true)}
-                    className='bg-blue-600 text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center'
+                    className='bg-blue-600 text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center cursor-pointer'
                 >
-                    <UserRoundPen className='w-4 h-4 mr-2' />
+                    <UserRoundPen className='w-4 h-4 mr-2'/>
                     Update profile
                 </button>
             </div>
@@ -72,16 +75,24 @@ export function UpdateProfileForm({ name }: { name: string }) {
             {avatarUrl && (
                 <div className='mt-4'>
                     <p className='text-sm text-gray-600'>Preview</p>
-                    <img
-                        src={avatarUrl}
-                        alt='Avatar URL'
-                        className='w-32 h-32 rounded-full mt-2 object-cover'
+                    <img src={avatarUrl} alt='Avatar URL' className='w-32 h-32 rounded-full mt-2 object-cover'
                     />
                 </div>
             )}
 
-            <button type='submit' className='bg-blue-600 text-white py-2 px-4 rounded w-full'>
+            <button
+                type='submit'
+                className='flex items-center justify-center bg-blue-600 text-white py-2 px-4 rounded w-full cursor-pointer'
+            >
+                <UserRoundPen className='w-4 h-4 mr-2'/>
                 Update profile
+            </button>
+
+            <button
+                type='button'
+                onClick={() => setShowForm(false)}
+                className='bg-red-600 text-white py-2 px-4 rounded w-full cursor-pointer'>
+                Cancel
             </button>
         </form>
     );

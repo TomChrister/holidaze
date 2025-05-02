@@ -1,6 +1,6 @@
 import { ProfileData } from '../components/ProfileData.tsx';
 import { UpdateProfileForm } from '../components/UpdateProfile.tsx';
-import { UpcomingBookings } from '../components/UpcomingBookings.tsx';
+import { MyBookings } from '../features/booking/MyBookings.tsx';
 import { MyVenues } from '../components/MyVenues.tsx';
 
 export function ProfilePage() {
@@ -11,7 +11,7 @@ export function ProfilePage() {
             <div>
                 <ProfileData/>
                 <UpdateProfileForm name={name}/>
-                <UpcomingBookings/>
+                <MyBookings/>
                 <MyVenues/>
             </div>
         </>
