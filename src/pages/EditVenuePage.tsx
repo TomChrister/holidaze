@@ -1,4 +1,4 @@
-import { EditVenue } from '../components/EditVenue.tsx';
+import { EditVenue } from '../features/venue/EditVenue.tsx';
 
 export function EditVenuePage() {
     return (

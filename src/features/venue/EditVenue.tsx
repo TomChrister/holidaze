@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { singleVenue, updateVenue } from '../api/venues.tsx';
-import { EditVenueProps } from '../types/venue';
+import { singleVenue, updateVenue } from '../../api/venues.tsx';
+import { EditVenueProps } from '../../types/venue';
 import { CarFront, PawPrint, Utensils, Wifi } from 'lucide-react';
 
 export function EditVenue() {

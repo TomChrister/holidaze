@@ -32,8 +32,8 @@ export function MyBookings() {
     if (bookings.length === 0) return <p>No bookings yet.</p>;
 
     return (
-        <div className='space-y-4 bg-brand-primary'>
-            <h2 className='text-2xl font-bold pt-6 px-6 m-0'>Upcoming trips</h2>
+        <div className='space-y-4 pt-6 w-full bg-brand-secondary'>
+            <h2 className='text-2xl font-bold px-6 m-0'>Upcoming trips</h2>
             <ul className='flex flex-col space-y-4 p-6'>
                 {bookings.map((booking) => (
                     <li key={booking.id} className="p-4 rounded-lg bg-white">
