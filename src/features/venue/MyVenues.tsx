@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ownVenues } from '../api/venues';
-import { formatDate } from '../utils';
-import { DeleteVenueBtn } from './DeleteVenueBtn.tsx';
+import { ownVenues } from '../../api/venues.tsx';
+import { formatDate } from '../../utils';
+import { DeleteVenueBtn } from '../../components/DeleteVenueBtn.tsx';
 
 export function MyVenues() {
     const navigate = useNavigate();
@@ -17,8 +17,8 @@ export function MyVenues() {
     }, [username]);
 
     return (
-        <div className='px-6 bg-brand-primary'>
-            <h1 className='mb-4 text-3xl font-bold'>My Venues</h1>
+        <div className='pt-6 px-6 w-full bg-brand-secondary'>
+            <h1 className='text-2xl font-bold'>My Venues</h1>
             <ul className='space-y-6'>
                 {venues.map((venue: any) => (
                     <li key={venue.id} className='rounded-lg bg-white p-4'>

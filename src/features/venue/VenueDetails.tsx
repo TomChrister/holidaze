@@ -1,11 +1,12 @@
-import React from 'react';
+import { useState } from 'react';
 import { VenueProps } from '../../types/venue';
-import { CarFront, PawPrint, Star, Utensils, Wifi } from 'lucide-react';
-import { capitalizeLetter, formatDate, NextArrow, PrevArrow } from '../../utils';
+import { capitalizeLetter, NextArrow, PrevArrow } from '../../utils';
 import { BookingForm } from '../booking/BookingForm.tsx';
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { IoLocation } from 'react-icons/io5';
+import { FaBed, FaDollarSign, FaStar } from 'react-icons/fa';
 
 interface Props {
     venue: VenueProps;
@@ -13,104 +14,72 @@ interface Props {
 }
 
 export function VenueDetails({ venue, venueId }: Props) {
-    const settings = {
-        dots: true,
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const settings: Settings = {
         infinite: venue.media && venue.media.length > 1,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
+        afterChange: (index: number) => setCurrentIndex(index),
     };
 
-    return (
-        <div>
-            <div className='flex items-center bg-white p-4 pb-2 justify-between'>
-                <h2 className='text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12'>
-                    {capitalizeLetter(venue.name)}
-                </h2>
-            </div>
-
-            <Slider {...settings}>
-                {(venue.media?.length > 0 ? venue.media : [{ url: '/default-img.jpg' }]).map((img, i) => (
-                    <div key={i} className='w-full h-[218px]'>
-                        <img
-                            src={img.url}
-                            alt={img.alt || venue.name}
-                            className='w-full h-full object-cover'
-                        />
-                    </div>
-                ))}
-            </Slider>
-
-            <div className='p-2'>
-                <h1 className='text-[#111518] text-[22px] font-bold px-4 pb-3 pt-5'>
-                    {capitalizeLetter(venue.name)}
-                </h1>
-                <p className='text-[#111518] text-base px-4 pb-3 pt-1'>
-                    {venue.location?.address || 'Oslo, Norway'}
-                </p>
-
-                <div className='flex flex-wrap gap-3 px-4 py-3'>
-                    <InfoCard title='guests' value={venue.maxGuests} />
-                    <InfoCard title='price' value={`$${venue.price || '200'}`} />
-                    <InfoCard title='listed at' value={formatDate(venue.created)} />
-                </div>
-
-                <Section title='About this place' text={venue.description || 'Enjoy a relaxing stay at this beautiful location!'} />
-
-                <Section title='What this place offers' />
-                <Feature icon={<Wifi />} text={venue.meta.wifi ? 'WiFi available' : 'No WiFi'} />
-                <Feature icon={<CarFront />} text={venue.meta.parking ? 'Free parking' : 'Parking not possible'} />
-                <Feature icon={<Utensils />} text={venue.meta.breakfast ? 'Breakfast included' : 'Breakfast not included'} />
-                <Feature icon={<PawPrint />} text={venue.meta.pets ? 'Pets allowed' : 'Pets not allowed'} />
-
-                <BookingForm venueId={venueId} />
-                
-                <Section title='Where you`ll be'/>
-                <div className='flex px-4 py-3 max-w-3xl'>
-                    <iframe
-                        className='w-full aspect-video rounded-xl'
-                        src='https://maps.google.com/maps?q=Oslo&t=&z=13&ie=UTF8&iwloc=&output=embed'
-                        allowFullScreen
-                        loading='lazy'
-                    ></iframe>
-                </div>
-
-                <Feature
-                    icon={<Star />}
-                    text={venue.rating ? `${venue.rating}` : 'No reviews yet'}
-                />
-            </div>
-        </div>
-    );
-}
-
-function InfoCard({ title, value }: { title: string; value: string | number }) {
-    return (
-        <div className='flex min-w-[111px] flex-1 flex-col gap-2 rounded-lg border border-[#dbe2e6] p-3 items-start'>
-            <p className='text-[#111518] text-2xl font-bold'>{value}</p>
-            <p className='text-[#617b89] text-sm'>{title}</p>
-        </div>
-    );
-}
-
-function Section({ title, text }: { title: string; text?: string }) {
+    const images = venue.media?.length > 0 ? venue.media : [{url: '/default-img.jpg'}]
     return (
         <>
-            <h2 className='text-[#111518] text-[22px] font-bold px-4 pb-3 pt-5'>{title}</h2>
-            {text && <p className='text-[#111518] text-base px-4 pb-3 pt-1'>{text}</p>}
-        </>
-    );
-}
+            <div className='bg-brand-secondary border-b border-gray-300'>
+                <Slider {...settings}>
+                    {images.map((img, i) => (
+                        <div key={i} className='relative w-full h-[318px]'>
+                            <img
+                                src={img.url}
+                                alt={img.alt || venue.name}
+                                className='w-full h-full object-cover'
+                            />
+                            <div className='absolute bottom-2 right-2 bg-black bg-opacity-60 text-white text-sm px-2 py-1 rounded'>
+                                {currentIndex + 1}/{images.length}
+                            </div>
+                        </div>
+                    ))}
+                </Slider>
 
-function Feature({ icon, text }: { icon: React.ReactNode; text: string }) {
-    return (
-        <div className='flex items-center gap-4 bg-white px-4 min-h-14'>
-            <div className='text-[#111518] flex items-center justify-center rounded-lg bg-[#f0f3f4] shrink-0 size-10'>
-                {icon}
+                <div className='p-2'>
+                    <h1 className='text-[#111518] text-[22px] font-bold px-4 pb-2'>
+                        {capitalizeLetter(venue.name)}
+                    </h1>
+                    <p className='flex gap-1 items-center text-gray-600 px-4 pb-3'>
+                        <IoLocation size={18}/>
+                        {capitalizeLetter(venue.location?.address) || 'Oslo, Norway'}
+                    </p>
+
+                    <div className='flex items-center px-4 py-3 gap-6'>
+                        <div className='flex flex-col items-center text-gray-600'>
+                            <FaBed size={24}/>
+                            {venue.maxGuests} guests
+                        </div>
+
+                        <div className='flex flex-col items-center text-gray-600'>
+                            <FaDollarSign size={24}/>
+                            {venue.price}/night
+                        </div>
+
+                        <div className='flex flex-col items-center text-gray-600'>
+                            <FaStar size={24}/>
+                            {venue.rating} of 5
+                        </div>
+                    </div>
+
+                    <div className='flex flex-col gap-2 px-4 pb-6 pt-4'>
+                        <p className='text-xl font-semibold font'>About this place</p>
+                        <p className='text-gray-600'>{venue.description}</p>
+                    </div>
+                </div>
             </div>
-            <p className='text-[#111518] text-base flex-1'>{text}</p>
-        </div>
+
+            <div className='py-8'>
+                <BookingForm venueId={venueId} />
+            </div>
+        </>
     );
 }

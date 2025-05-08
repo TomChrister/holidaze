@@ -47,7 +47,7 @@ export function ExplorePage() {
     if (loading) return <Loader/>;
 
     return (
-        <div>
+        <div className='bg-brand-secondary'>
             <SearchBar
                 search={searchInput}
                 onSearchChange={setSearchInput}

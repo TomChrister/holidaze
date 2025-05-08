@@ -76,7 +76,7 @@ export function SearchBar({
                             guests: parseInt(guests) || undefined,
                         })
                     }
-                    className='mt-2 rounded bg-blue-500 px-4 py-2 text-white cursor-pointer lg:mt-0 lg:self-center'
+                    className='mt-2 rounded bg-brand-primary px-4 py-2 text-white cursor-pointer lg:mt-0 lg:self-center hover:opacity-90'
                 >
                     Search
                 </button>

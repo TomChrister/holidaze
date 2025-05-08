@@ -4,7 +4,10 @@
 @theme {
     --font-primary: 'PlusJakarta', sans-serif;
 
-    --color-brand-primary: rgba(200, 200, 200, 0.16)
+    --color-brand-primary: #634AFF;
+
+    --color-brand-secondary: #EBEBEB7F;
+
 }
 
 html {
