@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');@import 'tailwindcss';
 
 @theme {
-    --font-primary: 'PlusJakarta', sans-serif;
+    --font-primary: 'Inter', sans-serif;
 
     --color-brand-primary: #634AFF;
 
-    --color-brand-secondary: #EBEBEB7F;
+    --color-brand-secondary: rgba(235, 235, 235, 0.35);
+
+
+    --color-brand-tierty: rgba(235, 235, 235, 0.76);
 
 }
 

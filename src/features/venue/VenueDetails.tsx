@@ -20,12 +20,12 @@ export function VenueDetails({ venue, venueId }: Props) {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
+        nextArrow: <NextArrow/>,
+        prevArrow: <PrevArrow/>,
         afterChange: (index: number) => setCurrentIndex(index),
     };
 
-    const images = venue.media?.length > 0 ? venue.media : [{url: '/default-img.jpg'}]
+    const images = venue.media?.length > 0 ? venue.media : [{ url: '/default-img.jpg' }]
     return (
         <>
             <div className='bg-brand-secondary border-b border-gray-300'>
@@ -37,7 +37,8 @@ export function VenueDetails({ venue, venueId }: Props) {
                                 alt={img.alt || venue.name}
                                 className='w-full h-full object-cover'
                             />
-                            <div className='absolute bottom-2 right-2 bg-black bg-opacity-60 text-white text-sm px-2 py-1 rounded'>
+                            <div
+                                className='absolute bottom-2 right-2 bg-black bg-opacity-60 text-white text-sm px-2 py-1 rounded'>
                                 {currentIndex + 1}/{images.length}
                             </div>
                         </div>
@@ -66,7 +67,7 @@ export function VenueDetails({ venue, venueId }: Props) {
 
                         <div className='flex flex-col items-center text-gray-600'>
                             <FaStar size={24}/>
-                            {venue.rating} of 5
+                            <p>{venue?.rating ? `${venue.rating} stars` : 'No reviews'}</p>
                         </div>
                     </div>
 
@@ -77,8 +78,18 @@ export function VenueDetails({ venue, venueId }: Props) {
                 </div>
             </div>
 
-            <div className='py-8'>
-                <BookingForm venueId={venueId} />
+            <div className='flex justify-between pt-8 px-6'>
+                <span className='flex text-2xl font-bold'>
+                    ${venue.price}<p className='font-normal'>/night</p>
+                </span>
+                <div className='flex gap-1'>
+                    {venue.rating}/5
+                    <FaStar size={20} className='text-yellow-500'/>
+                </div>
+            </div>
+
+            <div className='py-8 px-6'>
+                <BookingForm venueId={venueId}/>
             </div>
         </>
     );

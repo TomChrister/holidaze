@@ -43,3 +43,10 @@ export type EditVenueProps = {
         country?: string
     }
 }
+
+// Delete venue props
+export type DeleteVenueModalProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+};

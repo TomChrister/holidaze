@@ -41,7 +41,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
             <div className='px-6 pb-6'>
                 <button
                     onClick={() => setShowForm(true)}
-                    className='bg-brand-primary text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center cursor-pointer'
+                    className='bg-brand-primary text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center cursor-pointer hover:opacity-90'
                 >
                     <UserRoundPen className='w-4 h-4 mr-2'/>
                     Update profile
