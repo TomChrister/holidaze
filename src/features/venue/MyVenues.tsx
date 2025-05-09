@@ -1,14 +1,31 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ownVenues } from '../../api/venues.tsx';
+import { deleteVenue, ownVenues } from '../../api/venues.tsx';
 import { formatDate } from '../../utils';
-import { DeleteVenueBtn } from '../../components/DeleteVenueBtn.tsx';
+import { CreateVenueLink } from '../../components/CreateVenueLink.tsx';
+import { SquarePen, Trash2 } from 'lucide-react';
+import DeleteVenueModal from '../../components/DeleteVenueModal.tsx';
 
 export function MyVenues() {
     const navigate = useNavigate();
 
     const [venues, setVenues] = useState<any[]>([]);
     const username = localStorage.getItem('name');
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedVenueId, setSelectedVenueId] = useState<string | null>(null);
+
+    const handleOpenModal = (venueId: string) => {
+        setSelectedVenueId(venueId);
+        setShowModal(true);
+    };
+
+    const handleDelete = async () => {
+        if (!selectedVenueId) return;
+        await deleteVenue(selectedVenueId);
+        setVenues((prev) => prev.filter((v) => v.id !== selectedVenueId));
+        setShowModal(false);
+    };
 
     useEffect(() => {
         if (username) {
@@ -19,12 +36,47 @@ export function MyVenues() {
     return (
         <div className='pt-6 px-6 w-full bg-brand-secondary'>
             <h1 className='text-2xl font-bold'>My Venues</h1>
-            <ul className='space-y-6'>
+            <ul className='flex flex-col space-y-6 pt-6 gap-4'>
+                {venues.length === 0 && (
+                    <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
+                        go to
+                        <span className='ml-1 text-brand-primary font-semibold'>
+                            <CreateVenueLink/>.
+                        </span>
+                    </p>
+                )}
                 {venues.map((venue: any) => (
-                    <li key={venue.id} className='rounded-lg bg-white p-4'>
-                        <Link to={`/venues/${venue.id}`} className='mb-2 block'>
-                            <h2 className='text-xl font-semibold'>{venue.name}</h2>
-                        </Link>
+                    <li key={venue.id}
+                        onClick={() => navigate(`/venues/${venue.id}`)}
+                        className='min-h-28 rounded-lg bg-white p-4 m-0 transition-transform duration-400 hover:scale-105'
+                    >
+                        <div className='flex justify-between items-center'>
+                            <Link to={venue.id}>
+                                <h2 className='text-xl font-semibold'>{venue.name}</h2>
+                            </Link>
+
+                            <div className='flex gap-4'>
+                                <SquarePen
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate(`/venues/${venue.id}/edit`);
+                                    }}
+                                    className='text-brand-primary cursor-pointer hover:scale-110 transition-transform'
+                                >
+                                    Edit
+                                </SquarePen>
+
+                                <Trash2
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleOpenModal(venue.id);
+                                    }}
+                                    className='cursor-pointer text-red-500 hover:scale-110 transition-transform'
+                                >
+                                    Delete
+                                </Trash2>
+                            </div>
+                        </div>
 
                         {venue.bookings && venue.bookings.length > 0 ? (
                             <div className='mt-4'>
@@ -41,25 +93,16 @@ export function MyVenues() {
                                 </ul>
                             </div>
                         ) : (
-                            <p className='mt-2 text-sm text-gray-500'>No bookings yet.</p>
+                            <p className='mt-2 text-sm text-gray-500'>No bookings for this venue yet</p>
                         )}
-
-                        <div className='flex gap-2'>
-                            <div className='mt-4 flex gap-2'>
-                                <DeleteVenueBtn
-                                    venueId={venue.id}
-                                    onDelete={() => setVenues((prev) => prev.filter((v) => v.id !== venue.id))}
-                                />
-                            </div>
-                            <button
-                                onClick={() => navigate(`/venues/${venue.id}/edit`)}
-                                className='mt-4 w-28 cursor-pointer rounded bg-blue-500 px-3 text-white'
-                            >
-                                Edit
-                            </button>
-                        </div>
                     </li>
                 ))}
+
+                <DeleteVenueModal
+                    isOpen={showModal}
+                    onClose={() => setShowModal(false)}
+                    onConfirm={handleDelete}
+                />
             </ul>
         </div>
     );

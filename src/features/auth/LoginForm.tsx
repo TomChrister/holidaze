@@ -18,32 +18,37 @@ export default function LoginForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='mx-auto max-w-md rounded-xl bg-white p-4 shadow space-y-4'>
-            <input
-                {...register('email')}
-                placeholder='Email'
-                className='w-full rounded border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-            <input
-                {...register('password')}
-                type='password'
-                placeholder='Password'
-                className='w-full rounded border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
-            />
-            <button
-                type='submit'
-                className='w-full cursor-pointer rounded bg-blue-600 py-2 text-white transition hover:bg-blue-700'
-            >
-                Login
-            </button>
+        <div className="flex items-center justify-center min-h-screen">
+            <form onSubmit={handleSubmit(onSubmit)}
+                  className='mx-auto max-w-md rounded-xl bg-white p-4 shadow space-y-4'>
+                <label>Email</label>
+                <input
+                    {...register('email')}
+                    placeholder='Enter your email'
+                    className='w-full rounded border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+                <label>Password</label>
+                <input
+                    {...register('password')}
+                    type='password'
+                    placeholder='Enter your password'
+                    className='w-full rounded border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+                <button
+                    type='submit'
+                    className='w-full cursor-pointer rounded bg-blue-600 py-2 text-white transition hover:bg-blue-700'
+                >
+                    Login
+                </button>
 
-            <p className='flex justify-center'>Or</p>
+                <p className='flex justify-center'>Or</p>
 
-            <div className='flex justify-center'>
-                <div>
-                    Go to <Link to='/register' className='underline cursor-pointer'>register</Link>
+                <div className='flex justify-center'>
+                    <div>
+                        Go to <Link to='/register' className='underline cursor-pointer'>register</Link>
+                    </div>
                 </div>
-            </div>
-        </form>
-);
+            </form>
+        </div>
+    );
 }

@@ -50,20 +50,21 @@ export function CreateVenueForm() {
             <div className='max-w-xl mx-auto py-1 px-4 pt-4'>
                 <h3 className='text-xl font-semibold'>Home details</h3>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 max-w-xl mx-auto p-4'>
+
+            <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 max-w-xl mx-auto p-4 rounded-md'>
                 <input {...register('name', { required: true })}
                        placeholder='Name'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
                 <textarea {...register('description', { required: true })}
                           placeholder='Description'
-                          className='input bg-brand-secondary border-none rounded placeholder-gray-400 h-32'/>
+                          className='input bg-brand-tierty border-none rounded placeholder-gray-400 h-32'/>
 
                 <input {...register('media.0.url')}
                        placeholder='Image URL'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
                 <input {...register('media.0.alt')}
                        placeholder='Describe your image'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
 
                 <h3 className='text-xl pt-4 font-semibold'>Pricing & capacity</h3>
                 <input
@@ -71,21 +72,21 @@ export function CreateVenueForm() {
                     placeholder='Price'
                     defaultValue=''
                     {...register('price', { valueAsNumber: true, required: true })}
-                    className='input bg-brand-secondary border-none rounded placeholder-gray-400'
+                    className='input bg-brand-tierty border-none rounded placeholder-gray-400'
                 />
                 <input
                     type='number'
                     placeholder='Max Guests'
                     defaultValue=''
                     {...register('maxGuests', { valueAsNumber: true, required: true })}
-                    className='input bg-brand-secondary border-none rounded placeholder-gray-400'
+                    className='input bg-brand-tierty border-none rounded placeholder-gray-400'
                 />
 
                 <h3 className='text-xl pt-4 font-semibold'>Facilities</h3>
                 <div className='grid grid-cols-2 gap-6'>
                     <div className='flex justify-between items-center'>
                     <span className='flex gap-1'>
-                        <Wifi className='bg-brand-secondary rounded p-1' color='#634AFF' size={30}/>
+                        <Wifi className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
                         WiFi
                     </span>
                         <label className='relative inline-block w-12 h-6 cursor-pointer'>
@@ -103,7 +104,7 @@ export function CreateVenueForm() {
 
                     <div className='flex justify-between items-center'>
                     <span className='flex gap-1'>
-                        <CarFront className='bg-brand-secondary rounded p-1' color='#634AFF' size={30}/>
+                        <CarFront className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
                         Parking
                     </span>
                         <label className='relative inline-block w-12 h-6 cursor-pointer'>
@@ -121,7 +122,7 @@ export function CreateVenueForm() {
 
                     <div className='flex justify-between items-center'>
                     <span className='flex gap-1'>
-                        <Utensils className='bg-brand-secondary rounded p-1' color='#634AFF' size={30}/>
+                        <Utensils className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
                         Breakfast
                     </span>
                         <label className='relative inline-block w-12 h-6 cursor-pointer'>
@@ -139,7 +140,7 @@ export function CreateVenueForm() {
 
                     <div className='flex justify-between items-center'>
                     <span className='flex gap-1'>
-                        <PawPrint className='bg-brand-secondary rounded p-1' color='#634AFF' size={30}/>
+                        <PawPrint className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
                         Pets
                     </span>
                         <label className='relative inline-block w-12 h-6 cursor-pointer'>
@@ -159,16 +160,16 @@ export function CreateVenueForm() {
                 <h3 className='text-xl pt-4 font-bold'>Location</h3>
                 <input {...register('location.address')}
                        placeholder='Address'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
                 <input {...register('location.city')}
                        placeholder='City'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
                 <input {...register('location.country')}
                        placeholder='Country'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
                 <input {...register('location.zip')}
                        placeholder='ZIP'
-                       className='input bg-brand-secondary border-none rounded placeholder-gray-400'/>
+                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
 
                 <button type='submit' className='bg-brand-primary text-white px-4 py-2 my-4 rounded cursor-pointer hover:opacity-90'>
                     Create Venue

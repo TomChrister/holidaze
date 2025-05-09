@@ -30,13 +30,20 @@ export function ProfileData() {
     if (error) return <p>Error: {error}</p>
     if (!profile) return <p>No profile found</p>
 
+    const defaultApiAvatar = 'https://images.unsplash.com/photo-1579547945413-497e1b99dac0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&h=400&w=400';
+
+    const isDefaultAvatar = profile.avatar?.url === defaultApiAvatar;
+    const avatarUrl = !profile.avatar?.url || isDefaultAvatar
+        ? '/blank-profile-picture.png'
+        : profile.avatar.url;
+
     return (
         <div className='flex self-center justify-center gap-6 4'>
             <div>
                 <img
-                    src={profile.avatar?.url || '/default-avatar.jpg'}
+                    src={avatarUrl}
                     alt={profile.avatar?.alt || 'Avatar'}
-                    className='w-32 h-32 rounded-full mt-4'
+                    className='w-32 h-32 rounded-full mt-4 object-cover'
                 />
             </div>
             <div className='self-center'>
