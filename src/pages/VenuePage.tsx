@@ -16,5 +16,10 @@ export function VenuePage() {
 
     if (!venue) return <p>Loading...</p>;
 
-    return <VenueDetails venue={venue} venueId={id!} />;
+    return (
+        <>
+            <title>{venue.name}</title>
+            <VenueDetails venue={venue} venueId={id!}/>;
+        </>
+    )
 }

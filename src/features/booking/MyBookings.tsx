@@ -32,8 +32,8 @@ export function MyBookings() {
     if (error) return <p>Error: {error}</p>
 
     return (
-        <div className='w-full pt-6 space-y-4 bg-brand-secondary'>
-            <h2 className='m-0 px-6 text-2xl font-bold'>Upcoming trips</h2>
+        <div className='w-full px-8 pt-6 space-y-4 bg-brand-secondary lg:pl-20'>
+            <h2 className='m-0 pr-6 pb-6 text-2xl font-bold'>Upcoming trips</h2>
             {bookings.length === 0 && (
                 <p className='mx-6 rounded-lg bg-white p-4 px-6 text-gray-600'>
                     No bookings yet.<br/> Go to
@@ -42,9 +42,9 @@ export function MyBookings() {
                     </Link> here.
                 </p>
             )}
-            <ul className='flex flex-col p-6 gap-4 space-y-4'>
+            <ul className='flex flex-col gap-4 space-y-4'>
                 {bookings.map((booking) => (
-                    <li key={booking.id} className='flex items-center justify-between h-28 rounded-lg cursor-pointer bg-white p-4 m-0 transition-transform duration-400 hover:scale-105'>
+                    <li key={booking.id} className='flex items-center justify-between h-28 rounded-lg cursor-pointer bg-white p-4 m-0 transition-transform duration-400 hover:scale-102'>
                         <Link to={`/venues/${booking.venue.id}`}>
                             <p>
                                 <strong>

@@ -5,9 +5,10 @@ import { RegisterFormData } from '../../types/auth';
 import { Link } from 'react-router-dom';
 import { Switch } from '@headlessui/react';
 import toast from 'react-hot-toast';
+import { HelpCircle, Lock, Mail, User } from 'lucide-react';
 
 export default function RegisterForm() {
-    const { register, handleSubmit, setValue } = useForm<RegisterFormData>();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm<RegisterFormData>();
     const [venueToggle, setVenueToggle] = useState(false);
 
     const onSubmit = async (data: RegisterFormData) => {
@@ -23,39 +24,118 @@ export default function RegisterForm() {
             toast.error('Registration failed. Please try again.');
         }
     };
-
-
+    
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 max-w-md mx-auto p-4 bg-white rounded-xl shadow'>
-            <input {...register('name')} placeholder='Name' className='input'/>
-            <input {...register('email')} placeholder='Email' className='input'/>
-            <input {...register('password')} type='password' placeholder='Password' className='input'/>
+        <div className='h-screen flex items-center justify-center'>
+            <div
+                className='flex flex-col items-center justify-center bg-white p-6 py-12 border border-gray-200 rounded-lg shadow-md space-y-4'>
+                <h2 className='text-2xl font-semibold'>Create an account</h2>
+                <p className='text-gray-400'>Please enter your details to register</p>
+                <form onSubmit={handleSubmit(onSubmit)} className='mx-auto w-96 flex flex-col'>
 
-            <div className='flex items-center gap-3'>
-                <Switch
-                    checked={venueToggle}
-                    onChange={(checked) => {
-                        setVenueToggle(checked);
-                        setValue('venueManager', checked);
-                    }}
-                    className={`${
-                        venueToggle ? 'bg-blue-600' : 'bg-gray-300'
-                    } relative inline-flex h-6 w-11 items-center rounded-full transition`}
-                >
-                    <span
-                        className={`${
-                            venueToggle ? 'translate-x-6' : 'translate-x-1'
-                        } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                    />
-                </Switch>
-                <span>I want to list venues (Venue Manager)</span>
+                    <label>Name</label>
+                    <div className='relative'>
+                        <User size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <input
+                            {...register('name', {
+                                required: 'Name is required',
+                                pattern: {
+                                    value: /^\S+$/,
+                                    message: 'No spaces allowed'
+                                }
+                            })}
+                            placeholder='Enter your name'
+                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                        />
+                    </div>
+                    {errors.name && (
+                        <p className='text-red-500 text-sm mb-4'>{errors.name.message}</p>
+                    )}
+
+                    <label>Email</label>
+                    <div className='relative'>
+                        <Mail size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <input
+                            {...register('email', {
+                                required: 'Email is required',
+                                pattern: {
+                                    value: /^[^\s@]+@stud\.noroff\.no$/,
+                                    message: 'Must end with @stud.noroff.no'
+                                }
+                            })}
+                            placeholder='Enter your email'
+                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                        />
+                    </div>
+                    {errors.email && (
+                        <p className='text-red-500 text-sm mb-4'>{errors.email.message}</p>
+                    )}
+
+                    <label>Password</label>
+                    <div className='relative'>
+                        <Lock size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <input
+                            {...register('password', {
+                                required: 'Password is required',
+                                minLength: {
+                                    value: 8,
+                                    message: 'At least 8 characters'
+                                }
+                            })}
+                            type='password'
+                            placeholder='Enter your password'
+                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                        />
+                    </div>
+                    {errors.password && (
+                        <p className='text-red-500 text-sm mb-6'>{errors.password.message}</p>
+                    )}
+
+                    <div className='flex items-center gap-2 pb-6'>
+                        <Switch
+                            checked={venueToggle}
+                            onChange={(checked) => {
+                                setVenueToggle(checked)
+                                setValue('venueManager', checked)
+                            }}
+                            className={`${venueToggle ? 'bg-brand-primary' : 'bg-gray-300'}
+                            relative inline-flex h-6 w-11 items-center cursor-pointer rounded-full transition`}
+                        >
+
+                        <span className={`${venueToggle ? 'translate-x-6' : 'translate-x-1'}
+                              inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                        />
+                        </Switch>
+
+                        <span className='flex items-center gap-1 text-gray-800'>
+                            I want to register as a venue manager
+                            <span className='relative group'>
+                                <HelpCircle
+                                    size={16}
+                                    className='text-gray-400 hover:text-gray-600 cursor-pointer'
+                                />
+                                <div className='absolute bottom-full left-1/2 whitespace-normal w-40 -translate-x-1/2 -mb-2 hidden rounded bg-gray-700 p-2 text-xs text-white group-hover:block'>
+                                    A venue manager can create and manage venues and bookings.
+                                </div>
+                            </span>
+                        </span>
+                    </div>
+
+                    <button
+                        type='submit'
+                        className='w-full cursor-pointer rounded mb-6 bg-brand-primary py-3 text-white transition hover:opacity-90'
+                    >
+                        Register
+                    </button>
+
+                    <div className='text-center'>
+                        Back to{' '}
+                        <Link to='/login' className='text-brand-primary cursor-pointer pl-1 hover:underline'>
+                            login
+                        </Link>
+                    </div>
+                </form>
             </div>
-
-            <button type='submit' className='btn'>Register</button>
-
-            <div className='text-center'>
-                Back to <Link to='/login' className='underline'>login</Link>
-            </div>
-        </form>
+        </div>
     );
 }

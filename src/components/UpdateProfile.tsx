@@ -38,7 +38,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
     if (!showForm) {
         return (
-            <div className='px-6 pb-6'>
+            <div className='px-8 pb-6'>
                 <button
                     onClick={() => setShowForm(true)}
                     className='bg-brand-primary text-white py-2 px-4 rounded w-full mt-4 flex items-center justify-center cursor-pointer hover:opacity-90'
