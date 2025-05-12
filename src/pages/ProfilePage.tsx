@@ -9,9 +9,10 @@ export function ProfilePage() {
     return (
         <>
             <div>
+                <title>Profile</title>
                 <ProfileData/>
                 <UpdateProfileForm name={name}/>
-                <div className='flex flex-col justify-center md:flex-row'>
+                <div className="flex flex-col justify-center md:flex-row">
                     <MyBookings/>
                     <MyVenues/>
                 </div>

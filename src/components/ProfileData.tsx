@@ -38,7 +38,7 @@ export function ProfileData() {
         : profile.avatar.url;
 
     return (
-        <div className='flex self-center justify-center gap-6 4'>
+        <div className='flex self-center justify-center gap-6 pt-6'>
             <div>
                 <img
                     src={avatarUrl}

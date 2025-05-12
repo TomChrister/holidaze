@@ -17,6 +17,7 @@ export function HomePage() {
 
     return (
         <>
+            <title>Holidaze</title>
             <div>
                 <div>
                     <img src='/appartment.png' alt='appartment' className='w-full h-[378px] object-cover' />

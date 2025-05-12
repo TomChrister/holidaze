@@ -34,9 +34,9 @@ export function MyVenues() {
     }, [username]);
 
     return (
-        <div className='pt-6 px-6 w-full bg-brand-secondary'>
-            <h1 className='text-2xl font-bold'>My Venues</h1>
-            <ul className='flex flex-col space-y-6 pt-6 gap-4'>
+        <div className='pt-8 px-8 w-full bg-brand-secondary lg:pr-20'>
+            <h1 className='text-2xl font-bold'>My venues</h1>
+            <ul className='flex flex-col space-y-6 pt-4 gap-4'>
                 {venues.length === 0 && (
                     <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
                         go to
@@ -48,7 +48,7 @@ export function MyVenues() {
                 {venues.map((venue: any) => (
                     <li key={venue.id}
                         onClick={() => navigate(`/venues/${venue.id}`)}
-                        className='min-h-28 rounded-lg bg-white p-4 m-0 transition-transform duration-400 hover:scale-105'
+                        className='min-h-28 rounded-lg bg-white p-4 m-0 transition-transform duration-400 hover:scale-102'
                     >
                         <div className='flex justify-between items-center'>
                             <Link to={venue.id}>
