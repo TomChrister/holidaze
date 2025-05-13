@@ -20,7 +20,7 @@ export function SearchBar({
     const extra = pathname === '/' ? '-mt-10' : 'mt-2'
 
     return (
-        <div className='flex justify-center p-4 pb-8 px-6'>
+        <div className='flex justify-center p-4 px-6 pb-8'>
             <div className={`relative z-10 flex flex-col gap-6 border border-gray-200 rounded-lg p-4 w-full max-w-md -mt-10 bg-white shadow-md lg:flex-row lg:max-w-4xl lg:flex justify-center lg:items-end ${extra}`}>
                 <div className='flex flex-col'>
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Where</div>
@@ -38,7 +38,7 @@ export function SearchBar({
                 </div>
 
                 <div className='flex flex-col'>
-                    <div className='mb-[1px] text-sm font-semibold text-gray-500'>Check in - Check out</div>
+                    <div className='text-sm font-semibold text-gray-500 mb-[1px]'>Check in - Check out</div>
                     <div className='flex items-center border-b border-gray-300 pb-2'>
                         <CalendarDays className='mr-2 h-4 w-4 text-gray-400'/>
                         <DatePicker
@@ -76,7 +76,7 @@ export function SearchBar({
                             guests: parseInt(guests) || undefined,
                         })
                     }
-                    className='mt-2 rounded bg-brand-primary px-4 py-2 text-white cursor-pointer lg:mt-0 lg:self-center hover:opacity-90'
+                    className='mt-2 cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90 lg:mt-0 lg:self-center'
                 >
                     Search
                 </button>

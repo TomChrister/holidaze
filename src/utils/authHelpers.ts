@@ -1,7 +1,7 @@
 import { API_BASE_HOLIDAZE } from './constants';
 import { authHeaders } from './headers.tsx';
 
-// Get username in header
+// Get username in the header
 export function GetUserName() {
     return localStorage.getItem('name');
 }

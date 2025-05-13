@@ -37,14 +37,14 @@ export function MyBookings() {
             {bookings.length === 0 && (
                 <p className='mx-6 rounded-lg bg-white p-4 px-6 text-gray-600'>
                     No bookings yet.<br/> Go to
-                    <Link to={'/explore'} className='text-brand-primary font-semibold ml-1'>
+                    <Link to={'/explore'} className='ml-1 font-semibold text-brand-primary'>
                         explore
                     </Link> here.
                 </p>
             )}
             <ul className='flex flex-col gap-4 space-y-4'>
                 {bookings.map((booking) => (
-                    <li key={booking.id} className='flex items-center justify-between h-28 rounded-lg cursor-pointer bg-white p-4 m-0 transition-transform duration-400 hover:scale-102'>
+                    <li key={booking.id} className='m-0 flex h-28 cursor-pointer items-center justify-between rounded-lg bg-white p-4 shadow transition-transform duration-400 hover:scale-102'>
                         <Link to={`/venues/${booking.venue.id}`}>
                             <p>
                                 <strong>

@@ -63,7 +63,7 @@ export function ExplorePage() {
 
                 <h1 className='px-6 text-3xl lg:px-32'>Search results</h1>
                 {filteredVenues.length > 0 && (
-                    <p className='px-6 text-sm text-gray-500 mt-2 mb-6 lg:px-32'>
+                    <p className='mt-2 mb-6 px-6 text-sm text-gray-500 lg:px-32'>
                         Found {filteredVenues.length} results
                     </p>
                 )}
@@ -71,7 +71,7 @@ export function ExplorePage() {
                 {paginatedVenues.length > 0 ? (
                     <VenueGrid venues={paginatedVenues}/>
                 ) : (
-                    <p className='text-center text-gray-500 mt-8'>No venues found.</p>
+                    <p className='mt-8 text-center text-gray-500'>No venues found.</p>
                 )}
 
                 {filteredVenues.length > limit && (

@@ -26,16 +26,16 @@ export default function RegisterForm() {
     };
     
     return (
-        <div className='h-screen flex items-center justify-center'>
-            <div
-                className='flex flex-col items-center justify-center bg-white p-6 py-12 border border-gray-200 rounded-lg shadow-md space-y-4'>
+        <div className="flex h-screen items-center justify-center p-4">
+            <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 py-12 shadow-md space-y-4">
                 <h2 className='text-2xl font-semibold'>Create an account</h2>
                 <p className='text-gray-400'>Please enter your details to register</p>
-                <form onSubmit={handleSubmit(onSubmit)} className='mx-auto w-96 flex flex-col'>
-
-                    <label>Name</label>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='mx-auto flex w-full max-w-md px-4 flex-col'>
+                    <label className='mb-1'>Name</label>
                     <div className='relative'>
-                        <User size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <User size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
                         <input
                             {...register('name', {
                                 required: 'Name is required',
@@ -45,16 +45,16 @@ export default function RegisterForm() {
                                 }
                             })}
                             placeholder='Enter your name'
-                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
                     {errors.name && (
-                        <p className='text-red-500 text-sm mb-4'>{errors.name.message}</p>
+                        <p className='mb-2 text-sm text-red-500'>{errors.name.message}</p>
                     )}
 
-                    <label>Email</label>
+                    <label className='mb-1'>Email</label>
                     <div className='relative'>
-                        <Mail size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <Mail size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
                         <input
                             {...register('email', {
                                 required: 'Email is required',
@@ -64,16 +64,16 @@ export default function RegisterForm() {
                                 }
                             })}
                             placeholder='Enter your email'
-                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
                     {errors.email && (
-                        <p className='text-red-500 text-sm mb-4'>{errors.email.message}</p>
+                        <p className='mb-4 text-sm text-red-500'>{errors.email.message}</p>
                     )}
 
-                    <label>Password</label>
+                    <label className='mb-1'>Password</label>
                     <div className='relative'>
-                        <Lock size={20} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
+                        <Lock size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
                         <input
                             {...register('password', {
                                 required: 'Password is required',
@@ -84,11 +84,11 @@ export default function RegisterForm() {
                             })}
                             type='password'
                             placeholder='Enter your password'
-                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-1 mt-1 focus:outline-none focus:ring-2 focus:ring-brand-primary'
+                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
                     {errors.password && (
-                        <p className='text-red-500 text-sm mb-6'>{errors.password.message}</p>
+                        <p className='mb-6 text-sm text-red-500'>{errors.password.message}</p>
                     )}
 
                     <div className='flex items-center gap-2 pb-6'>
@@ -112,9 +112,9 @@ export default function RegisterForm() {
                             <span className='relative group'>
                                 <HelpCircle
                                     size={16}
-                                    className='text-gray-400 hover:text-gray-600 cursor-pointer'
+                                    className='cursor-pointer text-gray-400 hover:text-gray-600'
                                 />
-                                <div className='absolute bottom-full left-1/2 whitespace-normal w-40 -translate-x-1/2 -mb-2 hidden rounded bg-gray-700 p-2 text-xs text-white group-hover:block'>
+                                <div className='absolute bottom-full left-1/2 -mb-2 hidden w-40 -translate-x-1/2 whitespace-normal rounded bg-gray-700 p-2 text-xs text-white group-hover:block'>
                                     A venue manager can create and manage venues and bookings.
                                 </div>
                             </span>
@@ -123,14 +123,14 @@ export default function RegisterForm() {
 
                     <button
                         type='submit'
-                        className='w-full cursor-pointer rounded mb-6 bg-brand-primary py-3 text-white transition hover:opacity-90'
+                        className='mb-6 w-full cursor-pointer rounded py-3 text-white transition bg-brand-primary hover:opacity-90'
                     >
                         Register
                     </button>
 
                     <div className='text-center'>
                         Back to{' '}
-                        <Link to='/login' className='text-brand-primary cursor-pointer pl-1 hover:underline'>
+                        <Link to='/login' className='cursor-pointer pl-1 text-brand-primary hover:underline'>
                             login
                         </Link>
                     </div>

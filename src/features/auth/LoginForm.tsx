@@ -24,17 +24,17 @@ export default function LoginForm() {
     };
 
     return (
-        <div className='h-screen flex items-center justify-center'>
-            <div className='flex flex-col items-center justify-center bg-white p-6 py-12 border border-gray-200 rounded-lg shadow-md space-y-4'>
+        <div className='flex h-screen items-center justify-center p-4'>
+            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 py-12 shadow-md space-y-4'>
                 <h2 className='text-2xl font-semibold'>Welcome back</h2>
                 <p className='text-gray-400'>Please enter your details to sign in</p>
                 <form onSubmit={handleSubmit(onSubmit)}
-                      className='mx-auto w-96 flex flex-col'>
-                    <label>Email</label>
+                      className='mx-auto flex w-full max-w-md px-4 flex-col'>
+                    <label className='mb-1'>Email</label>
                     <div className='relative'>
                         <Mail
                             size={20}
-                            className='absolute left-3 top-1/2 -translate-y-2/2 text-gray-400'
+                            className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'
                         />
                         <input
                             {...register('email', {
@@ -45,18 +45,18 @@ export default function LoginForm() {
                                 }
                             })}
                             placeholder='Enter your email'
-                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-6 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
                     </div>
                     {errors.email && (
-                        <p className='text-red-500 text-sm mb-2'>{errors.email.message}</p>
+                        <p className='mb-2 text-sm text-red-500'>{errors.email.message}</p>
                     )}
 
-                    <label>Password</label>
+                    <label className='mb-1'>Password</label>
                     <div className='relative'>
                         <Lock
                             size={20}
-                            className='absolute left-3 top-1/2 -translate-y-2/2 text-gray-400'
+                            className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'
                         />
                         <input
                             {...register('password', {
@@ -68,26 +68,26 @@ export default function LoginForm() {
                             })}
                             type='password'
                             placeholder='Enter your password'
-                            className='w-full rounded-lg border border-gray-300 px-4 pl-12 py-3 mb-6 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
                     </div>
                     {errors.password && (
-                        <p className='text-red-500 text-sm mb-4'>{errors.password.message}</p>
+                        <p className='mb-4 text-sm text-red-500'>{errors.password.message}</p>
                     )}
 
                     <button
                         type='submit'
-                        className='w-full cursor-pointer rounded mb-6 bg-brand-primary py-3 text-white transition hover:opacity-90'
+                        className='mb-6 w-full cursor-pointer rounded py-3 text-white transition bg-brand-primary hover:opacity-90'
                     >
                         Sign in
                     </button>
 
-                    <p className='flex justify-center mb-6'>or</p>
+                    <p className='mb-6 flex justify-center'>or</p>
 
                     <div className='flex justify-center'>
                         <div>
                             Go to
-                            <Link to='/register' className='text-brand-primary cursor-pointer pl-1.5 hover:underline'>
+                            <Link to='/register' className='cursor-pointer text-brand-primary pl-1.5 hover:underline'>
                                 register
                             </Link>
                         </div>
