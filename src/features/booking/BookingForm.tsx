@@ -63,8 +63,8 @@ export function BookingForm({ venueId }: BookingFormProps) {
         <form onSubmit={handleBooking} className='space-y-4'>
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Dates</label>
-                <div className='flex w-full items-center border border-brand-primary rounded p-2'>
-                    <CalendarDays className='mr-2 h-5 w-5 ml-1 text-gray-400' />
+                <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
+                    <CalendarDays className='mr-2 ml-1 h-5 w-5 text-gray-400' />
                     <DatePicker
                         selected={startDate}
                         onChange={(dates) => {
@@ -93,8 +93,8 @@ export function BookingForm({ venueId }: BookingFormProps) {
 
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Guests</label>
-                <div className='flex items-center border border-brand-primary rounded w-full p-2'>
-                    <Users className='mr-2 h-5 w-5 ml-1 text-gray-400' />
+                <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
+                    <Users className='mr-2 ml-1 h-5 w-5 text-gray-400' />
                     <input
                         type='number'
                         value={guests}
@@ -108,7 +108,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
 
             <button
                 type='submit'
-                className='bg-brand-primary text-white py-3 px-4 rounded w-full cursor-pointer'
+                className='w-full cursor-pointer rounded px-4 py-3 text-white bg-brand-primary'
             >
                 Book now
             </button>

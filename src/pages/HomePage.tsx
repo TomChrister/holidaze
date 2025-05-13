@@ -20,7 +20,7 @@ export function HomePage() {
             <title>Holidaze</title>
             <div>
                 <div>
-                    <img src='/appartment.png' alt='appartment' className='w-full h-[378px] object-cover' />
+                    <img src='/appartment.png' alt='appartment' className='w-full object-cover h-[378px]' />
                 </div>
                 <SearchBar
                     search={search}

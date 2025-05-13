@@ -26,7 +26,7 @@ export function NextArrow(props: CustomArrowProps) {
     const { onClick } = props;
     return (
         <div
-            className='absolute top-1/2 right-2 transform -translate-y-1/2 z-10 cursor-pointer text-white rounded-full p-2'
+            className='absolute top-1/2 right-2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full p-2 text-white'
             onClick={onClick}
         >
             ›
@@ -38,7 +38,7 @@ export function PrevArrow(props: CustomArrowProps) {
     const { onClick } = props;
     return (
         <div
-            className='absolute top-1/2 left-2 transform -translate-y-1/2 z-10 cursor-pointer bg-white/70 rounded-full p-2'
+            className='absolute top-1/2 left-2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full bg-white/70 p-2'
             onClick={onClick}
         >
             ‹

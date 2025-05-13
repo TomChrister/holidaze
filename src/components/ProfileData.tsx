@@ -38,18 +38,18 @@ export function ProfileData() {
         : profile.avatar.url;
 
     return (
-        <div className='flex self-center justify-center gap-6 pt-6'>
+        <div className='flex justify-center gap-6 self-center pt-6'>
             <div>
                 <img
                     src={avatarUrl}
                     alt={profile.avatar?.alt || 'Avatar'}
-                    className='w-32 h-32 rounded-full mt-4 object-cover'
+                    className='mt-4 h-32 w-32 rounded-full object-cover'
                 />
             </div>
             <div className='self-center'>
                 <h1 className='text-2xl font-bold'>{profile.name}</h1>
-                <p className='text-gray-600 ml-1'>{profile.email}</p>
-                <p className='text-gray-500 ml-1'>{profile.bio || 'No bio available'}</p>
+                <p className='ml-1 text-gray-600'>{profile.email}</p>
+                <p className='ml-1 text-gray-500'>{profile.bio || 'No bio available'}</p>
             </div>
         </div>
     )

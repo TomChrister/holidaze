@@ -44,7 +44,7 @@ export function CreateVenueForm() {
 
     return (
         <>
-            <div className='flex flex-col justify-start max-w-xl mx-auto px-4 pt-8 pb-4 gap-2'>
+            <div className='mx-auto flex max-w-xl flex-col justify-start gap-2 px-6 pt-8 pb-4'>
                 <h1 className='text-3xl font-semibold'>List your home</h1>
                 <p className='text-gray-400'>Share your space with travelers, fill out the details below</p>
                 <p className='text-gray-400'>When creating a listing these are the required fields:</p>
@@ -57,19 +57,19 @@ export function CreateVenueForm() {
                 </p>
             </div>
 
-            <div className='max-w-xl mx-auto px-4'>
-                <hr className='border-t border-gray-300 my-4'/>
+            <div className='mx-auto max-w-xl px-6'>
+                <hr className='my-4 border-t border-gray-300'/>
             </div>
 
-            <div className='max-w-xl mx-auto py-1 px-4 pt-4'>
+            <div className='mx-auto max-w-xl px-6 py-1 pt-4'>
                 <h3 className='text-xl font-semibold'>Home details</h3>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 max-w-xl mx-auto p-4 rounded-md'>
+            <form onSubmit={handleSubmit(onSubmit)} className='mx-auto max-w-xl rounded-md p-6 space-y-4'>
                 <input
                     {...register('name', { required: 'Name is required' })}
                     placeholder='Name *'
-                    className='input bg-brand-tierty border-none rounded placeholder-gray-400'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
                 {errors.name && (
                     <p className='text-red-500'>
@@ -79,7 +79,7 @@ export function CreateVenueForm() {
 
                 <textarea {...register('description', { required: 'Description is required' })}
                           placeholder='Description *'
-                          className='input bg-brand-tierty border-none rounded placeholder-gray-400 h-32'
+                          className='h-32 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
                 {errors.description && (
                     <p className='text-red-500'>
@@ -89,7 +89,7 @@ export function CreateVenueForm() {
 
                 <input {...register('media.0.url', { required: 'Img URL is required, and must be a live link to a image URL' })}
                        placeholder='Image URL *'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
                 {errors.media?.[0]?.url && (
                     <p className='text-red-500'>
@@ -98,16 +98,16 @@ export function CreateVenueForm() {
                 )}
                 <input {...register('media.0.alt')}
                        placeholder='Describe your image'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
 
-                <h3 className='text-xl pt-4 font-semibold'>Pricing & capacity</h3>
+                <h3 className='pt-4 text-xl font-semibold'>Pricing & capacity</h3>
                 <input
                     type='number'
                     placeholder='Price *'
                     defaultValue=''
                     {...register('price', { valueAsNumber: true, required: 'Price is required' })}
-                    className='input bg-brand-tierty border-none rounded placeholder-gray-400'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
                 {errors.price && (
                     <p className='text-red-500'>
@@ -120,7 +120,7 @@ export function CreateVenueForm() {
                     placeholder='Max Guests *'
                     defaultValue=''
                     {...register('maxGuests', { valueAsNumber: true, required: 'Max guests is required' })}
-                    className='input bg-brand-tierty border-none rounded placeholder-gray-400'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
                 {errors.maxGuests && (
                     <p className='text-red-500'>
@@ -128,97 +128,97 @@ export function CreateVenueForm() {
                     </p>
                 )}
 
-                <h3 className='text-xl pt-4 font-semibold'>Facilities</h3>
+                <h3 className='pt-4 text-xl font-semibold'>Facilities</h3>
                 <div className='grid grid-cols-2 gap-6'>
-                    <div className='flex justify-between items-center'>
+                    <div className='flex items-center justify-between'>
                     <span className='flex gap-1'>
-                        <Wifi className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
+                        <Wifi className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                         WiFi
                     </span>
-                        <label className='relative inline-block w-12 h-6 cursor-pointer'>
+                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
-                                className='opacity-0 w-0 h-0 peer'
+                                className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.wifi')}
                             />
                             <span
-                                className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-brand-primary transition-colors'/>
+                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
                             <span
-                                className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'/>
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
                         </label>
                     </div>
 
-                    <div className='flex justify-between items-center'>
+                    <div className='flex items-center justify-between'>
                     <span className='flex gap-1'>
-                        <CarFront className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
+                        <CarFront className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                         Parking
                     </span>
-                        <label className='relative inline-block w-12 h-6 cursor-pointer'>
+                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
-                                className='opacity-0 w-0 h-0 peer'
+                                className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.parking')}
                             />
                             <span
-                                className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-brand-primary transition-colors'/>
+                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
                             <span
-                                className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'/>
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
                         </label>
                     </div>
 
-                    <div className='flex justify-between items-center'>
+                    <div className='flex items-center justify-between'>
                     <span className='flex gap-1'>
-                        <Utensils className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
+                        <Utensils className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                         Breakfast
                     </span>
-                        <label className='relative inline-block w-12 h-6 cursor-pointer'>
+                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
-                                className='opacity-0 w-0 h-0 peer'
+                                className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.breakfast')}
                             />
                             <span
-                                className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-brand-primary transition-colors'/>
+                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
                             <span
-                                className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'/>
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
                         </label>
                     </div>
 
-                    <div className='flex justify-between items-center'>
+                    <div className='flex items-center justify-between'>
                     <span className='flex gap-1'>
-                        <PawPrint className='bg-brand-tierty rounded p-1' color='#634AFF' size={30}/>
+                        <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                         Pets
                     </span>
-                        <label className='relative inline-block w-12 h-6 cursor-pointer'>
+                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
-                                className='opacity-0 w-0 h-0 peer'
+                                className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.pets')}
                             />
                             <span
-                                className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-brand-primary transition-colors'/>
+                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
                             <span
-                                className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'/>
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
                         </label>
                     </div>
                 </div>
 
-                <h3 className='text-xl pt-4 font-bold'>Location</h3>
+                <h3 className='pt-4 text-xl font-bold'>Location</h3>
                 <input {...register('location.address')}
                        placeholder='Address'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
                 <input {...register('location.city')}
                        placeholder='City'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
                 <input {...register('location.country')}
                        placeholder='Country'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
                 <input {...register('location.zip')}
                        placeholder='ZIP'
-                       className='input bg-brand-tierty border-none rounded placeholder-gray-400'/>
+                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
 
                 <button type='submit'
-                        className='bg-brand-primary text-white px-4 py-2 my-4 rounded cursor-pointer hover:opacity-90'>
+                        className='my-4 cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'>
                     Create Venue
                 </button>
             </form>

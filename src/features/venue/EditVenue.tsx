@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { singleVenue, updateVenue } from '../../api/venues.tsx';
 import { EditVenueProps } from '../../types/venue';
 import { CarFront, PawPrint, Utensils, Wifi } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export function EditVenue() {
     const { id } = useParams<{ id: string }>()
-    const navigate = useNavigate();
     const [venue, setVenue] = useState<EditVenueProps>({
         name: '',
         description: '',
@@ -42,21 +42,26 @@ export function EditVenue() {
         e.preventDefault();
         try {
             await updateVenue(id!, venue);
-            navigate(`/profile`);
+            toast.success('Venue updated successfully!');
+            setTimeout(() => {
+                window.location.href = '/profile';
+            }, 1500);
         } catch (err: any) {
+            toast.error('Failed to update venue. Please try again.');
             console.error('Update failed', err.message);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className='max-w-md mx-auto p-4 space-y-4'>
+        <form onSubmit={handleSubmit} className='mx-auto flex max-w-xl flex-col rounded-md p-4 px-6 space-y-4'>
+            <h3 className='text-xl font-semibold'>Home details</h3>
             <label>
                 Name
                 <input
                     name='name'
                     value={venue.name}
                     onChange={handleChange}
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
@@ -66,10 +71,26 @@ export function EditVenue() {
                     name='description'
                     value={venue.description}
                     onChange={handleChange}
-                    className='border p-2 w-full'
+                    className='h-32 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
+            <h3 className='pt-3 text-xl font-semibold'>Media</h3>
+            {(venue.media ?? []).map((m, i) => (
+                <div key={i} className='space-y-2'>
+                    <label>
+                        Image URL
+                        <input
+                            name={`media.${i}.url`}
+                            value={m.url}
+                            onChange={handleChange}
+                            className='rounded border-none input bg-brand-tierty placeholder-gray-400'
+                        />
+                    </label>
+                </div>
+            ))}
+
+            <h3 className='pt-3 text-xl font-semibold'>Pricing and capacity</h3>
             <label>
                 Price
                 <input
@@ -77,7 +98,7 @@ export function EditVenue() {
                     name='price'
                     value={venue.price}
                     onChange={handleChange}
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
@@ -88,33 +109,21 @@ export function EditVenue() {
                     name='maxGuests'
                     value={venue.maxGuests}
                     onChange={handleChange}
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
-            <h3 className='font-semibold'>Media</h3>
-            {(venue.media ?? []).map((m, i) => (
-                <div key={i} className='space-y-2'>
-                    <label>
-                        Image URL
-                        <input
-                            name={`media.${i}.url`}
-                            value={m.url}
-                            onChange={handleChange}
-                            className='border p-2 w-full'
-                        />
-                    </label>
-                </div>
-            ))}
-
-            <h3 className='font-semibold'>Facilities</h3>
+            <h3 className='pt-4 text-xl font-semibold'>Facilities</h3>
             <div className='grid grid-cols-2 gap-6'>
-                <div className='flex justify-between items-center'>
-                    <span className='flex gap-1'><Wifi className='bg-amber-300 rounded p-1'/>WiFi</span>
-                    <label className='relative inline-block w-12 h-6'>
+                <div className='flex items-center justify-between'>
+                    <span className='flex gap-1'>
+                        <Wifi className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                        WiFi
+                    </span>
+                    <label className='relative inline-block h-6 w-12'>
                         <input
                             type='checkbox'
-                            className='opacity-0 w-0 h-0 peer'
+                            className='h-0 w-0 opacity-0 peer'
                             checked={venue.meta?.wifi}
                             onChange={e =>
                                 setVenue(v => ({
@@ -124,20 +133,23 @@ export function EditVenue() {
                             }
                         />
                         <span
-                            className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition-colors'
+                            className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'
                         />
                         <span
-                            className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'
+                            className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'
                         />
                     </label>
                 </div>
 
-                <div className='flex justify-between items-center'>
-                    <span className='flex gap-1'><CarFront className='bg-amber-300 rounded p-1'/>Parking</span>
-                    <label className='relative inline-block w-12 h-6'>
+                <div className='flex items-center justify-between'>
+                    <span className='flex gap-1'>
+                        <CarFront className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                        Parking
+                    </span>
+                    <label className='relative inline-block h-6 w-12'>
                         <input
                             type='checkbox'
-                            className='opacity-0 w-0 h-0 peer'
+                            className='h-0 w-0 opacity-0 peer'
                             checked={venue.meta?.parking}
                             onChange={e =>
                                 setVenue(v => ({
@@ -147,20 +159,23 @@ export function EditVenue() {
                             }
                         />
                         <span
-                            className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition-colors'
+                            className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'
                         />
                         <span
-                            className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'
+                            className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'
                         />
                     </label>
                 </div>
 
-                <div className='flex justify-between items-center'>
-                    <span className='flex gap-1'><Utensils className='bg-amber-300 rounded p-1'/>Breakfast</span>
-                    <label className='relative inline-block w-12 h-6'>
+                <div className='flex items-center justify-between'>
+                    <span className='flex gap-1'>
+                        <Utensils className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                        Breakfast
+                    </span>
+                    <label className='relative inline-block h-6 w-12'>
                         <input
                             type='checkbox'
-                            className='opacity-0 w-0 h-0 peer'
+                            className='h-0 w-0 opacity-0 peer'
                             checked={venue.meta?.breakfast}
                             onChange={e =>
                                 setVenue(v => ({
@@ -170,20 +185,23 @@ export function EditVenue() {
                             }
                         />
                         <span
-                            className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition-colors'
+                            className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'
                         />
                         <span
-                            className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'
+                            className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'
                         />
                     </label>
                 </div>
 
-                <div className='flex justify-between items-center'>
-                    <span className='flex gap-1'><PawPrint className='bg-amber-300 rounded p-1'/>Pets</span>
-                    <label className='relative inline-block w-12 h-6'>
+                <div className='flex items-center justify-between'>
+                    <span className='flex gap-1'>
+                        <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                        Pets
+                    </span>
+                    <label className='relative inline-block h-6 w-12'>
                         <input
                             type='checkbox'
-                            className='opacity-0 w-0 h-0 peer'
+                            className='h-0 w-0 opacity-0 peer'
                             checked={venue.meta?.pets}
                             onChange={e =>
                                 setVenue(v => ({
@@ -193,16 +211,16 @@ export function EditVenue() {
                             }
                         />
                         <span
-                            className='absolute inset-0 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition-colors'
+                            className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'
                         />
                         <span
-                            className='absolute top-0 left-0 w-6 h-6 bg-white rounded-full shadow-md peer-checked:translate-x-full transition-transform'
+                            className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'
                         />
                     </label>
                 </div>
             </div>
 
-            <h3 className='font-semibold'>Location</h3>
+            <h3 className='pt-4 text-xl font-semibold'>Location</h3>
             <label>
                 Address
                 <input
@@ -213,7 +231,7 @@ export function EditVenue() {
                             location: { ...v.location, address: e.target.value }
                         }))
                     }
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
@@ -227,7 +245,7 @@ export function EditVenue() {
                             location: { ...v.location, city: e.target.value }
                         }))
                     }
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
@@ -241,13 +259,13 @@ export function EditVenue() {
                             location: { ...v.location, country: e.target.value }
                         }))
                     }
-                    className='border p-2 w-full'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
 
             <button
                 type='submit'
-                className='mt-4 px-4 py-2 bg-green-500 text-white rounded cursor-pointer hover:bg-green-600'
+                className='mt-4 cursor-pointer rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600'
             >
                 Save changes
             </button>

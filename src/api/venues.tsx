@@ -36,7 +36,7 @@ export async function allVenues(): Promise<VenueProps[]> {
     }
 }
 
-// Fetch single venue by ID
+// Fetch a single venue by ID
 export async function singleVenue(id: string) {
     const response = await fetch(`${API_VENUES}/${id}`, {
         headers: authHeaders()

@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { deleteVenue, ownVenues } from '../../api/venues.tsx';
 import { formatDate } from '../../utils';
-import { CreateVenueLink } from '../../components/CreateVenueLink.tsx';
+import { CreateVenueLink } from '../../components/HeaderLinks.tsx';
 import { SquarePen, Trash2 } from 'lucide-react';
 import DeleteVenueModal from '../../components/DeleteVenueModal.tsx';
 
@@ -34,13 +34,13 @@ export function MyVenues() {
     }, [username]);
 
     return (
-        <div className='pt-8 px-8 w-full bg-brand-secondary lg:pr-20'>
+        <div className='w-full px-8 pt-12 bg-brand-secondary lg:pr-20 lg:pt-6'>
             <h1 className='text-2xl font-bold'>My venues</h1>
-            <ul className='flex flex-col space-y-6 pt-4 gap-4'>
+            <ul className='flex flex-col gap-4 pt-4 space-y-6 lg:pt-6'>
                 {venues.length === 0 && (
                     <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
                         go to
-                        <span className='ml-1 text-brand-primary font-semibold'>
+                        <span className='ml-1 font-semibold text-brand-primary'>
                             <CreateVenueLink/>.
                         </span>
                     </p>
@@ -48,9 +48,9 @@ export function MyVenues() {
                 {venues.map((venue: any) => (
                     <li key={venue.id}
                         onClick={() => navigate(`/venues/${venue.id}`)}
-                        className='min-h-28 rounded-lg bg-white p-4 m-0 transition-transform duration-400 hover:scale-102'
+                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:scale-102'
                     >
-                        <div className='flex justify-between items-center'>
+                        <div className='flex items-center justify-between'>
                             <Link to={venue.id}>
                                 <h2 className='text-xl font-semibold'>{venue.name}</h2>
                             </Link>
@@ -61,7 +61,7 @@ export function MyVenues() {
                                         e.stopPropagation();
                                         navigate(`/venues/${venue.id}/edit`);
                                     }}
-                                    className='text-brand-primary cursor-pointer hover:scale-110 transition-transform'
+                                    className='cursor-pointer transition-transform text-brand-primary hover:scale-110'
                                 >
                                     Edit
                                 </SquarePen>
@@ -71,7 +71,7 @@ export function MyVenues() {
                                         e.stopPropagation();
                                         handleOpenModal(venue.id);
                                     }}
-                                    className='cursor-pointer text-red-500 hover:scale-110 transition-transform'
+                                    className='cursor-pointer text-red-500 transition-transform hover:scale-110'
                                 >
                                     Delete
                                 </Trash2>
