@@ -6,7 +6,8 @@ import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { IoLocation } from 'react-icons/io5';
-import { FaBed, FaDollarSign, FaStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
+import { Bed, CarFront, PawPrint, Star, Utensils, Wifi } from 'lucide-react';
 
 interface Props {
     venue: VenueProps;
@@ -51,23 +52,22 @@ export function VenueDetails({ venue, venueId }: Props) {
                     </h1>
                     <p className='flex items-center gap-1 px-4 pb-3 text-gray-600'>
                         <IoLocation size={18}/>
-                        {capitalizeLetter(venue.location?.address) || 'Oslo, Norway'}
+                        <p>
+                            {capitalizeLetter(venue.location?.address) || 'Oslo, Norway'}, {capitalizeLetter(venue.location?.country)}
+                        </p>
                     </p>
 
-                    <div className='flex items-center gap-6 px-4 py-3'>
-                        <div className='flex flex-col items-center text-gray-600'>
-                            <FaBed size={24}/>
-                            {venue.maxGuests} guests
-                        </div>
+                    <div className='flex flex-col gap-6 px-4 py-3'>
+                        <div className='flex gap-4'>
+                            <div className='flex flex-col items-center text-gray-600'>
+                                <Bed size={24}/>
+                                {venue.maxGuests} guests
+                            </div>
 
-                        <div className='flex flex-col items-center text-gray-600'>
-                            <FaDollarSign size={24}/>
-                            {venue.price}/night
-                        </div>
-
-                        <div className='flex flex-col items-center text-gray-600'>
-                            <FaStar size={24}/>
-                            <p>{venue?.rating ? `${venue.rating} stars` : 'No reviews'}</p>
+                            <div className='flex flex-col items-center text-gray-600'>
+                                <Star size={24}/>
+                                <p>{venue?.rating ? `${venue.rating} stars` : 'No reviews'}</p>
+                            </div>
                         </div>
                     </div>
 
@@ -75,9 +75,36 @@ export function VenueDetails({ venue, venueId }: Props) {
                         <p className='text-xl font-semibold font'>About this place</p>
                         <p className='text-gray-600'>{venue.description}</p>
                     </div>
+
+                    <div className='px-4 pb-2'>
+                        <h2 className='text-xl font-semibold pb-2'>Facilities</h2>
+
+                        <div className='flex gap-5'>
+                            <div className='flex flex-col items-center gap-1 text-gray-600'>
+                                <Wifi size={24}/>
+                                <p className='text-sm'>{venue.meta.wifi ? 'Available' : 'Not available'}</p>
+                            </div>
+
+                            <div className='flex flex-col items-center gap-1 text-gray-600'>
+                                <PawPrint size={24}/>
+                                <p className='text-sm'>{venue.meta.pets ? 'Allowed' : 'Not allowed'}</p>
+                            </div>
+
+                            <div className='flex flex-col items-center gap-1 text-gray-600'>
+                                <Utensils size={24}/>
+                                <p className='text-sm'>{venue.meta.breakfast ? 'Included' : 'Not included'}</p>
+                            </div>
+
+                            <div className='flex flex-col items-center gap-1 text-gray-600'>
+                                <CarFront size={24}/>
+                                <p className='text-sm'>{venue.meta.parking ? 'Parking' : 'No parking'}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <h2 className='text-2xl font-semibold px-6 pt-8'>Book your stay</h2>
             <div className='flex justify-between px-6 pt-8'>
                 <span className='flex text-2xl font-bold'>
                     ${venue.price}<p className='font-normal'>/night</p>

@@ -20,7 +20,7 @@ export function SearchBar({
     const extra = pathname === '/' ? '-mt-10' : 'mt-2'
 
     return (
-        <div className='flex justify-center p-4 px-6 pb-8'>
+        <div className='flex justify-center p-4 px-6 pb-6'>
             <div className={`relative z-10 flex flex-col gap-6 border border-gray-200 rounded-lg p-4 w-full max-w-md -mt-10 bg-white shadow-md lg:flex-row lg:max-w-4xl lg:flex justify-center lg:items-end ${extra}`}>
                 <div className='flex flex-col'>
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Where</div>
@@ -81,7 +81,8 @@ export function SearchBar({
                     Search
                 </button>
             </div>
+
+
         </div>
     );
-
 }

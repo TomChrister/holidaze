@@ -44,9 +44,12 @@ export type EditVenueProps = {
     }
 }
 
-// Delete venue props
-export type DeleteVenueModalProps = {
-    isOpen: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-};
+// Confirm modal props
+export type ConfirmModalProps = {
+    isOpen: boolean
+    onClose: () => void
+    onConfirm: () => void
+    title?: string
+    message: string
+    confirmText?: string
+}

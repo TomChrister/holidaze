@@ -19,7 +19,7 @@ export function VenuePage() {
     return (
         <>
             <title>{venue.name}</title>
-            <VenueDetails venue={venue} venueId={id!}/>;
+            <VenueDetails venue={venue} venueId={id!}/>
         </>
     )
 }
