@@ -2,12 +2,29 @@ import { useEffect, useState } from 'react';
 import { upcomingBookings } from '../../api/bookings.tsx';
 import { formatDate } from '../../utils';
 import { Link } from 'react-router-dom';
-import { PlaneTakeoff } from 'lucide-react';
+import { PlaneTakeoff, Trash2 } from 'lucide-react';
+import { cancelBookings } from '../../api/venues.tsx';
+import ConfirmModal from '../../components/ConfirmModal.tsx';
 
 export function MyBookings() {
     const [bookings, setBookings] = useState<any[]>([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    const [showCancel, setShowCancel] = useState(false)
+    const [selBookingId, setSelBookingId] = useState<string | null>(null)
+
+    const handleOpenCancel = (id: string) => {
+        setSelBookingId(id)
+        setShowCancel(true)
+    }
+
+    const handleCancel = async () => {
+        if (!selBookingId) return
+        await cancelBookings(selBookingId)
+        setBookings(b => b.filter(x => x.id !== selBookingId))
+        setShowCancel(false)
+    }
 
     const name = localStorage.getItem('name') || '';
 
@@ -33,7 +50,10 @@ export function MyBookings() {
 
     return (
         <div className='w-full px-8 pt-6 space-y-4 bg-brand-secondary lg:pl-20'>
-            <h2 className='m-0 pr-6 pb-6 text-2xl font-bold'>Upcoming trips</h2>
+            <div className='flex items-center gap-3'>
+                <h2 className='m-0 text-2xl font-bold'>Upcoming trips</h2>
+                <PlaneTakeoff className='text-brand-primary'/>
+            </div>
             {bookings.length === 0 && (
                 <p className='mx-6 rounded-lg bg-white p-4 px-6 text-gray-600'>
                     No bookings yet.<br/> Go to
@@ -44,7 +64,8 @@ export function MyBookings() {
             )}
             <ul className='flex flex-col gap-4 space-y-4'>
                 {bookings.map((booking) => (
-                    <li key={booking.id} className='m-0 flex h-28 cursor-pointer items-center justify-between rounded-lg bg-white p-4 shadow transition-transform duration-400 hover:scale-102'>
+                    <li key={booking.id}
+                        className='m-0 flex h-28 cursor-pointer items-center justify-between rounded-lg bg-white p-4 shadow transition-transform duration-400 hover:scale-102'>
                         <Link to={`/venues/${booking.venue.id}`}>
                             <p>
                                 <strong>
@@ -56,10 +77,27 @@ export function MyBookings() {
                             </p>
                             <p><strong>Guests:</strong> {booking.guests}</p>
                         </Link>
-                        <PlaneTakeoff className='text-brand-primary'/>
+                        <Trash2
+                            onClick={e => {
+                                e.stopPropagation();
+                                handleOpenCancel(booking.id)
+                            }}
+                            className='cursor-pointer text-red-500 transition-transform hover:scale-110'
+                        >
+                            <title>Cancel booking</title>
+                        </Trash2>
                     </li>
                 ))}
             </ul>
+
+            <ConfirmModal
+                isOpen={showCancel}
+                onClose={() => setShowCancel(false)}
+                onConfirm={handleCancel}
+                title='Cancel booking'
+                message='Are you sure you want to cancel this booking?'
+                confirmText='Cancel booking'
+            />
         </div>
     )
 }

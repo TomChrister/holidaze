@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { deleteVenue, ownVenues } from '../../api/venues.tsx';
 import { formatDate } from '../../utils';
 import { CreateVenueLink } from '../../components/HeaderLinks.tsx';
-import { SquarePen, Trash2 } from 'lucide-react';
-import DeleteVenueModal from '../../components/DeleteVenueModal.tsx';
+import { House, SquarePen, Trash2 } from 'lucide-react';
+import ConfirmModal from '../../components/ConfirmModal.tsx';
 
 export function MyVenues() {
     const navigate = useNavigate();
@@ -22,9 +22,14 @@ export function MyVenues() {
 
     const handleDelete = async () => {
         if (!selectedVenueId) return;
-        await deleteVenue(selectedVenueId);
-        setVenues((prev) => prev.filter((v) => v.id !== selectedVenueId));
-        setShowModal(false);
+        try {
+            await deleteVenue(selectedVenueId);
+            setVenues(v => v.filter(x => x.id !== selectedVenueId));
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setShowModal(false);
+        }
     };
 
     useEffect(() => {
@@ -35,8 +40,11 @@ export function MyVenues() {
 
     return (
         <div className='w-full px-8 pt-12 bg-brand-secondary lg:pr-20 lg:pt-6'>
-            <h1 className='text-2xl font-bold'>My venues</h1>
-            <ul className='flex flex-col gap-4 pt-4 space-y-6 lg:pt-6'>
+            <div className='flex items-center gap-3'>
+                <h1 className='text-2xl font-bold'>My venues</h1>
+                <House className='text-brand-primary'/>
+            </div>
+            <ul className='flex flex-col gap-4 pt-4 space-y-6'>
                 {venues.length === 0 && (
                     <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
                         go to
@@ -63,6 +71,7 @@ export function MyVenues() {
                                     }}
                                     className='cursor-pointer transition-transform text-brand-primary hover:scale-110'
                                 >
+                                    <title>Edit venue</title>
                                     Edit
                                 </SquarePen>
 
@@ -73,6 +82,7 @@ export function MyVenues() {
                                     }}
                                     className='cursor-pointer text-red-500 transition-transform hover:scale-110'
                                 >
+                                    <title>Delete venue</title>
                                     Delete
                                 </Trash2>
                             </div>
@@ -97,13 +107,16 @@ export function MyVenues() {
                         )}
                     </li>
                 ))}
-
-                <DeleteVenueModal
-                    isOpen={showModal}
-                    onClose={() => setShowModal(false)}
-                    onConfirm={handleDelete}
-                />
             </ul>
+
+            <ConfirmModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleDelete}
+                title='Delete venue'
+                message='Are you sure you want to delete this venue?'
+                confirmText='Delete'
+            />
         </div>
     );
 }

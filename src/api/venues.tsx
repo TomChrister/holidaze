@@ -1,4 +1,4 @@
-import { API_BASE_HOLIDAZE, API_PROFILES, API_VENUES } from '../utils/constants.tsx';
+import { API_BASE_HOLIDAZE, API_BOOKINGS, API_PROFILES, API_VENUES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
 import { VenueProps } from '../types/venue';
 
@@ -69,6 +69,20 @@ export async function ownVenues(name: string) {
     });
     const json = await response.json();
     return json.data;
+}
+
+// Delete bookings
+export async function cancelBookings(id: string) {
+    const response = await fetch(`${API_BOOKINGS}/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders(),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to delete bookings`);
+    }
+
+    return response.status !== 204 ? await response.json() : null;
 }
 
 // Delete venue
