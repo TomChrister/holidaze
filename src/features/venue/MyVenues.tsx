@@ -39,10 +39,15 @@ export function MyVenues() {
     }, [username]);
 
     return (
-        <div className='w-full px-8 pt-12 bg-brand-secondary lg:pr-20 lg:pt-6'>
-            <div className='flex items-center gap-3'>
-                <h1 className='text-2xl font-bold'>My venues</h1>
-                <House className='text-brand-primary'/>
+        <div className='w-full px-8 pt-6 lg:px-0 lg:pt-6'>
+            <div className='flex items-center justify-between gap-3'>
+                <div className='flex items-center gap-4'>
+                    <h1 className='text-2xl font-semibold'>My venues</h1>
+                    <House className='text-brand-primary'/>
+                </div>
+                <Link to='/create' className='font-semibold text-brand-primary hover:underline'>
+                    Create new venue
+                </Link>
             </div>
             <ul className='flex flex-col gap-4 pt-4 space-y-6'>
                 {venues.length === 0 && (
@@ -55,56 +60,56 @@ export function MyVenues() {
                 )}
                 {venues.map((venue: any) => (
                     <li key={venue.id}
-                        onClick={() => navigate(`/venues/${venue.id}`)}
-                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:scale-102'
-                    >
-                        <div className='flex items-center justify-between'>
-                            <Link to={venue.id}>
-                                <h2 className='text-xl font-semibold'>{venue.name}</h2>
-                            </Link>
+                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:scale-102'>
+                        <div className='block'>
+                            <div className='flex items-center justify-between'>
+                                <Link to={`/venues/${venue.id}`}>
+                                    <h2 className='text-xl font-semibold'>{venue.name}</h2>
+                                </Link>
+                                <div className='flex gap-4'>
+                                    <SquarePen
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            navigate(`/venues/${venue.id}/edit`);
+                                        }}
+                                        className='cursor-pointer transition-transform text-brand-primary hover:scale-110'
+                                    >
+                                        <title>Edit venue</title>
+                                        Edit
+                                    </SquarePen>
 
-                            <div className='flex gap-4'>
-                                <SquarePen
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        navigate(`/venues/${venue.id}/edit`);
-                                    }}
-                                    className='cursor-pointer transition-transform text-brand-primary hover:scale-110'
-                                >
-                                    <title>Edit venue</title>
-                                    Edit
-                                </SquarePen>
-
-                                <Trash2
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleOpenModal(venue.id);
-                                    }}
-                                    className='cursor-pointer text-red-500 transition-transform hover:scale-110'
-                                >
-                                    <title>Delete venue</title>
-                                    Delete
-                                </Trash2>
+                                    <Trash2
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleOpenModal(venue.id);
+                                        }}
+                                        className='cursor-pointer text-red-500 transition-transform hover:scale-110'
+                                    >
+                                        <title>Delete venue</title>
+                                        Delete
+                                    </Trash2>
+                                </div>
                             </div>
+
+                            {venue.bookings && venue.bookings.length > 0 ? (
+                                <div className='mt-4'>
+                                    <h3 className='font-semibold'>Bookings:</h3>
+                                    <ul className='ml-5 list-disc'>
+                                        {venue.bookings.map((booking: any) => (
+                                            <li key={booking.id} className='flex flex-wrap gap-1 text-sm'>
+                                                <span>
+                                                    {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
+                                                </span>
+                                                <span>for {booking.guests} guests</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ) : (
+                                <p className='mt-2 text-sm text-gray-500'>No bookings for this venue yet</p>
+                            )}
                         </div>
 
-                        {venue.bookings && venue.bookings.length > 0 ? (
-                            <div className='mt-4'>
-                                <h3 className='font-semibold'>Bookings:</h3>
-                                <ul className='ml-5 list-disc'>
-                                    {venue.bookings.map((booking: any) => (
-                                        <li key={booking.id} className='flex flex-wrap gap-1 text-sm'>
-                                            <span>
-                                                {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
-                                            </span>
-                                            <span>for {booking.guests} guests</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ) : (
-                            <p className='mt-2 text-sm text-gray-500'>No bookings for this venue yet</p>
-                        )}
                     </li>
                 ))}
             </ul>

@@ -10,6 +10,8 @@ export function BookingForm({ venueId }: BookingFormProps) {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [guests, setGuests] = useState('');
+    const [maxGuests, setMaxGuests] = useState<number>(1);
+
     const [bookings, setBookings] = useState<
         { id: string; dateFrom: string; dateTo: string }[]
     >([]);
@@ -18,6 +20,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
         singleBooking(venueId)
             .then(venue => {
                 setBookings(venue.bookings || []);
+                setMaxGuests(venue.maxGuests || 1);
             })
             .catch(console.error);
     }, [venueId]);
@@ -64,7 +67,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Dates</label>
                 <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
-                    <CalendarDays className='mr-2 ml-1 h-5 w-5 text-gray-400' />
+                    <CalendarDays className='mr-2 ml-1 h-5 w-5 text-brand-primary opacity-80'/>
                     <DatePicker
                         selected={startDate}
                         onChange={(dates) => {
@@ -76,7 +79,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
                         endDate={endDate}
                         selectsRange
                         placeholderText='dd.mm.yyyy'
-                        className='w-full p-1 text-gray-500 focus:outline-none'
+                        className='w-full p-1 text-gray-500 cursor-pointer focus:outline-none'
                         minDate={new Date()}
                         filterDate={date =>
                             !bookedDates.some(d => d.toDateString() === date.toDateString())
@@ -94,15 +97,21 @@ export function BookingForm({ venueId }: BookingFormProps) {
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Guests</label>
                 <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
-                    <Users className='mr-2 ml-1 h-5 w-5 text-gray-400' />
-                    <input
-                        type='number'
+                    <Users className='mr-2 ml-1 h-5 w-5 text-brand-primary opacity-80'/>
+                    <select
                         value={guests}
-                        onChange={e => setGuests(e.target.value)}
-                        placeholder='Guests'
+                        onChange={(e) => setGuests(e.target.value)}
                         required
-                        className='w-full p-1 text-gray-500 focus:outline-none'
-                    />
+                        className='w-full p-1 text-gray-500 focus:outline-none cursor-pointer'
+                    >
+                        <option value="" disabled>Guests</option>
+                        {Array.from({ length: maxGuests }, (_, i) => (
+                            <option key={i + 1} value={i + 1}>
+                                {i + 1} guest{i + 1 > 1 ? 's' : ''}
+                            </option>
+                        ))}
+                    </select>
+
                 </div>
             </div>
 

@@ -47,7 +47,7 @@ export function CreateVenueForm() {
             <div className='mx-auto flex max-w-xl flex-col justify-start gap-2 px-6 pt-8 pb-4'>
                 <h1 className='text-3xl font-semibold'>List your home</h1>
                 <p className='text-gray-400'>Share your space with travelers, fill out the details below</p>
-                <p className='text-gray-400'>When creating a listing these are the required fields:</p>
+                <p className='text-gray-400'>When creating a venue these are the required fields:</p>
                 <p className='text-gray-400'>
                     - Name<br/>
                     - Description<br/>
@@ -61,11 +61,11 @@ export function CreateVenueForm() {
                 <hr className='my-4 border-t border-gray-300'/>
             </div>
 
-            <div className='mx-auto max-w-xl px-6 py-1 pt-4'>
+            <div className='mx-auto max-w-xl px-6 py-1 pt-4 pb-4'>
                 <h3 className='text-xl font-semibold'>Home details</h3>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='mx-auto max-w-xl rounded-md p-6 space-y-4'>
+            <form onSubmit={handleSubmit(onSubmit)} className='mx-auto max-w-xl rounded-md px-6 pb-12 space-y-4'>
                 <input
                     {...register('name', { required: 'Name is required' })}
                     placeholder='Name *'
@@ -218,8 +218,8 @@ export function CreateVenueForm() {
                        className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
 
                 <button type='submit'
-                        className='my-4 cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'>
-                    Create Venue
+                        className='my-4 w-full cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'>
+                    Create venue
                 </button>
             </form>
         </>

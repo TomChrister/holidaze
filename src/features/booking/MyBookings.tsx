@@ -49,23 +49,24 @@ export function MyBookings() {
     if (error) return <p>Error: {error}</p>
 
     return (
-        <div className='w-full px-8 pt-6 space-y-4 bg-brand-secondary lg:pl-20'>
+        <div className='w-full px-8 pt-6 space-y-4 lg:px-0'>
             <div className='flex items-center gap-3'>
-                <h2 className='m-0 text-2xl font-bold'>Upcoming trips</h2>
+                <h2 className='m-0 text-2xl font-semibold'>Upcoming trips</h2>
                 <PlaneTakeoff className='text-brand-primary'/>
             </div>
             {bookings.length === 0 && (
-                <p className='mx-6 rounded-lg bg-white p-4 px-6 text-gray-600'>
+                <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>
                     No bookings yet.<br/> Go to
                     <Link to={'/explore'} className='ml-1 font-semibold text-brand-primary'>
                         explore
                     </Link> here.
                 </p>
             )}
-            <ul className='flex flex-col gap-4 space-y-4'>
+            <ul className='grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
                 {bookings.map((booking) => (
                     <li key={booking.id}
-                        className='m-0 flex h-28 cursor-pointer items-center justify-between rounded-lg bg-white p-4 shadow transition-transform duration-400 hover:scale-102'>
+                        className='flex h-28 items-center justify-between rounded-lg bg-white p-4 shadow duration-400 transition-transform hover:scale-103 lg:w-80'
+                    >
                         <Link to={`/venues/${booking.venue.id}`}>
                             <p>
                                 <strong>

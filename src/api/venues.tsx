@@ -11,7 +11,7 @@ export async function allVenues(): Promise<VenueProps[]> {
     try {
         while (!isLastPage) {
             const res = await fetch(
-                `${API_BASE_HOLIDAZE}/venues?page=${page}&limit=100`,
+                `${API_BASE_HOLIDAZE}/venues?page=${page}&limit=100&sort=created&sortOrder=asc`,
                 {
                     method: 'GET',
                     headers: {
