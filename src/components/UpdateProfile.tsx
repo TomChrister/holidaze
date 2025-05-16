@@ -38,10 +38,10 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
     if (!showForm) {
         return (
-            <div className='border-b-gray-500 px-8 pb-6 shadow'>
+            <div className='px-8'>
                 <button
                     onClick={() => setShowForm(true)}
-                    className='mt-4 flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'
+                    className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'
                 >
                     <UserRoundPen className='mr-2 h-4 w-4'/>
                     Update profile
@@ -51,7 +51,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='p-6 shadow space-y-4'>
+        <form onSubmit={handleSubmit} className='p-2 px-6 space-y-4 lg:px-0 lg:pb-6'>
             <div>
                 <label className='block font-semibold'>New bio:</label>
                 <textarea
@@ -82,7 +82,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
             <button
                 type='submit'
-                className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary'
+                className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'
             >
                 <UserRoundPen className='mr-2 h-4 w-4'/>
                 Update profile
@@ -91,7 +91,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
             <button
                 type='button'
                 onClick={() => setShowForm(false)}
-                className='w-full cursor-pointer rounded bg-red-700 px-4 py-2 text-white'>
+                className='w-full cursor-pointer rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700'>
                 Cancel
             </button>
         </form>

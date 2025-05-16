@@ -1,14 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap');
+
+@import 'tailwindcss';
 
 @theme {
-    --font-primary: 'Inter', sans-serif;
+    --font-primary: 'Montserrat', sans-serif;
+
+    --font-logo: 'Kantumruy Pro', sans-serif;
 
     --color-brand-primary: #634AFF;
 
-    --color-brand-secondary: rgba(235, 235, 235, 0.35);
+    --color-brand-secondary: #EBEBEB59;
 
-
-    --color-brand-tierty: rgba(235, 235, 235, 0.76);
+    --color-brand-tierty: #EBEBEBC1;
 
 }
 
@@ -19,3 +23,5 @@ html {
 .input {
     @apply w-full border rounded px-3 py-2;
 }
+
+
