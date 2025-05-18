@@ -47,14 +47,11 @@ export function HomePage() {
                     </div>
                 </div>
 
-
-
                 <SearchBar
                     search={search}
                     onSearchChange={setSearch}
                     onSearchSubmit={handleSearch}
                 />
-
             </div>
 
             <div className='flex justify-center items-center text-lg py-6'>

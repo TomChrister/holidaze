@@ -35,9 +35,9 @@ export function ExplorePage() {
 
     const [filters, setFilters] = useState({
         wifi: false,
+        pets: false,
         parking: false,
         breakfast: false,
-        pets: false,
     });
 
     useEffect(() => {
@@ -87,18 +87,18 @@ export function ExplorePage() {
                     />
 
                     <h2 className='flex justify-center px-6 pb-3 text-2xl lg:px-32'>Pick filters</h2>
-                    <div className='flex justify-center space-x-4 px-6 mb-8 lg:px-32'>
+                    <div className='mb-8 grid grid-cols-2 justify-center gap-4 px-20 space-x-4 lg:flex lg:px-32'>
                         {Object.entries(filters).map(([key, active]) => (
                             <span
                                 key={key}
                                 onClick={() =>
                                     setFilters(f => ({ ...f, [key]: !f[key as keyof typeof filters] }))
                                 }
-                                className={`flex items-center space-x-1 cursor-pointer px-3 py-1 rounded-lg shadow-md hover:bg-brand-primary hover:text-white
+                                className={`flex items-center space-x-1 w-full m-0 justify-center cursor-pointer py-1 rounded-lg shadow-md hover:bg-brand-primary hover:text-white lg:w-36
                                           ${active ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-700'}`}
                             >
                                 {iconMap[key as keyof typeof iconMap]}
-                                <span className='capitalize text-sm'>
+                                <span className='text-sm capitalize'>
                                     {key}
                                 </span>
                             </span>
