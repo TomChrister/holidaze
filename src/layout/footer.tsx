@@ -3,6 +3,11 @@ import { useLocation } from 'react-router-dom';
 export function Footer() {
     const location = useLocation();
     const isProfilePage = location.pathname === '/profile';
+    const hideFooterPaths = ['/login', '/register'];
+
+    if (hideFooterPaths.includes(location.pathname)) {
+        return null;
+    }
 
     return (
         <>
