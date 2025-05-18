@@ -21,7 +21,8 @@ export function SearchBar({
 
     return (
         <div className='flex justify-center p-4 px-6 pb-6'>
-            <div className={`relative z-10 flex flex-col gap-6 border border-gray-200 rounded-lg p-4 w-full max-w-md -mt-10 bg-white shadow-md lg:flex-row lg:max-w-4xl lg:flex justify-center lg:items-end ${extra}`}>
+            <div
+                className={`relative z-10 flex flex-col gap-6 border border-gray-200 rounded-lg p-4 w-full max-w-md -mt-10 bg-white shadow-md lg:flex-row lg:max-w-4xl lg:flex justify-center lg:items-end ${extra}`}>
                 <div className='flex flex-col'>
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Where</div>
                     <div className='flex items-center border-b border-gray-300 pb-2'>
@@ -47,7 +48,7 @@ export function SearchBar({
                             endDate={dateRange[1]}
                             onChange={(update) => setDateRange(update as [Date | null, Date | null])}
                             placeholderText='Select dates'
-                            className='w-full text-sm text-gray-500 focus:outline-none'
+                            className='w-full text-sm text-gray-500 focus:outline-none hover:cursor-pointer'
                             dateFormat='dd/MM/yyyy'
                         />
                     </div>
@@ -57,14 +58,18 @@ export function SearchBar({
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Add guests</div>
                     <div className='flex items-center border-b border-gray-300 pb-2'>
                         <Users className='mr-2 h-4 w-4 text-gray-400'/>
-                        <input
-                            type='number'
-                            min={1}
+                        <select
                             value={guests}
                             onChange={(e) => setGuests(e.target.value)}
-                            className='w-full text-sm text-gray-500 focus:outline-none'
-                            placeholder='Who'
-                        />
+                            className='w-full text-sm text-gray-500 focus:outline-none lg:w-44 hover:cursor-pointer'
+                        >
+                            <option value='' disabled>Guests</option>
+                            {Array.from({ length: 100 }, (_, i) => (
+                                <option key={i + 1} value={i + 1}>
+                                    {i + 1} guest{i + 1 > 1 ? 's' : ''}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
 

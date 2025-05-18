@@ -32,7 +32,7 @@ export function VenueDetails({ venue, venueId }: Props) {
             <div className='border-b border-gray-300 bg-brand-secondary lg:px-52 md:pt-6'>
                 <Slider {...settings}>
                     {images.map((img, i) => (
-                        <div key={i} className='relative w-full h-[400px]'>
+                        <div key={i} className='relative w-full h-[330px] lg:h-[400px]'>
                             <img
                                 src={img.url}
                                 alt={img.alt || venue.name}

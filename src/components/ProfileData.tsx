@@ -23,7 +23,6 @@ export function ProfileData() {
                 setLoading(false);
             }
         }
-
         loadProfile();
     }, [name]);
 
@@ -73,9 +72,6 @@ export function ProfileData() {
                     </p>
                 </div>
             </div>
-
-
-
         </div>
     )
 }
