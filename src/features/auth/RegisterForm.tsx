@@ -63,7 +63,7 @@ export default function RegisterForm() {
                                     message: 'Must end with @stud.noroff.no'
                                 }
                             })}
-                            placeholder='Enter your email'
+                            placeholder='yourmail@stud.noroff.no'
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
