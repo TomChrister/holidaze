@@ -25,11 +25,11 @@ export default function LoginForm() {
 
     return (
         <div className='flex h-screen items-center justify-center p-4'>
-            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 py-12 shadow-md space-y-4'>
+            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-11 py-12 shadow-md space-y-4 lg:p-8'>
                 <h2 className='text-2xl font-semibold'>Welcome back</h2>
                 <p className='text-gray-400'>Please enter your details to sign in</p>
                 <form onSubmit={handleSubmit(onSubmit)}
-                      className='mx-auto flex w-full max-w-md px-4 flex-col'>
+                      className='mx-auto flex w-full max-w-md flex-col lg:w-96 lg:px-4'>
                     <label className='mb-1'>Email</label>
                     <div className='relative'>
                         <Mail

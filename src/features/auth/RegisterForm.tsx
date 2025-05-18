@@ -10,6 +10,7 @@ import { HelpCircle, Lock, Mail, User } from 'lucide-react';
 export default function RegisterForm() {
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<RegisterFormData>();
     const [venueToggle, setVenueToggle] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const onSubmit = async (data: RegisterFormData) => {
         try {
@@ -24,18 +25,18 @@ export default function RegisterForm() {
             toast.error('Registration failed. Please try again.');
         }
     };
-    
+
     return (
-        <div className="flex h-screen items-center justify-center p-4">
-            <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 py-12 shadow-md space-y-4">
+        <div className='flex h-screen items-center justify-center p-4'>
+            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 shadow-md space-y-4'>
                 <h2 className='text-2xl font-semibold'>Create an account</h2>
                 <p className='text-gray-400'>Please enter your details to register</p>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className='mx-auto flex w-full max-w-md px-4 flex-col'>
+                    className='mx-auto flex w-full max-w-md flex-col px-4'>
                     <label className='mb-1'>Name</label>
                     <div className='relative'>
-                        <User size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
+                        <User size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
                         <input
                             {...register('name', {
                                 required: 'Name is required',
@@ -54,7 +55,7 @@ export default function RegisterForm() {
 
                     <label className='mb-1'>Email</label>
                     <div className='relative'>
-                        <Mail size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
+                        <Mail size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
                         <input
                             {...register('email', {
                                 required: 'Email is required',
@@ -73,7 +74,7 @@ export default function RegisterForm() {
 
                     <label className='mb-1'>Password</label>
                     <div className='relative'>
-                        <Lock size={20} className='absolute top-1/2 left-3 -translate-y-2/2 text-gray-400' />
+                        <Lock size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
                         <input
                             {...register('password', {
                                 required: 'Password is required',
@@ -99,7 +100,7 @@ export default function RegisterForm() {
                                 setValue('venueManager', checked)
                             }}
                             className={`${venueToggle ? 'bg-brand-primary' : 'bg-gray-300'}
-                            relative inline-flex h-6 w-11 items-center cursor-pointer rounded-full transition`}
+                            relative inline-flex h-6 w-14 items-center cursor-pointer rounded-full transition lg:w-14`}
                         >
 
                         <span className={`${venueToggle ? 'translate-x-6' : 'translate-x-1'}
@@ -109,13 +110,16 @@ export default function RegisterForm() {
 
                         <span className='flex items-center gap-1 text-gray-800'>
                             I want to register as a venue manager
-                            <span className='relative group'>
+                            <span className='relative group' onClick={() => setVisible(!visible)}>
                                 <HelpCircle
                                     size={16}
                                     className='cursor-pointer text-gray-400 hover:text-gray-600'
                                 />
-                                <div className='absolute bottom-full left-1/2 -mb-2 hidden w-40 -translate-x-1/2 whitespace-normal rounded bg-gray-700 p-2 text-xs text-white group-hover:block'>
-                                    A venue manager can create and manage venues and bookings.
+                                <div
+                                    className={`absolute bottom-full left-1/2 -mb-2 w-32 -translate-x-2/2 whitespace-normal rounded bg-gray-700 p-2 text-xs text-white
+                                    ${visible ? 'block' : 'hidden'} group-hover:block`}
+                                >
+                                    Venue manager's can create and manage venues and bookings.
                                 </div>
                             </span>
                         </span>
