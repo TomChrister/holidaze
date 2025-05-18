@@ -40,13 +40,13 @@ export function MyVenues() {
 
     return (
         <div className='w-full px-8 pt-6 lg:px-0 lg:pt-6'>
-            <div className='flex items-center justify-between gap-3'>
+            <div className='flex justify-between gap-3'>
                 <div className='flex items-center gap-4'>
                     <h1 className='text-2xl font-semibold'>My venues</h1>
                     <House className='text-brand-primary'/>
                 </div>
                 <Link to='/create' className='font-semibold text-brand-primary hover:underline'>
-                    Create new venue
+                    Create new
                 </Link>
             </div>
             <ul className='flex flex-col gap-4 pt-4 space-y-6'>

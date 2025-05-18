@@ -7,11 +7,12 @@ export default function VenueCard({
     id, name, price, media, location, rating
 }: VenueProps) {
     return (
-        <div className='@container bg-white rounded-lg shadow-md'>
+        <div className='@container bg-white rounded-xl border border-gray-200 shadow-md'>
             <div className='flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start'>
                 <div className='aspect-video w-full rounded-xl bg-cover bg-center bg-no-repeat'
                      style={{ backgroundImage: `url(${media[0]?.url || '/default-img.jpg'})` }}
-                ></div>
+                >
+                </div>
                 <div className='flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 p-4 @xl:px-4'>
                     <div className='flex items-center justify-between'>
                         <p className='text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]'>

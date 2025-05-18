@@ -15,16 +15,16 @@ export function Header() {
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
     return (
-        <header className='flex items-center justify-between border-b border-b-gray-100 shadow-sm mb-1 px-6 py-4 lg:px-20 lg:m-0'>
+        <header className='mb-1 flex items-center justify-between border-b border-b-gray-100 px-6 py-4 shadow-sm lg:m-0 lg:px-20'>
             <span
                 onClick={() => navigate('/')}
-                className='text-2xl font-semibold cursor-pointer font-logo text-brand-primary'
+                className='cursor-pointer text-2xl font-semibold font-logo text-brand-primary'
             >
                 Holidaze
             </span>
 
             {!hideLinks && (
-                <ul className='hidden md:flex items-center gap-4 text-lg'>
+                <ul className='hidden items-center gap-4 text-lg md:flex'>
                     <li><Link to='/explore' className='hover:text-brand-primary'>Explore</Link></li>
                     <li className='hover:text-brand-primary'><CreateVenueLink/></li>
                     <li className='hover:text-brand-primary'><ProfileLink/></li>
@@ -63,7 +63,7 @@ export function Header() {
                         onClick={toggleMenu}
                     />
                     <aside
-                        className='fixed inset-y-0 right-0 z-50 w-3/5 p-6 bg-white border-l border-gray-200 shadow-lg'>
+                        className='fixed inset-y-0 right-0 z-50 w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
                         <ul className='flex flex-col gap-4'>
                             {loggedIn && (
                                 <li className='text-sm text-gray-500'>
