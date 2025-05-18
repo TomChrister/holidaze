@@ -66,6 +66,10 @@ This application is built based on the official Holidaze API. The project includ
 4. Open localhost
     ````bash
    Usually http://localhost:5173
+   
+## 📱 Deployment
+
+- [Live site](#https://holidaze-eta.vercel.app/)
 
 ## 🔗 Resources
 
