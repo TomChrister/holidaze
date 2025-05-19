@@ -69,7 +69,7 @@ This application is built based on the official Holidaze API. The project includ
    
 ## 📱 Deployment
 
-- [Live site](#https://holidaze-eta.vercel.app/)
+- [Deployed live site here](https://holidaze-eta.vercel.app/)
 
 ## 🔗 Resources
 
