@@ -9,9 +9,9 @@ lerna-debug.log*
 
 node_modules
 dist
+.gitattributes
 dist-ssr
 *.local
-.gitattributes
 
 # Editor directories and files
 .vscode/*
