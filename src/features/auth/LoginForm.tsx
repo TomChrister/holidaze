@@ -48,6 +48,7 @@ export default function LoginForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
                     </div>
+
                     {errors.email && (
                         <p className='mb-2 text-sm text-red-500'>{errors.email.message}</p>
                     )}
@@ -71,6 +72,7 @@ export default function LoginForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
                         />
                     </div>
+
                     {errors.password && (
                         <p className='mb-4 text-sm text-red-500'>{errors.password.message}</p>
                     )}

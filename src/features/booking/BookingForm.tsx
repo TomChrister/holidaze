@@ -41,6 +41,13 @@ export function BookingForm({ venueId }: BookingFormProps) {
 
     async function handleBooking(e: React.FormEvent) {
         e.preventDefault();
+
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            toast.error('You need to be logged in to book a venue!');
+            return;
+        }
+
         if (!startDate || !endDate) {
             console.error('Choose dates!');
             return;
@@ -63,7 +70,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
     }
 
     return (
-        <form onSubmit={handleBooking} className='space-y-4'>
+        <form onSubmit={handleBooking} noValidate className='space-y-4'>
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Dates</label>
                 <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
@@ -104,14 +111,13 @@ export function BookingForm({ venueId }: BookingFormProps) {
                         required
                         className='w-full p-1 text-gray-500 focus:outline-none cursor-pointer'
                     >
-                        <option value="" disabled>Guests</option>
+                        <option value='' disabled>Guests</option>
                         {Array.from({ length: maxGuests }, (_, i) => (
                             <option key={i + 1} value={i + 1}>
                                 {i + 1} guest{i + 1 > 1 ? 's' : ''}
                             </option>
                         ))}
                     </select>
-
                 </div>
             </div>
 

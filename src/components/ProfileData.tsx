@@ -47,11 +47,13 @@ export function ProfileData() {
                     className='mt-4 h-32 w-32 rounded-full object-cover'
                 />
             </div>
+
             <div className='flex flex-col gap-2 items-center'>
                 <h1 className='text-2xl font-bold'>{profile.name}</h1>
                 <p className='ml-1 text-gray-600'>{profile.email}</p>
                 <p className='ml-1 text-gray-500'>{profile.bio || 'No bio available'}</p>
             </div>
+
             <UpdateProfileForm name={name}/>
 
             <div className='w-full px-6 flex flex-col justify-center'>
@@ -65,6 +67,7 @@ export function ProfileData() {
                         {profile._count?.bookings === 1 ? 'trip' : 'trips'}
                     </p>
                 </div>
+
                 <div className='flex flex-col items-center'>
                     <span className='text-xl font-semibold'>{profile._count?.venues}</span>
                     <p className='text-sm'>

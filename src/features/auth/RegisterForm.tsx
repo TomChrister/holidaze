@@ -49,6 +49,7 @@ export default function RegisterForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
+
                     {errors.name && (
                         <p className='mb-2 text-sm text-red-500'>{errors.name.message}</p>
                     )}
@@ -68,6 +69,7 @@ export default function RegisterForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
+
                     {errors.email && (
                         <p className='mb-4 text-sm text-red-500'>{errors.email.message}</p>
                     )}
@@ -88,6 +90,7 @@ export default function RegisterForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
+                    
                     {errors.password && (
                         <p className='mb-6 text-sm text-red-500'>{errors.password.message}</p>
                     )}

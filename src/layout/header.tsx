@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GetUserName, isLoggedIn } from '../utils/authHelpers.ts';
 import { CreateVenueLink, ProfileLink } from '../components/HeaderLinks.tsx';
 import { AlignJustify, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function Header() {
     const location = useLocation();
@@ -14,8 +14,29 @@ export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
+    const [showHeader, setShowHeader] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        const handlescroll = () => {
+            if (window.scrollY < lastScrollY.current) {
+                setShowHeader(true);
+            } else {
+                setShowHeader(false);
+            }
+            lastScrollY.current = window.scrollY;
+        }
+
+        window.addEventListener('scroll', handlescroll);
+        return () => window.removeEventListener('scroll', handlescroll);
+    }, []);
+
     return (
-        <header className='mb-1 flex items-center justify-between border-b border-b-gray-100 px-6 py-4 shadow-sm lg:m-0 lg:px-20'>
+        <>
+            <header
+                className={`sticky top-0 z-20 bg-white transition-transform duration-300
+            ${showHeader ? 'translate-y-0' : '-translate-y-full'} flex items-center justify-between border-b border-b-gray-200 px-6 py-4 shadow-sm lg:px-20`}
+            >
             <span
                 onClick={() => navigate('/')}
                 className='cursor-pointer text-2xl font-semibold font-logo text-brand-primary'
@@ -23,47 +44,47 @@ export function Header() {
                 Holidaze
             </span>
 
-            {!hideLinks && (
-                <ul className='hidden items-center gap-4 text-lg md:flex'>
-                    <li><Link to='/explore' className='hover:text-brand-primary'>Explore</Link></li>
-                    <li className='hover:text-brand-primary'><CreateVenueLink/></li>
-                    <li className='hover:text-brand-primary'><ProfileLink/></li>
-                    {loggedIn ? (
-                        <li>
-                            <button
-                                onClick={() => {
-                                    localStorage.clear();
-                                    navigate('/');
-                                    window.location.reload();
-                                }}
-                                className='text-gray-700 cursor-pointer hover:text-[#F14016]'
-                            >
-                                Logout
-                            </button>
-                        </li>
-                    ) : (
-                        <li><Link to='/login' className='hover:text-brand-primary'>Login</Link></li>
-                    )}
-                </ul>
-            )}
+                {!hideLinks && (
+                    <ul className='hidden items-center gap-4 text-lg md:flex'>
+                        <li><Link to='/explore' className='hover:text-brand-primary'>Explore</Link></li>
+                        <li className='hover:text-brand-primary'><CreateVenueLink/></li>
+                        <li className='hover:text-brand-primary'><ProfileLink/></li>
+                        {loggedIn ? (
+                            <li>
+                                <button
+                                    onClick={() => {
+                                        localStorage.clear();
+                                        navigate('/');
+                                        window.location.reload();
+                                    }}
+                                    className='text-gray-700 cursor-pointer hover:text-[#F14016]'
+                                >
+                                    Logout
+                                </button>
+                            </li>
+                        ) : (
+                            <li><Link to='/login' className='hover:text-brand-primary'>Login</Link></li>
+                        )}
+                    </ul>
+                )}
 
-            {!hideLinks && (
-                <button
-                    className='md:hidden'
-                    onClick={toggleMenu}
-                >
-                    {isMenuOpen ? <X size={24}/> : <AlignJustify size={24}/>}
-                </button>
-            )}
+                {!hideLinks && (
+                    <button
+                        className='md:hidden'
+                        onClick={toggleMenu}
+                    >
+                        {isMenuOpen ? <X size={24}/> : <AlignJustify size={24}/>}
+                    </button>
+                )}
+            </header>
 
-            {isMenuOpen && (
+            {!hideLinks && isMenuOpen && (
                 <>
                     <div
-                        className='fixed inset-0 z-40 bg-black/70'
+                        className='fixed inset-0 z-[60] bg-black/70'
                         onClick={toggleMenu}
                     />
-                    <aside
-                        className='fixed inset-y-0 right-0 z-50 w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
+                    <aside className='fixed inset-y-0 right-0 z-[60] w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
                         <ul className='flex flex-col gap-4'>
                             {loggedIn && (
                                 <li className='text-sm text-gray-500'>
@@ -75,7 +96,7 @@ export function Header() {
                                 <li>
                                     <ProfileLink onClick={toggleMenu}/>
                                 </li>
-                                <X size={24} onClick={toggleMenu}/>
+                                <X size={24} onClick={toggleMenu} className="cursor-pointer"/>
                             </div>
 
                             <li>
@@ -105,10 +126,9 @@ export function Header() {
                                 </li>
                             )}
                         </ul>
-
                     </aside>
                 </>
             )}
-        </header>
+        </>
     );
 }

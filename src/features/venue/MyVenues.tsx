@@ -49,6 +49,7 @@ export function MyVenues() {
                     Create new
                 </Link>
             </div>
+
             <ul className='flex flex-col gap-4 pt-4 space-y-6'>
                 {venues.length === 0 && (
                     <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
@@ -58,6 +59,7 @@ export function MyVenues() {
                         </span>
                     </p>
                 )}
+                
                 {venues.map((venue: any) => (
                     <li key={venue.id}
                         className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:scale-102'>

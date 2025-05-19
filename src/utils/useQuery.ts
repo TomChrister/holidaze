@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-// Gets values from the URL query on explore page
+// Gets values from the URL query on the explore page
 export function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
