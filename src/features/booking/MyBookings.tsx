@@ -54,6 +54,7 @@ export function MyBookings() {
                 <h2 className='m-0 text-2xl font-semibold'>Upcoming trips</h2>
                 <PlaneTakeoff className='text-brand-primary'/>
             </div>
+
             {bookings.length === 0 && (
                 <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>
                     No bookings yet.<br/> Go to
@@ -62,6 +63,7 @@ export function MyBookings() {
                     </Link> here.
                 </p>
             )}
+
             <ul className='grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
                 {bookings.map((booking) => (
                     <li key={booking.id}
@@ -78,6 +80,7 @@ export function MyBookings() {
                             </p>
                             <p><strong>Guests:</strong> {booking.guests}</p>
                         </Link>
+                        
                         <Trash2
                             onClick={e => {
                                 e.stopPropagation();

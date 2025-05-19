@@ -149,10 +149,10 @@ export function CreateVenueForm() {
                     </div>
 
                     <div className='flex items-center justify-between'>
-                    <span className='flex gap-1'>
-                        <CarFront className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
-                        Parking
-                    </span>
+                        <span className='flex gap-1'>
+                            <CarFront className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                            Parking
+                        </span>
                         <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
@@ -167,10 +167,10 @@ export function CreateVenueForm() {
                     </div>
 
                     <div className='flex items-center justify-between'>
-                    <span className='flex gap-1'>
-                        <Utensils className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
-                        Breakfast
-                    </span>
+                        <span className='flex gap-1'>
+                            <Utensils className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                            Breakfast
+                        </span>
                         <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
@@ -185,10 +185,10 @@ export function CreateVenueForm() {
                     </div>
 
                     <div className='flex items-center justify-between'>
-                    <span className='flex gap-1'>
-                        <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
-                        Pets
-                    </span>
+                        <span className='flex gap-1'>
+                            <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
+                            Pets
+                        </span>
                         <label className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'

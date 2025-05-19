@@ -86,8 +86,6 @@ export function SearchBar({
                     Search
                 </button>
             </div>
-
-
         </div>
     );
 }

@@ -13,6 +13,7 @@ export default function VenueCard({
                      style={{ backgroundImage: `url(${media[0]?.url || '/default-img.jpg'})` }}
                 >
                 </div>
+
                 <div className='flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 p-4 @xl:px-4'>
                     <div className='flex items-center justify-between'>
                         <p className='text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]'>
@@ -25,6 +26,7 @@ export default function VenueCard({
                             </span>
                         </div>
                     </div>
+
                     <div className='flex items-end justify-between gap-3'>
                         <div className='flex flex-col gap-1'>
                             <p className='text-[#617b89] text-base font-normal leading-normal'>
@@ -35,6 +37,7 @@ export default function VenueCard({
                             </p>
                         </div>
                     </div>
+
                     <Link to={`/venues/${id}`}
                           className='rounded-lg border p-2 text-center font-medium text-white bg-brand-primary hover:opacity-90'>
                         View details

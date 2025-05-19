@@ -18,6 +18,7 @@ export default function ConfirmModal({
                     >
                         {confirmText}
                     </button>
+
                     <button
                         onClick={onClose}
                         className='cursor-pointer rounded bg-gray-300 px-4 py-2'
@@ -29,4 +30,3 @@ export default function ConfirmModal({
         </div>
     )
 }
-

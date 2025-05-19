@@ -13,7 +13,7 @@ export function Pagination({ page, setPage, totalItems, limit }: PaginationProps
             <button
                 onClick={() => setPage(Math.max(page - 1, 1))}
                 disabled={page === 1}
-                className='rounded bg-gray-200 px-4 py-2 cursor-pointer disabled:opacity-50'
+                className='rounded bg-gray-200 px-4 py-2 cursor-pointer hover:bg-gray-300 disabled:opacity-50'
             >
                 Previous
             </button>
@@ -23,7 +23,7 @@ export function Pagination({ page, setPage, totalItems, limit }: PaginationProps
             <button
                 onClick={() => setPage(page + 1)}
                 disabled={start + limit >= totalItems}
-                className='rounded bg-gray-200 px-4 py-2 cursor-pointer disabled:opacity-50'
+                className='rounded bg-gray-200 px-4 py-2 cursor-pointer hover:bg-gray-300 disabled:opacity-50'
             >
                 Next
             </button>

@@ -47,7 +47,6 @@ export function EditVenue() {
         { icon: <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>, name: 'pets', label: 'Pets' },
     ] as const
 
-
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
@@ -80,6 +79,7 @@ export function EditVenue() {
                             className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                         />
                     </label>
+
                     <label>
                         Describe your image
                         <input
@@ -99,6 +99,7 @@ export function EditVenue() {
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
+
             <label>
                 Max guests
                 <input
@@ -136,6 +137,7 @@ export function EditVenue() {
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
+
             <label>
                 City
                 <input
@@ -143,6 +145,7 @@ export function EditVenue() {
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
+
             <label>
                 ZIP
                 <input
@@ -150,6 +153,7 @@ export function EditVenue() {
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
             </label>
+
             <label>
                 Country
                 <input

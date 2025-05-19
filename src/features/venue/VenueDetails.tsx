@@ -101,6 +101,18 @@ export function VenueDetails({ venue, venueId }: Props) {
                             </div>
                         </div>
                     </div>
+
+                    <div className='px-4 pb-4 lg:px-0 lg:pb-8'>
+                        <h2 className='text-xl font-semibold pb-4'>Where you'll stay</h2>
+                        <iframe
+                            title='Venue Location'
+                            src={`https://www.google.com/maps?q=${encodeURIComponent(
+                                `${venue.location.address}, ${venue.location.city}, ${venue.location.country}`
+                            )}&z=14&output=embed`}
+                            className='w-full max-w-screen-md h-44 rounded-lg shadow-md border border-gray-200 lg:h-72'
+                            loading='lazy'
+                        />
+                    </div>
                 </div>
             </div>
 
