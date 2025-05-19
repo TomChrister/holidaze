@@ -18,17 +18,25 @@ export function Header() {
     const lastScrollY = useRef(0);
 
     useEffect(() => {
-        const handlescroll = () => {
-            if (window.scrollY < lastScrollY.current) {
-                setShowHeader(true);
+        const handleScroll = () => {
+            const currentScroll = window.scrollY;
+            const tolerance = 5;
+
+            if (Math.abs(currentScroll - lastScrollY.current) < tolerance) return;
+
+            if (currentScroll <= 0) {
+                setShowHeader(true); // Always show the header on top
+            } else if (currentScroll < lastScrollY.current) {
+                setShowHeader(true); // Scrolls down
             } else {
-                setShowHeader(false);
+                setShowHeader(false); // Scrolls up
             }
+
             lastScrollY.current = window.scrollY;
         }
 
-        window.addEventListener('scroll', handlescroll);
-        return () => window.removeEventListener('scroll', handlescroll);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
