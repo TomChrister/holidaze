@@ -25,18 +25,21 @@ export default function LoginForm() {
 
     return (
         <div className='flex h-screen items-center justify-center p-4'>
-            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-11 py-12 shadow-md space-y-4 lg:p-8'>
+            <div className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-11 py-12 shadow-md space-y-4 lg:p-8 lg:py-14'>
                 <h2 className='text-2xl font-semibold'>Welcome back</h2>
                 <p className='text-gray-400'>Please enter your details to sign in</p>
-                <form onSubmit={handleSubmit(onSubmit)}
-                      className='mx-auto flex w-full max-w-md flex-col lg:w-96 lg:px-4'>
-                    <label className='mb-1'>Email</label>
+                <form
+                    id='login-form'
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='mx-auto flex w-full max-w-md flex-col lg:w-96 lg:px-4'>
+                    <label className='mb-1' htmlFor='email'>Email</label>
                     <div className='relative'>
                         <Mail
                             size={20}
-                            className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'
+                            className='absolute top-1/2 left-3 -translate-y-2/2 text-brand-primary'
                         />
                         <input
+                            id='email'
                             {...register('email', {
                                 required: 'You need to enter your email',
                                 pattern: {
@@ -53,13 +56,14 @@ export default function LoginForm() {
                         <p className='mb-2 text-sm text-red-500'>{errors.email.message}</p>
                     )}
 
-                    <label className='mb-1'>Password</label>
+                    <label className='mb-1' htmlFor='password'>Password</label>
                     <div className='relative'>
                         <Lock
                             size={20}
-                            className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'
+                            className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'
                         />
                         <input
+                            id='password'
                             {...register('password', {
                                 required: 'You need to enter a password',
                                 minLength: {
@@ -79,7 +83,7 @@ export default function LoginForm() {
 
                     <button
                         type='submit'
-                        className='mb-6 w-full cursor-pointer rounded py-3 text-white transition bg-brand-primary hover:opacity-90'
+                        className='mb-6 w-full cursor-pointer rounded py-3 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
                     >
                         Sign in
                     </button>

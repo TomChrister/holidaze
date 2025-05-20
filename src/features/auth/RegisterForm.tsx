@@ -28,16 +28,18 @@ export default function RegisterForm() {
 
     return (
         <div className='flex h-screen items-center justify-center p-4'>
-            <div className='flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-6 shadow-md space-y-4'>
+            <div className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-6 py-8 shadow-md space-y-4'>
                 <h2 className='text-2xl font-semibold'>Create an account</h2>
                 <p className='text-gray-400'>Please enter your details to register</p>
                 <form
+                    id='register-form'
                     onSubmit={handleSubmit(onSubmit)}
                     className='mx-auto flex w-full max-w-md flex-col px-4'>
-                    <label className='mb-1'>Name</label>
+                    <label className='mb-1' htmlFor='register-name'>Name</label>
                     <div className='relative'>
-                        <User size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
+                        <User size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
                         <input
+                            id='register-name'
                             {...register('name', {
                                 required: 'Name is required',
                                 pattern: {
@@ -54,10 +56,11 @@ export default function RegisterForm() {
                         <p className='mb-2 text-sm text-red-500'>{errors.name.message}</p>
                     )}
 
-                    <label className='mb-1'>Email</label>
+                    <label className='mb-1' htmlFor='register-email'>Email</label>
                     <div className='relative'>
-                        <Mail size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
+                        <Mail size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
                         <input
+                            id='register-email'
                             {...register('email', {
                                 required: 'Email is required',
                                 pattern: {
@@ -74,10 +77,11 @@ export default function RegisterForm() {
                         <p className='mb-4 text-sm text-red-500'>{errors.email.message}</p>
                     )}
 
-                    <label className='mb-1'>Password</label>
+                    <label className='mb-1' htmlFor='register-password'>Password</label>
                     <div className='relative'>
-                        <Lock size={20} className='absolute top-1/2 left-3 text-gray-400 -translate-y-2/2'/>
+                        <Lock size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
                         <input
+                            id='register-password'
                             {...register('password', {
                                 required: 'Password is required',
                                 minLength: {
@@ -130,7 +134,7 @@ export default function RegisterForm() {
 
                     <button
                         type='submit'
-                        className='mb-6 w-full cursor-pointer rounded py-3 text-white transition bg-brand-primary hover:opacity-90'
+                        className='mb-6 w-full cursor-pointer rounded py-3 text-white bg-brand-primary hover:bg-brand-hover transition duration-200'
                     >
                         Register
                     </button>
