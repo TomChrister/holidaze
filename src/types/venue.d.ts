@@ -23,6 +23,27 @@ export type VenueProps = {
     };
 };
 
+export type VenueFormData = {
+    name: string;
+    description: string;
+    media: { url: string; alt?: string }[];
+    price: number;
+    maxGuests: number;
+    meta: {
+        wifi: boolean;
+        parking: boolean;
+        breakfast: boolean;
+        pets: boolean;
+    };
+    location: {
+        address: string;
+        city: string;
+        zip: string;
+        country: string;
+    };
+};
+
+
 // Edit venue props
 export type EditVenueProps = {
     name: string
@@ -30,8 +51,18 @@ export type EditVenueProps = {
     media: { url: string; alt: string }[]
     price: number
     maxGuests: number
-    meta: { wifi: boolean; parking: boolean; breakfast: boolean; pets: boolean }
-    location: { address: string; city: string; zip: string; country: string }
+    meta: {
+        wifi: boolean;
+        parking: boolean;
+        breakfast: boolean;
+        pets: boolean
+    }
+    location: {
+        address: string;
+        city: string;
+        zip: string;
+        country: string
+    }
 }
 
 // Confirm modal props

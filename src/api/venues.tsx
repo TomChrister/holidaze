@@ -1,6 +1,6 @@
 import { API_BASE_HOLIDAZE, API_BOOKINGS, API_PROFILES, API_VENUES } from '../utils/constants.tsx';
 import { authHeaders } from '../utils/headers.tsx';
-import { VenueProps } from '../types/venue';
+import { VenueFormData, VenueProps } from '../types/venue';
 
 // Fetch all venues
 export async function allVenues(): Promise<VenueProps[]> {
@@ -46,7 +46,7 @@ export async function singleVenue(id: string) {
 }
 
 // Create venue
-export async function createVenue(data: VenueProps) {
+export async function createVenue(data: VenueFormData) {
     const res = await fetch(`${API_VENUES}`, {
         method: 'POST',
         headers: authHeaders(),
