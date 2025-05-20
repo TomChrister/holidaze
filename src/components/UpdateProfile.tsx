@@ -41,7 +41,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
             <div className='px-8'>
                 <button
                     onClick={() => setShowForm(true)}
-                    className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'
+                    className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
                 >
                     <UserRoundPen className='mr-2 h-4 w-4'/>
                     Update profile
@@ -51,10 +51,14 @@ export function UpdateProfileForm({ name }: { name: string }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className='p-2 px-6 space-y-4 lg:px-0 lg:pb-6'>
+        <form
+            id='update-profile-form'
+            onSubmit={handleSubmit}
+            className='p-2 px-6 space-y-4 lg:px-0 lg:pb-6'>
             <div>
-                <label className='block font-semibold'>New bio:</label>
+                <label className='block font-semibold' htmlFor='bio'>New bio:</label>
                 <textarea
+                    id='bio'
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     className='w-full rounded border border-gray-400 p-2'
@@ -63,8 +67,9 @@ export function UpdateProfileForm({ name }: { name: string }) {
             </div>
 
             <div>
-                <label className='block font-semibold'>Avatar URL:</label>
+                <label className='block font-semibold' htmlFor='avatar-url'>Avatar URL:</label>
                 <input
+                    id='avatar-url'
                     type='text'
                     value={avatarUrl}
                     onChange={(e) => setAvatarUrl(e.target.value)}
@@ -82,7 +87,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
             <button
                 type='submit'
-                className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'
+                className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
             >
                 <UserRoundPen className='mr-2 h-4 w-4'/>
                 Update profile
@@ -91,7 +96,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
             <button
                 type='button'
                 onClick={() => setShowForm(false)}
-                className='w-full cursor-pointer rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700'>
+                className='w-full cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-800 transition-colors duration-200'>
                 Cancel
             </button>
         </form>

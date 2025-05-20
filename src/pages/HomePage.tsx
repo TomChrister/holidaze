@@ -40,10 +40,10 @@ export function HomePage() {
                 <div className='relative'>
                     <img src='/appartment.jpg' alt='appartment' className='w-full object-cover h-[450px]' />
                     <div className="text-3xl text-center font-semibold text-shadow-md text-white absolute inset-0 flex flex-col items-center justify-center bg-black/25">
-                        <p>Book your next stay</p>
-                        <p>
+                        <h1>Book your next stay</h1>
+                        <h1>
                             with <span>Holidaze</span>
-                        </p>
+                        </h1>
                     </div>
                 </div>
 
@@ -55,15 +55,15 @@ export function HomePage() {
             </div>
 
             <div className='flex justify-center items-center text-lg py-6'>
-                <span>Or go to</span>
+                <h2>Or go to</h2>
                 <Link to='/explore' className='text-brand-primary font-bold ml-1 hover:underline'>
                     explore
                 </Link>
             </div>
 
-            <section className='px-6 py-8 lg:px-32'>
+            <section className='px-6 py-8 md:px-10 lg:px-32'>
                 <h2 className='text-xl font-semibold mb-4'>Popular stays</h2>
-                <div className='grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                <div className='grid gap-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'>
                     {popularVenues.map(v => (
                         <VenueCard key={v.id} {...v} />
                     ))}

@@ -49,75 +49,75 @@ export function EditVenue() {
 
     return (
         <form
+            id='edit-venue-form'
+            method='PUT'
             onSubmit={handleSubmit(onSubmit)}
             className='mx-auto flex max-w-xl flex-col rounded-md p-4 px-6 pb-12 space-y-4'
         >
+            <h1 className='text-2xl font-semibold'>Edit your venue</h1>
+            <hr className='my-4 border-t border-gray-300'/>
             <h3 className='text-xl font-semibold'>Home details</h3>
-            <label>
-                Name
+            <label className='mb-0' htmlFor='edit-name'>Name</label>
                 <input
                     {...register('name')}
+                    id='edit-name'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
-            <label>
-                Description
+            <label className='mb-0' htmlFor='edit-description'>Description</label>
                 <textarea
                     {...register('description')}
+                    id='edit-description'
                     className='mt-2 h-32 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
             <h3 className='pt-3 text-xl font-semibold'>Media</h3>
             {mediaFields.map((f, i) => (
                 <div key={f.id} className='space-y-2'>
-                    <label>
-                        Image URL
+                    <label htmlFor='edit-media-url'>Image URL</label>
                         <input
                             {...register(`media.${i}.url` as const)}
-                            className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
+                            id='edit-media-url'
+                            className='mt-2 mb-4 rounded border-none input bg-brand-tierty placeholder-gray-400'
+                            type='url'
                         />
-                    </label>
 
-                    <label>
-                        Describe your image
+                    <label htmlFor='edit-media-alt'>Describe your image</label>
                         <input
                             {...register(`media.${i}.alt` as const)}
+                            id='edit-media-alt'
                             className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                         />
-                    </label>
                 </div>
             ))}
 
             <h3 className='pt-3 text-xl font-semibold'>Pricing & capacity</h3>
-            <label>
-                Price
+            <label className='mb-0' htmlFor='edit-price'>Price</label>
                 <input
                     type='number'
                     {...register('price', { valueAsNumber: true })}
+                    id='edit-price'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
-            <label>
-                Max guests
+            <label className='mb-0' htmlFor='edit-max-guests'>Max guests</label>
                 <input
                     type='number'
                     {...register('maxGuests', { valueAsNumber: true })}
+                    id='edit-max-guests'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
             <h3 className='pt-4 text-xl font-semibold'>Facilities</h3>
             <div className='grid grid-cols-2 gap-6'>
                 {facilities.map(f => (
                     <div key={f.name} className='flex items-center justify-between'>
                         <span className='flex gap-1'>{f.icon}{f.label}</span>
-                        <label className='relative inline-block h-6 w-12'>
+                        <label className='relative inline-block h-6 w-12' htmlFor='edit-facilities'>
                             <input
                                 type='checkbox'
                                 {...register(`meta.${f.name}` as const)}
+                                id='edit-facilities'
                                 className='mt-2 h-0 w-0 opacity-0 peer'
                             />
                             <span
@@ -130,41 +130,37 @@ export function EditVenue() {
             </div>
 
             <h3 className='pt-4 text-xl font-semibold'>Location</h3>
-            <label>
-                Address
+            <label className='mb-0' htmlFor='edit-address'>Address</label>
                 <input
                     {...register('location.address')}
+                    id='edit-address'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
-            <label>
-                City
+            <label className='mb-0' htmlFor='edit-city'>City</label>
                 <input
                     {...register('location.city')}
+                    id='edit-city'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
-            <label>
-                ZIP
+            <label className='mb-0' htmlFor='edit-zip'>ZIP</label>
                 <input
                     {...register('location.zip')}
+                    id='edit-zip'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
-            <label>
-                Country
+            <label className='mb-0' htmlFor='edit-country'>Country</label>
                 <input
                     {...register('location.country')}
+                    id='edit-country'
                     className='mt-2 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
-            </label>
 
             <button
                 type='submit'
-                className='mt-4 cursor-pointer rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600'
+                className='save-button mt-4 cursor-pointer rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600 transition-colors duration-200'
             >
                 Save changes
             </button>

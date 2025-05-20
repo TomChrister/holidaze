@@ -94,8 +94,8 @@ export function ExplorePage() {
                                 onClick={() =>
                                     setFilters(f => ({ ...f, [key]: !f[key as keyof typeof filters] }))
                                 }
-                                className={`flex items-center space-x-1 w-full m-0 justify-center cursor-pointer py-1 rounded-lg shadow-md hover:bg-brand-primary hover:text-white lg:w-36
-                                          ${active ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-700'}`}
+                                className={`flex items-center space-x-1 w-full m-0 justify-center cursor-pointer py-1 rounded-lg shadow-md hover:bg-brand-primary hover:text-white lg:w-36 
+                                           transition-colors duration-300 ${active ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-700'}`}
                             >
                                 {iconMap[key as keyof typeof iconMap]}
                                 <span className='text-sm capitalize'>
