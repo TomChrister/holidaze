@@ -65,7 +65,12 @@ export function CreateVenueForm() {
                 <h3 className='text-xl font-semibold'>Home details</h3>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className='mx-auto max-w-xl rounded-md px-6 pb-12 space-y-4'>
+            <form
+                id='create-venue-form'
+                method='POST'
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
+                className='mx-auto max-w-xl rounded-md px-6 pb-12 space-y-4'>
                 <input
                     {...register('name', { required: 'Name is required' })}
                     placeholder='Name *'
@@ -77,7 +82,9 @@ export function CreateVenueForm() {
                     </p>
                 )}
 
+                <label htmlFor='description'></label>
                 <textarea {...register('description', { required: 'Description is required' })}
+                          id='description'
                           placeholder='Description *'
                           className='h-32 rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
@@ -87,7 +94,10 @@ export function CreateVenueForm() {
                     </p>
                 )}
 
+                <label htmlFor='media-url'> </label>
                 <input {...register('media.0.url', { required: 'Img URL is required, and must be a live link to a image URL' })}
+                       id='media-url'
+                       type='url'
                        placeholder='Image URL *'
                        className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
@@ -96,14 +106,19 @@ export function CreateVenueForm() {
                         {errors.media?.[0]?.url.message}
                     </p>
                 )}
+
+                <label htmlFor='media-alt'></label>
                 <input {...register('media.0.alt')}
+                       id='media-alt'
                        placeholder='Describe your image'
                        className='rounded border-none input bg-brand-tierty placeholder-gray-400'
                 />
 
                 <h3 className='pt-4 text-xl font-semibold'>Pricing & capacity</h3>
+                <label htmlFor='price'></label>
                 <input
                     type='number'
+                    id='price'
                     placeholder='Price *'
                     defaultValue=''
                     {...register('price', { valueAsNumber: true, required: 'Price is required' })}
@@ -115,8 +130,10 @@ export function CreateVenueForm() {
                     </p>
                 )}
 
+                <label htmlFor='max-guests'></label>
                 <input
                     type='number'
+                    id='max-guests'
                     placeholder='Max Guests *'
                     defaultValue=''
                     {...register('maxGuests', { valueAsNumber: true, required: 'Max guests is required' })}
@@ -135,8 +152,10 @@ export function CreateVenueForm() {
                         <Wifi className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                         WiFi
                     </span>
-                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
+                        <label htmlFor='wifi'
+                               className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
+                                id='wifi'
                                 type='checkbox'
                                 className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.wifi')}
@@ -153,9 +172,11 @@ export function CreateVenueForm() {
                             <CarFront className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                             Parking
                         </span>
-                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
+                        <label htmlFor='parking'
+                               className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
+                                id='parking'
                                 className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.parking')}
                             />
@@ -171,9 +192,11 @@ export function CreateVenueForm() {
                             <Utensils className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                             Breakfast
                         </span>
-                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
+                        <label htmlFor='breakfast'
+                               className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
+                                id='breakfast'
                                 className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.breakfast')}
                             />
@@ -189,9 +212,11 @@ export function CreateVenueForm() {
                             <PawPrint className='rounded p-1 bg-brand-tierty' color='#634AFF' size={30}/>
                             Pets
                         </span>
-                        <label className='relative inline-block h-6 w-12 cursor-pointer'>
+                        <label htmlFor='pets'
+                               className='relative inline-block h-6 w-12 cursor-pointer'>
                             <input
                                 type='checkbox'
+                                id='pets'
                                 className='h-0 w-0 opacity-0 peer'
                                 {...register('meta.pets')}
                             />
@@ -204,21 +229,44 @@ export function CreateVenueForm() {
                 </div>
 
                 <h3 className='pt-4 text-xl font-bold'>Location</h3>
-                <input {...register('location.address')}
-                       placeholder='Address'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
-                <input {...register('location.city')}
-                       placeholder='City'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
-                <input {...register('location.country')}
-                       placeholder='Country'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
-                <input {...register('location.zip')}
-                       placeholder='ZIP'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'/>
+                <label htmlFor='location-address'></label>
+                <input
+                    id='location-address'
+                    {...register('location.address')}
+                    name='location.address'
+                    placeholder='Address'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
+                />
+
+                <label htmlFor='location-city'></label>
+                <input
+                    id='location-city'
+                    {...register('location.city')}
+                    name='location.city'
+                    placeholder='City'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
+                />
+
+                <label htmlFor='location-country'></label>
+                <input
+                    id='location-country'
+                    {...register('location.country')}
+                    name='location.country'
+                    placeholder='Country'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
+                />
+
+                <label htmlFor='location-zip'></label>
+                <input
+                    id='location-zip'
+                    {...register('location.zip')}
+                    name='location.zip'
+                    placeholder='ZIP'
+                    className='rounded border-none input bg-brand-tierty placeholder-gray-400'
+                />
 
                 <button type='submit'
-                        className='my-4 w-full cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90'>
+                        className='create-venue-button my-4 w-full cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'>
                     Create venue
                 </button>
             </form>

@@ -48,8 +48,8 @@ export function BookingForm({ venueId }: BookingFormProps) {
             return;
         }
 
-        if (!startDate || !endDate) {
-            console.error('Choose dates!');
+        if (!startDate || !endDate || !guests) {
+            toast.error('Please fill in all fields!');
             return;
         }
 
@@ -70,7 +70,12 @@ export function BookingForm({ venueId }: BookingFormProps) {
     }
 
     return (
-        <form onSubmit={handleBooking} noValidate className='space-y-4'>
+        <form
+            id='booking-form'
+            onSubmit={handleBooking}
+            method='POST'
+            noValidate
+            className='space-y-4'>
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
                 <label className='mb-1 block font-semibold text-gray-500'>Dates</label>
                 <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
@@ -102,11 +107,12 @@ export function BookingForm({ venueId }: BookingFormProps) {
             </div>
 
             <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
-                <label className='mb-1 block font-semibold text-gray-500'>Guests</label>
+                <label className='mb-1 block font-semibold text-gray-500' htmlFor='booking-guests'>Guests</label>
                 <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
                     <Users className='mr-2 ml-1 h-5 w-5 text-brand-primary opacity-80'/>
                     <select
                         value={guests}
+                        id='booking-guests'
                         onChange={(e) => setGuests(e.target.value)}
                         required
                         className='w-full p-1 text-gray-500 focus:outline-none cursor-pointer'
@@ -123,7 +129,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
 
             <button
                 type='submit'
-                className='w-full cursor-pointer rounded px-4 py-3 text-white bg-brand-primary'
+                className='book-button w-full cursor-pointer rounded px-4 py-3 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
             >
                 Book now
             </button>

@@ -54,9 +54,9 @@ export function Header() {
 
                 {!hideLinks && (
                     <ul className='hidden items-center gap-4 text-lg md:flex'>
-                        <li><Link to='/explore' className='hover:text-brand-primary'>Explore</Link></li>
-                        <li className='hover:text-brand-primary'><CreateVenueLink/></li>
-                        <li className='hover:text-brand-primary'><ProfileLink/></li>
+                        <li><Link to='/explore' className='hover:text-brand-primary transition-colors duration-200'>Explore</Link></li>
+                        <li className='hover:text-brand-primary transition-colors duration-200'><CreateVenueLink/></li>
+                        <li className='hover:text-brand-primary transition-colors duration-200'><ProfileLink/></li>
                         {loggedIn ? (
                             <li>
                                 <button
@@ -65,7 +65,7 @@ export function Header() {
                                         navigate('/');
                                         window.location.reload();
                                     }}
-                                    className='text-gray-700 cursor-pointer hover:text-[#F14016]'
+                                    className='text-gray-700 cursor-pointer hover:text-red-500 transition-colors duration-200'
                                 >
                                     Logout
                                 </button>
@@ -78,7 +78,7 @@ export function Header() {
 
                 {!hideLinks && (
                     <button
-                        className='md:hidden'
+                        className='burger-menu md:hidden'
                         onClick={toggleMenu}
                     >
                         {isMenuOpen ? <X size={24}/> : <AlignJustify size={24}/>}

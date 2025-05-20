@@ -27,7 +27,9 @@ export function SearchBar({
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Where</div>
                     <div className='flex items-center border-b border-gray-300 pb-2'>
                         <MapPin className='mr-2 h-4 w-4 text-gray-400'/>
+                        <label htmlFor='where'></label>
                         <input
+                            id='where'
                             type='text'
                             value={search}
                             onChange={(e) => onSearchChange(e.target.value)}
@@ -43,6 +45,7 @@ export function SearchBar({
                     <div className='flex items-center border-b border-gray-300 pb-2'>
                         <CalendarDays className='mr-2 h-4 w-4 text-gray-400'/>
                         <DatePicker
+                            id='date-range'
                             selectsRange
                             startDate={dateRange[0]}
                             endDate={dateRange[1]}
@@ -58,18 +61,21 @@ export function SearchBar({
                     <div className='mb-1 text-sm font-semibold text-gray-500'>Add guests</div>
                     <div className='flex items-center border-b border-gray-300 pb-2'>
                         <Users className='mr-2 h-4 w-4 text-gray-400'/>
-                        <select
-                            value={guests}
-                            onChange={(e) => setGuests(e.target.value)}
-                            className='w-full text-sm text-gray-500 focus:outline-none lg:w-44 hover:cursor-pointer'
-                        >
-                            <option value='' disabled>Guests</option>
-                            {Array.from({ length: 100 }, (_, i) => (
-                                <option key={i + 1} value={i + 1}>
-                                    {i + 1} guest{i + 1 > 1 ? 's' : ''}
-                                </option>
-                            ))}
-                        </select>
+                        <label htmlFor='add-guests'>
+                            <select
+                                name='add-guests'
+                                value={guests}
+                                onChange={(e) => setGuests(e.target.value)}
+                                className='w-full text-sm text-gray-500 focus:outline-none lg:w-44 hover:cursor-pointer'
+                            >
+                                <option value='' disabled>Guests</option>
+                                {Array.from({ length: 100 }, (_, i) => (
+                                    <option key={i + 1} value={i + 1}>
+                                        {i + 1} guest{i + 1 > 1 ? 's' : ''}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
                     </div>
                 </div>
 
@@ -81,7 +87,7 @@ export function SearchBar({
                             guests: parseInt(guests) || undefined,
                         })
                     }
-                    className='mt-2 cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:opacity-90 lg:mt-0 lg:self-center'
+                    className='search-button mt-2 cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200 lg:mt-0 lg:self-center'
                 >
                     Search
                 </button>
