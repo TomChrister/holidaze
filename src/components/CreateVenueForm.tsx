@@ -1,15 +1,16 @@
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { createVenue } from '../api/venues.tsx';
-import { VenueProps } from '../types/venue';
-import { CarFront, PawPrint, Utensils, Wifi } from 'lucide-react'
+import { VenueFormData } from '../types/venue';
+import { CarFront, PawPrint, Plus, Utensils, Wifi, X } from 'lucide-react'
 import toast from 'react-hot-toast';
 
 export function CreateVenueForm() {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
-    } = useForm<VenueProps>({
+    } = useForm<VenueFormData>({
         defaultValues: {
             name: '',
             description: '',
@@ -29,7 +30,12 @@ export function CreateVenueForm() {
         },
     });
 
-    const onSubmit = async (data: VenueProps) => {
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: 'media',
+    });
+
+    const onSubmit = async (data: VenueFormData) => {
         try {
             await createVenue(data);
             toast.success('Venue created successfully!');
@@ -94,25 +100,48 @@ export function CreateVenueForm() {
                     </p>
                 )}
 
-                <label htmlFor='media-url'> </label>
-                <input {...register('media.0.url', { required: 'Img URL is required, and must be a live link to a image URL' })}
-                       id='media-url'
-                       type='url'
-                       placeholder='Image URL *'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'
-                />
-                {errors.media?.[0]?.url && (
-                    <p className='text-red-500'>
-                        {errors.media?.[0]?.url.message}
-                    </p>
-                )}
+                {fields.map((field, index) => (
+                    <div key={field.id} className='mb-4 flex items-center gap-2'>
+                        <div className='flex-1'>
+                            <label htmlFor={`media-${index}-url`} className='sr-only'>Image URL</label>
+                            <input
+                                id={`media-${index}-url`}
+                                type='url'
+                                placeholder='Image URL, max 8 *'
+                                {...register(`media.${index}.url`, {
+                                    required: 'Img URL is required, and must be a live link to a image URL',
+                                })}
+                                className='w-full rounded border-none input bg-brand-tierty placeholder-gray-400'
+                            />
 
-                <label htmlFor='media-alt'></label>
-                <input {...register('media.0.alt')}
-                       id='media-alt'
-                       placeholder='Describe your image'
-                       className='rounded border-none input bg-brand-tierty placeholder-gray-400'
-                />
+                            {errors.media?.[index]?.url && (
+                                <p className='mt-1 text-sm text-red-500'>
+                                    {errors.media[index].url.message}
+                                </p>
+                            )}
+                        </div>
+
+                        {fields.length > 1 && (
+                            <button
+                                type='button'
+                                onClick={() => remove(index)}
+                                className='cursor-pointer text-red-500 hover:text-red-700'
+                                aria-label='Remove image'
+                            >
+                                <X size={18}/>
+                            </button>
+                        )}
+                    </div>
+                ))}
+                
+                <button
+                    type='button'
+                    onClick={() => append({ url: '', alt: '' })}
+                    className='flex cursor-pointer items-center gap-2 text-green-500 hover:text-green-600'
+                >
+                    <Plus size={18}/>
+                    Add Image
+                </button>
 
                 <h3 className='pt-4 text-xl font-semibold'>Pricing & capacity</h3>
                 <label htmlFor='price'></label>
@@ -266,7 +295,7 @@ export function CreateVenueForm() {
                 />
 
                 <button type='submit'
-                        className='create-venue-button my-4 w-full cursor-pointer rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'>
+                        className='my-4 w-full cursor-pointer rounded px-4 py-2 text-white transition-colors duration-200 create-venue-button bg-brand-primary hover:bg-brand-hover'>
                     Create venue
                 </button>
             </form>
