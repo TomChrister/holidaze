@@ -46,7 +46,7 @@ This application is built based on the official Holidaze API. The project includ
 - [Vite](https://vitejs.dev/)
 
 ## 🎨 Design
-- Coming soon
+- [Design systems here](https://www.figma.com/design/vXABTe0KFQ0psM8XOwvCxA/Holidaze?node-id=85-2024&t=szppvexWKe0GqdN3-1)
 
 ## ⚙️ Setup Instructions
 
