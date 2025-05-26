@@ -4,7 +4,7 @@ export function EditVenuePage() {
     return (
         <>
             <title>Edit venue</title>
-            <EditVenue />
+            <EditVenue/>
         </>
     )
 }

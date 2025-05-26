@@ -133,7 +133,7 @@ export function CreateVenueForm() {
                         )}
                     </div>
                 ))}
-                
+
                 <button
                     type='button'
                     onClick={() => append({ url: '', alt: '' })}

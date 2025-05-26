@@ -25,7 +25,7 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
         try {
             await updateProfile(name, profileData);
-            toast.success('Profile page updated', {duration: 1500});
+            toast.success('Profile page updated', { duration: 1500 });
 
             setTimeout(() => {
                 window.location.reload()

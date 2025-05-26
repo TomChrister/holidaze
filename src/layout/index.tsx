@@ -8,7 +8,7 @@ export function Layout() {
     return (
         <>
             <div>
-                <Toaster position='top-center' />
+                <Toaster position='top-center'/>
                 <Header/>
                 <main>
                     <Outlet/>

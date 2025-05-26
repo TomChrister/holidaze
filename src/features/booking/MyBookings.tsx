@@ -67,7 +67,7 @@ export function MyBookings() {
             <ul className='grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
                 {bookings.map((booking) => (
                     <li key={booking.id}
-                        className='flex h-28 items-center justify-between rounded-lg bg-white p-4 shadow duration-400 transition-transform hover:scale-103 lg:w-80'
+                        className='flex h-28 items-center justify-between rounded-lg bg-white p-4 shadow duration-400 transition-transform hover:shadow-md lg:w-80'
                     >
                         <Link to={`/venues/${booking.venue.id}`}>
                             <p>
@@ -80,7 +80,7 @@ export function MyBookings() {
                             </p>
                             <p><strong>Guests:</strong> {booking.guests}</p>
                         </Link>
-                        
+
                         <Trash2
                             onClick={e => {
                                 e.stopPropagation();

@@ -28,7 +28,8 @@ export default function RegisterForm() {
 
     return (
         <div className='flex h-screen items-center justify-center p-4'>
-            <div className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-6 py-8 shadow-md space-y-4'>
+            <div
+                className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-6 py-8 shadow-md space-y-4'>
                 <h2 className='text-2xl font-semibold'>Create an account</h2>
                 <p className='text-gray-400'>Please enter your details to register</p>
                 <form
@@ -94,7 +95,7 @@ export default function RegisterForm() {
                             className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
                         />
                     </div>
-                    
+
                     {errors.password && (
                         <p className='mb-6 text-sm text-red-500'>{errors.password.message}</p>
                     )}

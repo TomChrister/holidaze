@@ -14,14 +14,14 @@ export default function ConfirmModal({
                 <div className='mt-4 flex justify-center gap-4'>
                     <button
                         onClick={onConfirm}
-                        className='cursor-pointer rounded bg-red-500 px-4 py-2 text-white'
+                        className='cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600'
                     >
                         {confirmText}
                     </button>
 
                     <button
                         onClick={onClose}
-                        className='cursor-pointer rounded bg-gray-300 px-4 py-2'
+                        className='cursor-pointer rounded bg-gray-300 px-4 py-2 hover:bg-gray-400'
                     >
                         No
                     </button>

@@ -54,7 +54,9 @@ export function Header() {
 
                 {!hideLinks && (
                     <ul className='hidden items-center gap-4 text-lg md:flex'>
-                        <li><Link to='/explore' className='hover:text-brand-primary transition-colors duration-200'>Explore</Link></li>
+                        <li><Link to='/explore'
+                                  className='hover:text-brand-primary transition-colors duration-200'>Explore</Link>
+                        </li>
                         <li className='hover:text-brand-primary transition-colors duration-200'><CreateVenueLink/></li>
                         <li className='hover:text-brand-primary transition-colors duration-200'><ProfileLink/></li>
                         {loggedIn ? (
@@ -92,7 +94,8 @@ export function Header() {
                         className='fixed inset-0 z-[60] bg-black/70'
                         onClick={toggleMenu}
                     />
-                    <aside className='fixed inset-y-0 right-0 z-[60] w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
+                    <aside
+                        className='fixed inset-y-0 right-0 z-[60] w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
                         <ul className='flex flex-col gap-4'>
                             {loggedIn && (
                                 <li className='text-sm text-gray-500'>
@@ -104,7 +107,7 @@ export function Header() {
                                 <li>
                                     <ProfileLink onClick={toggleMenu}/>
                                 </li>
-                                <X size={24} onClick={toggleMenu} className="cursor-pointer"/>
+                                <X size={24} onClick={toggleMenu} className='cursor-pointer'/>
                             </div>
 
                             <li>

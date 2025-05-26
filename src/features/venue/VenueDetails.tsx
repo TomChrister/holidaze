@@ -96,7 +96,7 @@ export function VenueDetails({ venue, venueId }: Props) {
                             </div>
 
                             <div className='flex flex-col items-center gap-1 text-gray-600'>
-                                <CarFront size={24} color='#634AFF' />
+                                <CarFront size={24} color='#634AFF'/>
                                 <p className='text-sm text-center'>{venue.meta.parking ? 'Parking' : 'No parking'}</p>
                             </div>
                         </div>

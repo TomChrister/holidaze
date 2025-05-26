@@ -25,7 +25,8 @@ export default function LoginForm() {
 
     return (
         <div className='flex h-screen items-center justify-center p-4'>
-            <div className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-11 py-12 shadow-md space-y-4 lg:p-8 lg:py-14'>
+            <div
+                className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-11 py-12 shadow-md space-y-4 lg:p-8 lg:py-14'>
                 <h2 className='text-2xl font-semibold'>Welcome back</h2>
                 <p className='text-gray-400'>Please enter your details to sign in</p>
                 <form

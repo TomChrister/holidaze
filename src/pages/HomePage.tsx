@@ -38,8 +38,9 @@ export function HomePage() {
             <title>Holidaze</title>
             <div>
                 <div className='relative'>
-                    <img src='/appartment.jpg' alt='appartment' className='w-full object-cover h-[450px]' />
-                    <div className="text-3xl text-center font-semibold text-shadow-md text-white absolute inset-0 flex flex-col items-center justify-center bg-black/25">
+                    <img src='/appartment.jpg' alt='appartment' className='w-full object-cover h-[450px]'/>
+                    <div
+                        className="text-3xl text-center font-semibold text-shadow-md text-white absolute inset-0 flex flex-col items-center justify-center bg-black/25">
                         <h1>Book your next stay<br/>with Holidaze</h1>
                     </div>
                 </div>

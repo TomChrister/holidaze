@@ -23,6 +23,7 @@ export function ProfileData() {
                 setLoading(false);
             }
         }
+
         loadProfile();
     }, [name]);
 

@@ -19,7 +19,7 @@ export async function createBooking(data: BookingData) {
 }
 
 // Upcoming bookings
-export async function upcomingBookings(name:string) {
+export async function upcomingBookings(name: string) {
     const response = await fetch(`${API_PROFILES}/${name}/bookings?_venue=true`, {
         method: 'GET',
         headers: authHeaders(),

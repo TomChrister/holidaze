@@ -59,10 +59,10 @@ export function MyVenues() {
                         </span>
                     </p>
                 )}
-                
+
                 {venues.map((venue: any) => (
                     <li key={venue.id}
-                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:scale-102'>
+                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:shadow-md'>
                         <div className='block'>
                             <div className='flex items-center justify-between'>
                                 <Link to={`/venues/${venue.id}`}>
