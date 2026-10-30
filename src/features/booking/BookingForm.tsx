@@ -1,43 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { createBooking, singleBooking } from '../../api/bookings';
+import React, { useMemo, useState } from 'react';
+import { createBooking } from '../../api/bookings';
 import { BookingFormProps } from '../../types/bookings';
+import { overlapsBooking } from '../../utils/helperFunctions.tsx';
 import toast from 'react-hot-toast';
 import DatePicker from 'react-datepicker';
 import { CalendarDays, Users } from 'lucide-react';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export function BookingForm({ venueId }: BookingFormProps) {
+export function BookingForm({ venueId, bookings, maxGuests }: BookingFormProps) {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
     const [guests, setGuests] = useState('');
-    const [maxGuests, setMaxGuests] = useState<number>(1);
 
-    const [bookings, setBookings] = useState<
-        { id: string; dateFrom: string; dateTo: string }[]
-    >([]);
-
-    useEffect(() => {
-        singleBooking(venueId)
-            .then(venue => {
-                setBookings(venue.bookings || []);
-                setMaxGuests(venue.maxGuests || 1);
-            })
-            .catch(console.error);
-    }, [venueId]);
-
-    const bookedDates = bookings.flatMap(booking => {
-        const startDate = new Date(booking.dateFrom);
+    // Every booked day as a date string, so each calendar cell is one Set lookup
+    const bookedDays = useMemo(() => new Set(bookings.flatMap(booking => {
         const endDate = new Date(booking.dateTo);
-        const datesInRange: Date[] = [];
-        let currentDate = new Date(startDate);
+        const datesInRange: string[] = [];
+        const currentDate = new Date(booking.dateFrom);
 
         while (currentDate <= endDate) {
-            datesInRange.push(new Date(currentDate));
+            datesInRange.push(currentDate.toDateString());
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
         return datesInRange;
-    });
+    })), [bookings]);
 
     async function handleBooking(e: React.FormEvent) {
         e.preventDefault();
@@ -50,6 +37,11 @@ export function BookingForm({ venueId }: BookingFormProps) {
 
         if (!startDate || !endDate || !guests) {
             toast.error('Please fill in all fields!');
+            return;
+        }
+
+        if (overlapsBooking(bookings, startDate, endDate)) {
+            toast.error('Your dates include days that are already booked.');
             return;
         }
 
@@ -66,6 +58,7 @@ export function BookingForm({ venueId }: BookingFormProps) {
             }, 1500);
         } catch (err) {
             console.error('Booking failed', err);
+            toast.error(err instanceof Error ? err.message : 'Booking failed. Please try again.');
         }
     }
 
@@ -94,10 +87,10 @@ export function BookingForm({ venueId }: BookingFormProps) {
                         className='w-full p-1 text-gray-500 cursor-pointer focus:outline-none'
                         minDate={new Date()}
                         filterDate={date =>
-                            !bookedDates.some(d => d.toDateString() === date.toDateString())
+                            !bookedDays.has(date.toDateString())
                         }
                         dayClassName={date =>
-                            bookedDates.some(d => d.toDateString() === date.toDateString())
+                            bookedDays.has(date.toDateString())
                                 ? 'bg-red-400 text-white rounded-sm'
                                 : ''
                         }

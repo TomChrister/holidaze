@@ -19,10 +19,12 @@ export function HomePage() {
     const [popularVenues, setPopularVenues] = useState<VenueProps[]>([]);
 
     useEffect(() => {
+        // allSettled: one deleted venue must not hide the others
         Promise
-            .all(popularIds.map(id => singleVenue(id)))
-            .then(venues => setPopularVenues(venues))
-            .catch(console.error);
+            .allSettled(popularIds.map(id => singleVenue(id)))
+            .then(results => setPopularVenues(
+                results.flatMap(r => r.status === 'fulfilled' ? [r.value] : [])
+            ));
     }, []);
 
     const handleSearch = (params?: {

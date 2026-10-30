@@ -1,6 +1,3 @@
-import { API_BASE_HOLIDAZE } from './constants';
-import { authHeaders } from './headers.tsx';
-
 // Get username in the header
 export function GetUserName() {
     return localStorage.getItem('name');
@@ -11,17 +8,7 @@ export function isLoggedIn() {
     return Boolean(localStorage.getItem('accessToken'));
 }
 
-// Check if user is venue manager or not
-export async function isVenueManager(): Promise<boolean> {
-    const name = localStorage.getItem('name');
-    if (!name) return false;
-
-    const res = await fetch(`${API_BASE_HOLIDAZE}/profiles/${name}`, {
-        headers: authHeaders(),
-    });
-
-    if (!res.ok) return false;
-
-    const json = await res.json();
-    return json.data.venueManager === true;
+// Check if user is venue manager or not, saved at login
+export function isVenueManager() {
+    return localStorage.getItem('venueManager') === 'true';
 }

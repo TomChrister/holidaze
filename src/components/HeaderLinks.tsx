@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { isLoggedIn, isVenueManager } from '../utils/authHelpers.ts';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -8,13 +7,7 @@ type CreateVenueLinkProps = {
 };
 
 export function CreateVenueLink({ onClick }: CreateVenueLinkProps) {
-    const [canCreate, setCanCreate] = useState(false);
-
-    useEffect(() => {
-        isVenueManager().then(setCanCreate);
-    }, []);
-
-    return canCreate ? (
+    return isVenueManager() ? (
         <Link to='/create' onClick={onClick}>
             Create venue
         </Link>
@@ -36,13 +29,7 @@ type ProfileLinkProps = {
 }
 
 export function ProfileLink({ onClick }: ProfileLinkProps) {
-    const [logged, setLogged] = useState(false);
-
-    useEffect(() => {
-        setLogged(isLoggedIn());
-    }, []);
-
-    return logged ? (
+    return isLoggedIn() ? (
         <Link to='/profile' onClick={onClick}>
             Profile
         </Link>

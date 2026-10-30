@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { upcomingBookings } from '../../api/bookings.tsx';
-import { formatDate } from '../../utils';
+import { formatDate } from '../../utils/helperFunctions.tsx';
 import { Link } from 'react-router-dom';
 import { PlaneTakeoff, Trash2 } from 'lucide-react';
 import { cancelBookings } from '../../api/venues.tsx';
 import ConfirmModal from '../../components/ConfirmModal.tsx';
+import toast from 'react-hot-toast';
 
 export function MyBookings() {
     const [bookings, setBookings] = useState<any[]>([])
@@ -21,9 +22,15 @@ export function MyBookings() {
 
     const handleCancel = async () => {
         if (!selBookingId) return
-        await cancelBookings(selBookingId)
-        setBookings(b => b.filter(x => x.id !== selBookingId))
-        setShowCancel(false)
+        try {
+            await cancelBookings(selBookingId)
+            setBookings(b => b.filter(x => x.id !== selBookingId))
+        } catch (e) {
+            console.error(e)
+            toast.error('Could not cancel the booking. Please try again.')
+        } finally {
+            setShowCancel(false)
+        }
     }
 
     const name = localStorage.getItem('name') || '';
@@ -34,7 +41,8 @@ export function MyBookings() {
         async function getBookings() {
             try {
                 const data = await upcomingBookings(name)
-                setBookings(data);
+                const now = new Date()
+                setBookings(data.filter((b: any) => new Date(b.dateTo) >= now));
             } catch (error: any) {
                 setError(error.message);
             } finally {

@@ -22,6 +22,16 @@ export function formatDate(dateSting: string) {
     });
 }
 
+// True if any booking shares a day with from–to, both ends counted as booked
+export function overlapsBooking(
+    bookings: { dateFrom: string; dateTo: string }[] = [],
+    from: Date,
+    to: Date
+) {
+    const day = (d: string | Date) => new Date(d).setHours(0, 0, 0, 0);
+    return bookings.some(b => day(b.dateFrom) <= day(to) && day(b.dateTo) >= day(from));
+}
+
 // Custom carousel buttons
 export function NextArrow(props: CustomArrowProps) {
     const { onClick } = props;

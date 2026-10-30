@@ -7,6 +7,7 @@ import { VenueGrid } from '../components/VenueGrid.tsx';
 import { Pagination } from '../components/Pagination.tsx';
 import { buildSearchQuery, useQuery } from '../utils/useQuery.ts';
 import { VenueProps } from '../types/venue';
+import { overlapsBooking } from '../utils/helperFunctions.tsx';
 import { CarFront, Coffee, PawPrint, Wifi } from 'lucide-react';
 
 export function ExplorePage() {
@@ -47,6 +48,9 @@ export function ExplorePage() {
             .finally(() => setLoading(false));
     }, []);
 
+    // New search or filter: start from the first page again
+    useEffect(() => setPage(1), [search, guestCount, from, to, filters]);
+
     const filteredVenues = venues.filter(venue => {
         const name = venue.name?.toLowerCase() || ''
         const city = venue.location?.city?.toLowerCase() || ''
@@ -61,7 +65,8 @@ export function ExplorePage() {
             (!filters.wifi || venue.meta.wifi) &&
             (!filters.parking || venue.meta.parking) &&
             (!filters.breakfast || venue.meta.breakfast) &&
-            (!filters.pets || venue.meta.pets)
+            (!filters.pets || venue.meta.pets) &&
+            !(from && to && overlapsBooking(venue.bookings, new Date(from), new Date(to)))
         )
     })
 

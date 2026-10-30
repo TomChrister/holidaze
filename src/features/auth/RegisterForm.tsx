@@ -3,13 +3,11 @@ import { useForm } from 'react-hook-form';
 import { registerUser } from '../../api/auth';
 import { RegisterFormData } from '../../types/auth';
 import { Link } from 'react-router-dom';
-import { Switch } from '@headlessui/react';
 import toast from 'react-hot-toast';
 import { HelpCircle, Lock, Mail, User } from 'lucide-react';
 
 export default function RegisterForm() {
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm<RegisterFormData>();
-    const [venueToggle, setVenueToggle] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>();
     const [visible, setVisible] = useState(false);
 
     const onSubmit = async (data: RegisterFormData) => {
@@ -101,23 +99,24 @@ export default function RegisterForm() {
                     )}
 
                     <div className='flex items-center gap-2 pb-6'>
-                        <Switch
-                            checked={venueToggle}
-                            onChange={(checked) => {
-                                setVenueToggle(checked)
-                                setValue('venueManager', checked)
-                            }}
-                            className={`${venueToggle ? 'bg-brand-primary' : 'bg-gray-300'}
-                            relative inline-flex h-6 w-14 items-center cursor-pointer rounded-full transition lg:w-14`}
-                        >
-
-                        <span className={`${venueToggle ? 'translate-x-6' : 'translate-x-1'}
-                              inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                        />
-                        </Switch>
+                        <label htmlFor='register-venue-manager'
+                               className='relative inline-block h-6 w-12 shrink-0 cursor-pointer'>
+                            <input
+                                id='register-venue-manager'
+                                type='checkbox'
+                                className='h-0 w-0 opacity-0 peer'
+                                {...register('venueManager')}
+                            />
+                            <span
+                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
+                            <span
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
+                        </label>
 
                         <span className='flex items-center gap-1 text-gray-800'>
-                            I want to register as a venue manager
+                            <label htmlFor='register-venue-manager' className='cursor-pointer'>
+                                I want to register as a venue manager
+                            </label>
                             <span className='relative group' onClick={() => setVisible(!visible)}>
                                 <HelpCircle
                                     size={16}

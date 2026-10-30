@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { VenueProps } from '../../types/venue';
-import { capitalizeLetter, NextArrow, PrevArrow } from '../../utils';
+import { capitalizeLetter, NextArrow, PrevArrow } from '../../utils/helperFunctions.tsx';
 import { BookingForm } from '../booking/BookingForm.tsx';
 import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { IoLocation } from 'react-icons/io5';
-import { FaStar } from 'react-icons/fa';
-import { Bed, CarFront, PawPrint, Star, Utensils, Wifi } from 'lucide-react';
+import { Bed, CarFront, MapPin, PawPrint, Star, Utensils, Wifi } from 'lucide-react';
 
 interface Props {
     venue: VenueProps;
@@ -51,9 +49,10 @@ export function VenueDetails({ venue, venueId }: Props) {
                         {capitalizeLetter(venue.name)}
                     </h1>
                     <p className='flex items-center gap-1 px-4 pb-3 text-gray-600 lg:px-0'>
-                        <IoLocation size={18}/>
+                        <MapPin size={18} fill='currentColor' stroke='white'/>
                         <span>
-                            {capitalizeLetter(venue.location?.address) || 'Oslo, Norway'}, {capitalizeLetter(venue.location?.country)}
+                            {[venue.location?.address, venue.location?.country]
+                                .filter(Boolean).map(capitalizeLetter).join(', ') || 'Location not given'}
                         </span>
                     </p>
 
@@ -124,12 +123,12 @@ export function VenueDetails({ venue, venueId }: Props) {
                 </span>
                     <div className='flex gap-1'>
                         {venue.rating}/5
-                        <FaStar size={20} className='text-yellow-500'/>
+                        <Star size={20} fill='currentColor' className='text-yellow-500'/>
                     </div>
                 </div>
 
                 <div className='px-6 py-8'>
-                    <BookingForm venueId={venueId}/>
+                    <BookingForm venueId={venueId} bookings={venue.bookings ?? []} maxGuests={venue.maxGuests}/>
                 </div>
             </div>
         </>
