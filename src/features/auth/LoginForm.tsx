@@ -17,6 +17,7 @@ export default function LoginForm() {
             }, 1500);
             localStorage.setItem('name', result.data.name);
             localStorage.setItem('accessToken', result.data.accessToken);
+            localStorage.setItem('venueManager', String(result.data.venueManager === true));
         } catch (err) {
             console.error('LoginPage failed', err);
             toast.error('Login failed. Please try again.');

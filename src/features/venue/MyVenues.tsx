@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { deleteVenue, ownVenues } from '../../api/venues.tsx';
-import { formatDate } from '../../utils';
+import { formatDate } from '../../utils/helperFunctions.tsx';
 import { CreateVenueLink } from '../../components/HeaderLinks.tsx';
 import { House, SquarePen, Trash2 } from 'lucide-react';
 import ConfirmModal from '../../components/ConfirmModal.tsx';

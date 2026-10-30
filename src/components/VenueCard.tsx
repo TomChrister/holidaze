@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { capitalizeLetter, truncate } from '../utils';
+import { capitalizeLetter, truncate } from '../utils/helperFunctions.tsx';
 import { VenueProps } from '../types/venue';
-import { FaStar } from 'react-icons/fa';
+import { Star } from 'lucide-react';
 
 export default function VenueCard({
     id, name, price, media, location, rating
@@ -20,7 +20,7 @@ export default function VenueCard({
                             {capitalizeLetter(truncate(name))}
                         </p>
                         <div className='flex items-center'>
-                            <FaStar size={16} className='mr-1 mb-1 text-yellow-400'/>
+                            <Star size={16} fill='currentColor' className='mr-1 mb-1 text-yellow-400'/>
                             <span className='text-sm font-medium text-gray-700'>
                                 {rating}/5
                             </span>
@@ -30,7 +30,7 @@ export default function VenueCard({
                     <div className='flex items-end justify-between gap-3'>
                         <div className='flex flex-col gap-1'>
                             <p className='opacity-80 text-base font-normal leading-normal'>
-                                {location.city || 'Koh Samui'}, {location.country || 'Thailand'}
+                                {[location.city, location.country].filter(Boolean).join(', ') || 'Location not given'}
                             </p>
                             <p className='pb-3 text-base font-bold leading-normal text-brand-primary'>
                                 ${price}/night

@@ -9,4 +9,6 @@ export type BookingData = {
 // Booking form type
 export type BookingFormProps = {
     venueId: string;
+    bookings: { dateFrom: string; dateTo: string }[];
+    maxGuests: number;
 };

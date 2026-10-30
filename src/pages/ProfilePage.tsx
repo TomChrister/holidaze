@@ -1,8 +1,12 @@
 import { ProfileData } from '../components/ProfileData.tsx';
 import { MyBookings } from '../features/booking/MyBookings.tsx';
 import { MyVenues } from '../features/venue/MyVenues.tsx';
+import { Navigate } from 'react-router-dom';
+import { isLoggedIn } from '../utils/authHelpers.ts';
 
 export function ProfilePage() {
+    if (!isLoggedIn()) return <Navigate to='/login' replace/>;
+
     return (
         <>
             <div className='bg-brand-secondary pb-12 lg:flex lg:justify-center lg:gap-20 lg:pb-20'>

@@ -2,8 +2,18 @@ import { API_BASE_HOLIDAZE, API_BOOKINGS, API_PROFILES, API_VENUES } from '../ut
 import { authHeaders } from '../utils/headers.tsx';
 import { VenueFormData, VenueProps } from '../types/venue';
 
-// Fetch all venues
-export async function allVenues(): Promise<VenueProps[]> {
+// Fetch all venues, once per page load
+// shortcut: venues added by others show up after a reload, fine for browsing
+let venuesCache: Promise<VenueProps[]> | null = null;
+export function allVenues(): Promise<VenueProps[]> {
+    venuesCache ??= loadAllVenues().catch(err => {
+        venuesCache = null;
+        throw err;
+    });
+    return venuesCache;
+}
+
+async function loadAllVenues(): Promise<VenueProps[]> {
     const all: VenueProps[] = [];
     let page = 1;
     let isLastPage = false;
@@ -11,7 +21,7 @@ export async function allVenues(): Promise<VenueProps[]> {
     try {
         while (!isLastPage) {
             const res = await fetch(
-                `${API_BASE_HOLIDAZE}/venues?page=${page}&limit=100&sort=created&sortOrder=asc`,
+                `${API_BASE_HOLIDAZE}/venues?page=${page}&limit=100&sort=created&sortOrder=asc&_bookings=true`,
                 {
                     method: 'GET',
                     headers: {
@@ -37,10 +47,11 @@ export async function allVenues(): Promise<VenueProps[]> {
 }
 
 // Fetch a single venue by ID
-export async function singleVenue(id: string) {
-    const response = await fetch(`${API_VENUES}/${id}`, {
+export async function singleVenue(id: string, withBookings = false) {
+    const response = await fetch(`${API_VENUES}/${id}${withBookings ? '?_bookings=true' : ''}`, {
         headers: authHeaders()
     });
+    if (!response.ok) throw new Error('Failed to fetch venue');
     const { data } = await response.json();
     return data;
 }
@@ -67,6 +78,7 @@ export async function ownVenues(name: string) {
         method: 'GET',
         headers: authHeaders(),
     });
+    if (!response.ok) throw new Error('Failed to fetch your venues');
     const json = await response.json();
     return json.data;
 }

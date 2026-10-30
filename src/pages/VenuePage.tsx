@@ -7,13 +7,15 @@ import { VenueDetails } from '../features/venue/VenueDetails.tsx';
 export function VenuePage() {
     const { id } = useParams();
     const [venue, setVenue] = useState<VenueProps | null>(null);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         if (id) {
-            singleVenue(id).then(setVenue);
+            singleVenue(id, true).then(setVenue).catch(() => setNotFound(true));
         }
     }, [id]);
 
+    if (notFound) return <p className='p-6 text-center'>Venue not found.</p>;
     if (!venue) return <p>Loading...</p>;
 
     return (
