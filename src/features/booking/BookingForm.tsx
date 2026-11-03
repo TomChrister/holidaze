@@ -69,11 +69,13 @@ export function BookingForm({ venueId, bookings, maxGuests }: BookingFormProps) 
             method='POST'
             noValidate
             className='space-y-4'>
-            <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
-                <label className='mb-1 block font-semibold text-gray-500'>Dates</label>
-                <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
-                    <CalendarDays className='mr-2 ml-1 h-5 w-5 text-brand-primary opacity-80'/>
+            <div className='overflow-hidden rounded-control border border-divider'>
+                <label htmlFor='booking-dates' className='block cursor-pointer px-4 pt-3 pb-2.5'>
+                    <span className='flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase'>
+                        <CalendarDays size={14}/> Dates
+                    </span>
                     <DatePicker
+                        id='booking-dates'
                         selected={startDate}
                         onChange={(dates) => {
                             const [s, e] = dates as [Date, Date]
@@ -83,48 +85,44 @@ export function BookingForm({ venueId, bookings, maxGuests }: BookingFormProps) 
                         startDate={startDate}
                         endDate={endDate}
                         selectsRange
-                        placeholderText='dd.mm.yyyy'
-                        className='w-full p-1 text-gray-500 cursor-pointer focus:outline-none'
+                        placeholderText='Add dates'
+                        className='w-full cursor-pointer bg-transparent text-base text-ink placeholder:text-placeholder focus:outline-none'
                         minDate={new Date()}
                         filterDate={date =>
                             !bookedDays.has(date.toDateString())
                         }
                         dayClassName={date =>
                             bookedDays.has(date.toDateString())
-                                ? 'bg-red-400 text-white rounded-sm'
+                                ? 'text-placeholder line-through'
                                 : ''
                         }
                         dateFormat='dd/MM/yyyy'
                     />
-                </div>
-            </div>
+                </label>
 
-            <div className='flex flex-col items-start rounded-md border-gray-300 pb-2'>
-                <label className='mb-1 block font-semibold text-gray-500' htmlFor='booking-guests'>Guests</label>
-                <div className='flex w-full items-center rounded border p-2 border-brand-primary'>
-                    <Users className='mr-2 ml-1 h-5 w-5 text-brand-primary opacity-80'/>
+                <label htmlFor='booking-guests' className='block cursor-pointer border-t border-divider px-4 pt-3 pb-2.5'>
+                    <span className='flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase'>
+                        <Users size={14}/> Guests
+                    </span>
                     <select
                         value={guests}
                         id='booking-guests'
                         onChange={(e) => setGuests(e.target.value)}
                         required
-                        className='w-full p-1 text-gray-500 focus:outline-none cursor-pointer'
+                        className={`w-full cursor-pointer appearance-none bg-transparent text-base focus:outline-none ${guests ? 'text-ink' : 'text-placeholder'}`}
                     >
-                        <option value='' disabled>Guests</option>
+                        <option value='' disabled>Add guests</option>
                         {Array.from({ length: maxGuests }, (_, i) => (
                             <option key={i + 1} value={i + 1}>
                                 {i + 1} guest{i + 1 > 1 ? 's' : ''}
                             </option>
                         ))}
                     </select>
-                </div>
+                </label>
             </div>
 
-            <button
-                type='submit'
-                className='book-button w-full cursor-pointer rounded px-4 py-3 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
-            >
-                Book now
+            <button type='submit' className='book-button btn-primary w-full py-3'>
+                Reserve
             </button>
         </form>
     );

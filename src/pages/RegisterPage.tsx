@@ -2,7 +2,7 @@ import RegisterForm from '../features/auth/RegisterForm';
 
 export function RegisterPage() {
     return (
-        <div className='max-w-md mx-auto'>
+        <div className='bg-cloud'>
             <title>Register</title>
             <RegisterForm/>
         </div>

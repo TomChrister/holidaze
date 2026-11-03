@@ -18,15 +18,14 @@ export function CreateVenueForm() {
     };
 
     return (
-        <>
-            <div className='mx-auto flex max-w-xl flex-col justify-start gap-2 px-6 pt-8 pb-4'>
-                <h1 className='text-3xl font-semibold'>List your home</h1>
-                <p className='text-gray-400'>Share your space with travelers, fill out the details below</p>
-                <p className='text-gray-400'>Fields marked with * are required.</p>
-                <hr className='my-4 border-t border-gray-300'/>
+        <div className='container-page'>
+            <div className='mx-auto max-w-2xl pt-10 pb-8'>
+                <h1 className='page-heading'>List your home</h1>
+                <p className='mt-2 text-base text-graphite'>
+                    Share your space with travelers. Fields marked with * are required.
+                </p>
             </div>
-
             <VenueForm onSubmit={onSubmit} submitText='Create venue'/>
-        </>
+        </div>
     );
 }

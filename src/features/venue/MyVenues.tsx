@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { deleteVenue, ownVenues } from '../../api/venues.tsx';
 import { formatDate } from '../../utils/helperFunctions.tsx';
 import { CreateVenueLink } from '../../components/HeaderLinks.tsx';
-import { House, SquarePen, Trash2 } from 'lucide-react';
+import { isVenueManager } from '../../utils/authHelpers.ts';
+import { Plus, SquarePen, Trash2 } from 'lucide-react';
 import ConfirmModal from '../../components/ConfirmModal.tsx';
 
 export function MyVenues() {
@@ -38,80 +39,86 @@ export function MyVenues() {
         }
     }, [username]);
 
+    const iconButton = 'flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-divider text-ink transition-colors hover:border-ink';
+
     return (
-        <div className='w-full px-8 pt-6 lg:px-0 lg:pt-6'>
+        <section>
             <div className='flex items-center justify-between gap-3'>
-                <div className='flex items-center gap-4'>
-                    <h1 className='text-2xl font-semibold'>My venues</h1>
-                    <House className='text-brand-primary'/>
-                </div>
-                <Link to='/create' className='font-semibold text-brand-primary hover:underline'>
-                    Create new
-                </Link>
+                <h2 className='section-heading'>My venues</h2>
+                {isVenueManager() && (
+                    <Link to='/create' className='btn-secondary py-2'>
+                        <Plus size={16}/>
+                        New venue
+                    </Link>
+                )}
             </div>
 
-            <ul className='flex flex-col gap-4 pt-4 space-y-6'>
-                {venues.length === 0 && (
-                    <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>You haven't created a venue yet.<br/>
-                        go to
-                        <span className='ml-1 font-semibold text-brand-primary'>
-                            <CreateVenueLink/>.
-                        </span>
-                    </p>
-                )}
+            {venues.length === 0 && (
+                <div className='mt-4 rounded-card bg-cloud p-6 text-graphite'>
+                    You haven't listed a venue yet.{' '}
+                    <span className='link font-semibold'><CreateVenueLink/></span>
+                </div>
+            )}
 
+            <ul className='mt-4 flex flex-col gap-4'>
                 {venues.map((venue: any) => (
-                    <li key={venue.id}
-                        className='m-0 rounded-lg bg-white p-4 shadow transition-transform min-h-28 duration-400 hover:shadow-md'>
-                        <div className='block'>
-                            <div className='flex items-center justify-between'>
-                                <Link to={`/venues/${venue.id}`}>
-                                    <h2 className='text-xl font-semibold'>{venue.name}</h2>
-                                </Link>
-                                <div className='flex gap-4'>
-                                    <SquarePen
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            navigate(`/venues/${venue.id}/edit`);
-                                        }}
-                                        className='cursor-pointer transition-transform text-brand-primary hover:scale-110'
-                                    >
-                                        <title>Edit venue</title>
-                                        Edit
-                                    </SquarePen>
+                    <li key={venue.id} className='card flex flex-col gap-4 p-4 sm:flex-row'>
+                        <Link to={`/venues/${venue.id}`} className='shrink-0'>
+                            <img
+                                src={venue.media?.[0]?.url || '/default-img.jpg'}
+                                alt={venue.name}
+                                className='aspect-[4/3] w-full rounded-control object-cover sm:w-40'
+                            />
+                        </Link>
 
-                                    <Trash2
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleOpenModal(venue.id);
-                                        }}
-                                        className='cursor-pointer text-red-500 transition-transform hover:scale-110'
+                        <div className='min-w-0 flex-1'>
+                            <div className='flex items-start justify-between gap-3'>
+                                <Link to={`/venues/${venue.id}`} className='min-w-0'>
+                                    <h3 className='truncate text-lg font-bold hover:underline'>{venue.name}</h3>
+                                    <p className='text-sm text-graphite'>
+                                        ${venue.price} / night · {venue.maxGuests} guests
+                                    </p>
+                                </Link>
+                                <div className='flex shrink-0 gap-2'>
+                                    <button
+                                        onClick={() => navigate(`/venues/${venue.id}/edit`)}
+                                        aria-label='Edit venue'
+                                        title='Edit venue'
+                                        className={iconButton}
                                     >
-                                        <title>Delete venue</title>
-                                        Delete
-                                    </Trash2>
+                                        <SquarePen size={16}/>
+                                    </button>
+                                    <button
+                                        onClick={() => handleOpenModal(venue.id)}
+                                        aria-label='Delete venue'
+                                        title='Delete venue'
+                                        className={`${iconButton} hover:border-red-600 hover:text-red-600`}
+                                    >
+                                        <Trash2 size={16}/>
+                                    </button>
                                 </div>
                             </div>
 
                             {venue.bookings && venue.bookings.length > 0 ? (
-                                <div className='mt-4'>
-                                    <h3 className='font-semibold'>Bookings:</h3>
-                                    <ul className='ml-5 list-disc'>
+                                <div className='mt-4 border-t border-divider pt-3'>
+                                    <h4 className='text-xs font-bold tracking-wide uppercase'>
+                                        Bookings ({venue.bookings.length})
+                                    </h4>
+                                    <ul className='mt-2 flex flex-col gap-1'>
                                         {venue.bookings.map((booking: any) => (
-                                            <li key={booking.id} className='flex flex-wrap gap-1 text-sm'>
-                                                <span>
-                                                    {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
-                                                </span>
-                                                <span>for {booking.guests} guests</span>
+                                            <li key={booking.id} className='text-sm text-graphite'>
+                                                {formatDate(booking.dateFrom)} – {formatDate(booking.dateTo)}
+                                                {' · '}{booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                             ) : (
-                                <p className='mt-2 text-sm text-gray-500'>No bookings for this venue yet</p>
+                                <p className='mt-4 border-t border-divider pt-3 text-sm text-graphite'>
+                                    No bookings yet
+                                </p>
                             )}
                         </div>
-
                     </li>
                 ))}
             </ul>
@@ -124,6 +131,6 @@ export function MyVenues() {
                 message='Are you sure you want to delete this venue?'
                 confirmText='Delete'
             />
-        </div>
+        </section>
     );
 }

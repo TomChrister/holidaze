@@ -39,42 +39,30 @@ export function ProfileData() {
         : profile.avatar.url;
 
     return (
-        <div
-            className='flex flex-col justify-center gap-6 self-center pt-4 lg:flex-col lg:items-center lg:self-baseline lg:pt-8'>
-            <div className='flex justify-center'>
-                <img
-                    src={avatarUrl}
-                    alt={profile.avatar?.alt || 'Avatar'}
-                    className='mt-4 h-32 w-32 rounded-full object-cover'
-                />
-            </div>
+        <div className='flex flex-col items-center text-center'>
+            <img
+                src={avatarUrl}
+                alt={profile.avatar?.alt || 'Avatar'}
+                className='h-28 w-28 rounded-full object-cover ring-1 ring-divider'
+            />
 
-            <div className='flex flex-col gap-2 items-center'>
-                <h1 className='text-2xl font-bold'>{profile.name}</h1>
-                <p className='ml-1 text-gray-600'>{profile.email}</p>
-                <p className='ml-1 text-gray-500'>{profile.bio || 'No bio available'}</p>
-            </div>
+            <h1 className='mt-4 text-2xl leading-8 font-bold'>{profile.name}</h1>
+            <p className='text-sm text-graphite'>{profile.email}</p>
+            <p className='mt-3 text-base text-graphite'>{profile.bio || 'No bio yet'}</p>
 
-            <UpdateProfileForm name={name}/>
-
-            <div className='w-full px-6 flex flex-col justify-center'>
-                <hr className='border border-gray-300 w-full max-w-xl'/>
-            </div>
-
-            <div className='flex justify-center gap-8 pb-6'>
-                <div className='flex flex-col items-center'>
-                    <span className='text-xl font-semibold'>{profile._count?.bookings}</span>
-                    <p className='text-sm'>
-                        {profile._count?.bookings === 1 ? 'trip' : 'trips'}
-                    </p>
+            <div className='my-6 grid w-full grid-cols-2 divide-x divide-divider border-y border-divider py-4'>
+                <div>
+                    <p className='text-xl font-extrabold'>{profile._count?.bookings ?? 0}</p>
+                    <p className='text-sm text-graphite'>{profile._count?.bookings === 1 ? 'Trip' : 'Trips'}</p>
                 </div>
-
-                <div className='flex flex-col items-center'>
-                    <span className='text-xl font-semibold'>{profile._count?.venues}</span>
-                    <p className='text-sm'>
-                        {profile._count?.venues === 1 ? 'venue' : 'venues'}
-                    </p>
+                <div>
+                    <p className='text-xl font-extrabold'>{profile._count?.venues ?? 0}</p>
+                    <p className='text-sm text-graphite'>{profile._count?.venues === 1 ? 'Venue' : 'Venues'}</p>
                 </div>
+            </div>
+
+            <div className='w-full text-left'>
+                <UpdateProfileForm name={name}/>
             </div>
         </div>
     )

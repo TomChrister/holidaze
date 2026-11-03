@@ -13,7 +13,7 @@ export function CreateVenueLink({ onClick }: CreateVenueLinkProps) {
         </Link>
     ) : (
         <span
-            className='cursor-pointer text-gray-400'
+            className='cursor-pointer text-placeholder'
             onClick={() => {
                 toast.error('You need to be a venue manager');
                 onClick?.();
@@ -35,7 +35,7 @@ export function ProfileLink({ onClick }: ProfileLinkProps) {
         </Link>
     ) : (
         <span
-            className='cursor-pointer text-gray-400'
+            className='cursor-pointer text-placeholder'
             onClick={() => {
                 toast.error('You need to be logged in');
                 onClick?.();

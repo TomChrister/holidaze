@@ -7,23 +7,21 @@ export default function ConfirmModal({
 }: ConfirmModalProps) {
     if (!isOpen) return null
     return (
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 backdrop-blur-xs'>
-            <div className='mx-4 w-full max-w-sm rounded bg-white p-6 shadow-lg'>
-                {title && <h2 className='mb-2 text-lg font-semibold'>{title}</h2>}
-                <p>{message}</p>
-                <div className='mt-4 flex justify-center gap-4'>
-                    <button
-                        onClick={onConfirm}
-                        className='cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600'
-                    >
-                        {confirmText}
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4' onClick={onClose}>
+            <div
+                role='dialog'
+                aria-modal='true'
+                className='w-full max-w-sm rounded-card bg-white p-6'
+                onClick={e => e.stopPropagation()}
+            >
+                {title && <h2 className='section-heading'>{title}</h2>}
+                <p className='mt-2 text-graphite'>{message}</p>
+                <div className='mt-6 flex justify-end gap-2'>
+                    <button onClick={onClose} className='btn-secondary'>
+                        Keep it
                     </button>
-
-                    <button
-                        onClick={onClose}
-                        className='cursor-pointer rounded bg-gray-300 px-4 py-2 hover:bg-gray-400'
-                    >
-                        No
+                    <button onClick={onConfirm} className='btn-danger'>
+                        {confirmText}
                     </button>
                 </div>
             </div>
