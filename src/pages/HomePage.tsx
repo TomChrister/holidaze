@@ -5,6 +5,8 @@ import { buildSearchQuery } from '../utils/useQuery.ts';
 import { VenueProps } from '../types/venue';
 import { singleVenue } from '../api/venues.tsx';
 import VenueCard from '../components/VenueCard';
+import { ArrowRight } from 'lucide-react';
+import { isVenueManager } from '../utils/authHelpers.ts';
 
 const popularIds = [
     '2d842c90-9d01-42c3-8a51-3fd1e4d2978b',
@@ -38,35 +40,63 @@ export function HomePage() {
     return (
         <>
             <title>Holidaze</title>
-            <div>
-                <div className='relative'>
-                    <img src='/appartment.jpg' alt='appartment' className='w-full object-cover h-[450px]'/>
-                    <div
-                        className="text-3xl text-center font-semibold text-shadow-md text-white absolute inset-0 flex flex-col items-center justify-center bg-black/25">
-                        <h1>Book your next stay<br/>with Holidaze</h1>
+            <section className='container-page pt-4 md:pt-6'>
+                <div className='relative overflow-hidden rounded-[20px] md:rounded-frame'>
+                    <img
+                        src='/appartment.jpg'
+                        alt='Bright apartment living room'
+                        className='absolute inset-0 h-full w-full object-cover'
+                    />
+                    <div className='absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/25 to-ink/55'/>
+
+                    <div className='relative flex min-h-[520px] flex-col justify-end gap-8 px-4 pt-24 pb-6 md:min-h-[560px] md:px-10 md:pb-10'>
+                        <div className='text-center text-white'>
+                            <p className='text-base font-semibold text-white/85'>Homes, cabins & apartments</p>
+                            <h1 className='mt-2 text-4xl leading-tight font-extrabold tracking-tight md:text-6xl'>
+                                Book your next stay<br className='hidden sm:block'/> with Holidaze
+                            </h1>
+                        </div>
+
+                        <SearchBar
+                            search={search}
+                            onSearchChange={setSearch}
+                            onSearchSubmit={handleSearch}
+                        />
                     </div>
                 </div>
+            </section>
 
-                <SearchBar
-                    search={search}
-                    onSearchChange={setSearch}
-                    onSearchSubmit={handleSearch}
-                />
-            </div>
+            <section className='container-page pt-12 md:pt-16'>
+                <div className='mb-6 flex items-end justify-between gap-4'>
+                    <div>
+                        <h2 className='section-heading'>Popular stays</h2>
+                        <p className='text-base text-graphite'>Hand-picked places our guests love</p>
+                    </div>
+                    <Link to='/explore' className='link shrink-0 text-base'>Explore all</Link>
+                </div>
 
-            <div className='flex justify-center items-center text-lg py-6'>
-                <h2>Or go to</h2>
-                <Link to='/explore' className='text-brand-primary font-bold ml-1 hover:underline'>
-                    explore
-                </Link>
-            </div>
-
-            <section className='px-6 py-8 md:px-10 lg:px-32'>
-                <h2 className='text-xl font-semibold mb-4'>Popular stays</h2>
-                <div className='grid gap-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'>
+                <div className='grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-4'>
                     {popularVenues.map(v => (
                         <VenueCard key={v.id} {...v} />
                     ))}
+                </div>
+            </section>
+
+            <section className='container-page pt-12 md:pt-16'>
+                <div className='flex flex-col items-start justify-between gap-6 rounded-[20px] bg-accent p-8 text-white md:flex-row md:items-center md:rounded-frame md:p-12'>
+                    <div className='max-w-xl'>
+                        <h2 className='text-[32px] leading-10 font-extrabold tracking-tight'>Have a place to share?</h2>
+                        <p className='mt-2 text-base text-white/85'>
+                            Become a venue manager and list your home for travelers from all over the world.
+                        </p>
+                    </div>
+                    <Link
+                        to={isVenueManager() ? '/create' : '/register'}
+                        className='btn shrink-0 bg-white text-ink hover:bg-cloud'
+                    >
+                        {isVenueManager() ? 'List your home' : 'Get started'}
+                        <ArrowRight size={18}/>
+                    </Link>
                 </div>
             </section>
         </>

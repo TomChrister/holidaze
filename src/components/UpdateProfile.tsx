@@ -38,15 +38,10 @@ export function UpdateProfileForm({ name }: { name: string }) {
 
     if (!showForm) {
         return (
-            <div className='px-8'>
-                <button
-                    onClick={() => setShowForm(true)}
-                    className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
-                >
-                    <UserRoundPen className='mr-2 h-4 w-4'/>
-                    Update profile
-                </button>
-            </div>
+            <button onClick={() => setShowForm(true)} className='btn-secondary w-full'>
+                <UserRoundPen size={18}/>
+                Edit profile
+            </button>
         );
     }
 
@@ -54,49 +49,48 @@ export function UpdateProfileForm({ name }: { name: string }) {
         <form
             id='update-profile-form'
             onSubmit={handleSubmit}
-            className='p-2 px-6 space-y-4 lg:px-0 lg:pb-6'>
+            className='space-y-4'>
             <div>
-                <label className='block font-semibold' htmlFor='bio'>New bio:</label>
+                <label className='label' htmlFor='bio'>Bio</label>
                 <textarea
                     id='bio'
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
-                    className='w-full rounded border border-gray-400 p-2'
+                    className='input'
                     rows={3}
                 />
             </div>
 
             <div>
-                <label className='block font-semibold' htmlFor='avatar-url'>Avatar URL:</label>
+                <label className='label' htmlFor='avatar-url'>Avatar URL</label>
                 <input
                     id='avatar-url'
                     type='text'
                     value={avatarUrl}
                     onChange={(e) => setAvatarUrl(e.target.value)}
-                    className='w-full rounded border border-gray-400 p-2'
+                    className='input'
                 />
             </div>
 
             {avatarUrl && (
                 <div className='mt-4'>
-                    <p className='text-sm text-gray-600'>Preview</p>
-                    <img src={avatarUrl} alt='Avatar URL' className='mt-2 h-32 w-32 rounded-full object-cover'
+                    <p className='label'>Preview</p>
+                    <img src={avatarUrl} alt='Avatar URL' className='h-24 w-24 rounded-full object-cover ring-1 ring-divider'
                     />
                 </div>
             )}
 
             <button
                 type='submit'
-                className='flex w-full cursor-pointer items-center justify-center rounded px-4 py-2 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
+                className='btn-primary w-full'
             >
-                <UserRoundPen className='mr-2 h-4 w-4'/>
-                Update profile
+                Save changes
             </button>
 
             <button
                 type='button'
                 onClick={() => setShowForm(false)}
-                className='w-full cursor-pointer rounded bg-red-500 px-4 py-2 text-white hover:bg-red-800 transition-colors duration-200'>
+                className='btn-secondary w-full'>
                 Cancel
             </button>
         </form>

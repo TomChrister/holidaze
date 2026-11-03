@@ -1,28 +1,171 @@
-@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap');
 
 @import 'tailwindcss';
 
+/*
+ * Design tokens
+ * Achromatic travel interface: ink text, white + pale gray surfaces,
+ * 1px gray dividers and a single saturated blue for actions and links.
+ */
 @theme {
-    --font-primary: 'Montserrat', sans-serif;
+    --font-primary: 'Nunito Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-logo: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
 
-    --font-logo: 'Kantumruy Pro', sans-serif;
+    --color-accent: #1878ec;
+    --color-accent-hover: #0f63c9;
+    --color-accent-soft: #e8f1fd;
+    --color-ink: #111111;
+    --color-graphite: #606060;
+    --color-placeholder: #b3b3b3;
+    --color-divider: #d9d9d9;
+    --color-cloud: #f6f6f6;
+    --color-mist: #ededed;
 
-    --color-brand-primary: #634AFF;
-
-    --color-brand-hover: #4326d1;
-
-    --color-brand-secondary: #EBEBEB59;
-
-    --color-brand-tierty: #EBEBEBC1;
-
+    --radius-link: 4px;
+    --radius-control: 12px;
+    --radius-card: 16px;
+    --radius-frame: 32px;
 }
 
 html {
-    @apply font-primary;
+    @apply font-primary text-ink antialiased;
 }
 
-.input {
-    @apply w-full border rounded px-3 py-2;
+body {
+    @apply bg-white;
 }
 
+::selection {
+    @apply bg-accent-soft text-ink;
+}
 
+/* ---------- Shared utilities ---------- */
+
+@utility container-page {
+    @apply mx-auto w-full max-w-7xl px-4 md:px-8;
+}
+
+@utility section-heading {
+    @apply text-xl leading-7 font-bold text-ink;
+}
+
+@utility page-heading {
+    @apply text-[32px] leading-10 font-extrabold tracking-tight text-ink;
+}
+
+@utility btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-2.5 text-base leading-6
+    font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+@utility btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-hover;
+}
+
+@utility btn-dark {
+    @apply btn bg-ink text-white hover:bg-graphite;
+}
+
+@utility btn-secondary {
+    @apply btn border border-divider bg-white text-ink hover:border-ink;
+}
+
+@utility btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+}
+
+@utility label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+}
+
+@utility input {
+    @apply w-full rounded-control border border-divider bg-white px-4 py-3 text-base text-ink placeholder:text-placeholder
+    transition-colors focus:border-ink focus:outline-none;
+}
+
+@utility card {
+    @apply rounded-card border border-divider bg-white;
+}
+
+@utility link {
+    @apply rounded-link text-accent transition-colors hover:text-accent-hover hover:underline underline-offset-4;
+}
+
+@utility error-text {
+    @apply mt-1.5 text-sm text-red-600;
+}
+
+@utility chip {
+    @apply inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold
+    transition-colors duration-200;
+}
+
+/* ---------- react-datepicker ---------- */
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker {
+    font-family: var(--font-primary) !important;
+    border: 1px solid var(--color-divider) !important;
+    border-radius: var(--radius-card) !important;
+    overflow: hidden;
+}
+
+.react-datepicker__header {
+    background: #fff !important;
+    border-bottom: 1px solid var(--color-divider) !important;
+}
+
+.react-datepicker__current-month {
+    font-weight: 700 !important;
+}
+
+.react-datepicker__triangle {
+    display: none;
+}
+
+.react-datepicker__day {
+    border-radius: 9999px !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-range,
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end,
+.react-datepicker__day--keyboard-selected {
+    background: var(--color-accent) !important;
+    color: #fff !important;
+}
+
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {
+    background: var(--color-accent-soft) !important;
+    color: var(--color-ink) !important;
+}
+
+/* ---------- react-slick ---------- */
+
+.slick-dots {
+    bottom: 16px !important;
+}
+
+.slick-dots li button:before {
+    color: #fff !important;
+    font-size: 8px !important;
+    opacity: 0.6 !important;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1 !important;
+}
+
+.slick-slider {
+    margin-bottom: 0 !important;
+}
+
+/* slick wraps slides in inline-block divs, which leaves a gap below the image */
+.slick-slide > div > div {
+    display: block !important;
+    vertical-align: top;
+}

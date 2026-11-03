@@ -77,9 +77,9 @@ export function ExplorePage() {
 
     return (
         <>
-            <div>
-                <title>Explore</title>
-                <div className='bg-brand-secondary'>
+            <title>Explore</title>
+            <section className='border-b border-divider bg-cloud'>
+                <div className='container-page py-8 md:py-10'>
                     <SearchBar
                         search={searchInput}
                         onSearchChange={setSearchInput}
@@ -91,48 +91,53 @@ export function ExplorePage() {
                         initialGuests={guestCount}
                     />
 
-                    <h2 className='flex justify-center px-6 pb-3 text-2xl lg:px-32'>Pick filters</h2>
-                    <div className='mb-8 grid grid-cols-2 justify-center gap-4 px-20 space-x-4 lg:flex lg:px-32'>
+                    <div className='mt-6 flex flex-wrap justify-center gap-2'>
                         {Object.entries(filters).map(([key, active]) => (
-                            <span
+                            <button
                                 key={key}
+                                type='button'
+                                aria-pressed={active}
                                 onClick={() =>
                                     setFilters(f => ({ ...f, [key]: !f[key as keyof typeof filters] }))
                                 }
-                                className={`flex items-center space-x-1 w-full m-0 justify-center cursor-pointer py-1 rounded-lg shadow-md hover:bg-brand-primary hover:text-white lg:w-36 
-                                           transition-colors duration-300 ${active ? 'bg-brand-primary text-white' : 'bg-gray-200 text-gray-700'}`}
+                                className={`chip capitalize ${active
+                                    ? 'border-ink bg-ink text-white'
+                                    : 'border-divider bg-white text-ink hover:border-ink'}`}
                             >
                                 {iconMap[key as keyof typeof iconMap]}
-                                <span className='text-sm capitalize'>
-                                    {key}
-                                </span>
-                            </span>
+                                {key}
+                            </button>
                         ))}
                     </div>
-
-                    <h2 className='px-6 text-3xl lg:px-32'>Search results</h2>
-                    {filteredVenues.length > 0 && (
-                        <p className='mt-2 mb-6 px-6 text-sm text-gray-500 lg:px-32'>
-                            Found {filteredVenues.length} results
-                        </p>
-                    )}
-
-                    {paginatedVenues.length > 0 ? (
-                        <VenueGrid venues={paginatedVenues}/>
-                    ) : (
-                        <p className='mt-8 text-center text-gray-500'>No venues found.</p>
-                    )}
-
-                    {filteredVenues.length > limit && (
-                        <Pagination
-                            page={page}
-                            setPage={setPage}
-                            totalItems={filteredVenues.length}
-                            limit={limit}
-                        />
-                    )}
                 </div>
-            </div>
+            </section>
+
+            <section className='container-page pt-10'>
+                <div className='mb-6'>
+                    <h1 className='page-heading'>{search ? `Stays matching “${search}”` : 'All stays'}</h1>
+                    <p className='mt-1 text-base text-graphite'>
+                        {filteredVenues.length} {filteredVenues.length === 1 ? 'place' : 'places'} found
+                    </p>
+                </div>
+
+                {paginatedVenues.length > 0 ? (
+                    <VenueGrid venues={paginatedVenues}/>
+                ) : (
+                    <div className='rounded-card bg-cloud px-6 py-16 text-center'>
+                        <p className='section-heading'>No venues found</p>
+                        <p className='mt-1 text-graphite'>Try another destination or remove some filters.</p>
+                    </div>
+                )}
+
+                {filteredVenues.length > limit && (
+                    <Pagination
+                        page={page}
+                        setPage={setPage}
+                        totalItems={filteredVenues.length}
+                        limit={limit}
+                    />
+                )}
+            </section>
         </>
     );
 }

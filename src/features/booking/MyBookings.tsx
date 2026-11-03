@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { upcomingBookings } from '../../api/bookings.tsx';
 import { formatDate } from '../../utils/helperFunctions.tsx';
 import { Link } from 'react-router-dom';
-import { PlaneTakeoff, Trash2 } from 'lucide-react';
+import { CalendarDays, Trash2, Users } from 'lucide-react';
 import { cancelBookings } from '../../api/venues.tsx';
 import ConfirmModal from '../../components/ConfirmModal.tsx';
 import toast from 'react-hot-toast';
+import { Loader } from '../../components/Loader.tsx';
 
 export function MyBookings() {
     const [bookings, setBookings] = useState<any[]>([])
@@ -53,51 +54,54 @@ export function MyBookings() {
         getBookings();
     }, [name]);
 
-    if (loading) return <p>Loading your bookings</p>
+    if (loading) return <Loader/>
     if (error) return <p>Error: {error}</p>
 
     return (
-        <div className='w-full px-8 pt-6 space-y-4 lg:px-0'>
-            <div className='flex items-center gap-3'>
-                <h2 className='m-0 text-2xl font-semibold'>Upcoming trips</h2>
-                <PlaneTakeoff className='text-brand-primary'/>
-            </div>
+        <section>
+            <h2 className='section-heading'>Upcoming trips</h2>
 
             {bookings.length === 0 && (
-                <p className='rounded-lg bg-white p-4 px-6 text-gray-600'>
-                    No bookings yet.<br/> Go to
-                    <Link to={'/explore'} className='ml-1 font-semibold text-brand-primary'>
-                        explore
-                    </Link> here.
-                </p>
+                <div className='mt-4 rounded-card bg-cloud p-6 text-graphite'>
+                    No trips booked yet. <Link to='/explore' className='link font-semibold'>Start exploring</Link>
+                </div>
             )}
 
-            <ul className='grid grid-cols-1 gap-4 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+            <ul className='mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3'>
                 {bookings.map((booking) => (
-                    <li key={booking.id}
-                        className='flex h-28 items-center justify-between rounded-lg bg-white p-4 shadow duration-400 transition-transform hover:shadow-md lg:w-80'
-                    >
-                        <Link to={`/venues/${booking.venue.id}`}>
-                            <p>
-                                <strong>
-                                    {booking.venue.location.city}, {booking.venue.location.country}
-                                </strong>
-                            </p>
-                            <p className='text-gray-500'>
-                                {formatDate(booking.dateFrom)} – {formatDate(booking.dateTo)}
-                            </p>
-                            <p><strong>Guests:</strong> {booking.guests}</p>
+                    <li key={booking.id} className='card group relative overflow-hidden'>
+                        <Link to={`/venues/${booking.venue.id}`} className='block'>
+                            <div className='aspect-[16/9] bg-cloud'>
+                                <img
+                                    src={booking.venue.media?.[0]?.url || '/default-img.jpg'}
+                                    alt={booking.venue.name}
+                                    className='h-full w-full object-cover'
+                                />
+                            </div>
+                            <div className='p-4'>
+                                <p className='font-bold'>
+                                    {[booking.venue.location.city, booking.venue.location.country]
+                                        .filter(Boolean).join(', ') || booking.venue.name}
+                                </p>
+                                <p className='mt-1 flex items-center gap-1.5 text-sm text-graphite'>
+                                    <CalendarDays size={14}/>
+                                    {formatDate(booking.dateFrom)} – {formatDate(booking.dateTo)}
+                                </p>
+                                <p className='mt-0.5 flex items-center gap-1.5 text-sm text-graphite'>
+                                    <Users size={14}/>
+                                    {booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}
+                                </p>
+                            </div>
                         </Link>
 
-                        <Trash2
-                            onClick={e => {
-                                e.stopPropagation();
-                                handleOpenCancel(booking.id)
-                            }}
-                            className='cursor-pointer text-red-500 transition-transform hover:scale-110'
+                        <button
+                            onClick={() => handleOpenCancel(booking.id)}
+                            aria-label='Cancel booking'
+                            title='Cancel booking'
+                            className='absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white text-ink transition-colors hover:text-red-600'
                         >
-                            <title>Cancel booking</title>
-                        </Trash2>
+                            <Trash2 size={16}/>
+                        </button>
                     </li>
                 ))}
             </ul>
@@ -110,6 +114,6 @@ export function MyBookings() {
                 message='Are you sure you want to cancel this booking?'
                 confirmText='Cancel booking'
             />
-        </div>
+        </section>
     )
 }

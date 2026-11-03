@@ -7,12 +7,10 @@ type VenueGridProps = {
 
 export function VenueGrid({ venues }: VenueGridProps) {
     return (
-        <>
-            <div className='grid grid-cols-1 gap-6 px-6 lg:grid-cols-2 xl:grid-cols-3 lg:px-32'>
-                {venues.map((venue) => (
-                    <VenueCard key={venue.id} {...venue} />
-                ))}
-            </div>
-        </>
+        <div className='grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+            {venues.map((venue) => (
+                <VenueCard key={venue.id} {...venue} />
+            ))}
+        </div>
     );
 }

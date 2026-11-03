@@ -8,18 +8,18 @@ export function ProfilePage() {
     if (!isLoggedIn()) return <Navigate to='/login' replace/>;
 
     return (
-        <>
-            <div className='bg-brand-secondary pb-12 lg:flex lg:justify-center lg:gap-20 lg:pb-20'>
-                <title>Profile</title>
-                <div className='justify-center bg-white lg:mt-8 lg:flex lg:rounded-lg lg:px-8 lg:shadow'>
+        <div className='container-page grid gap-10 pt-8 md:pt-10 lg:grid-cols-[340px_1fr] lg:gap-12'>
+            <title>Profile</title>
+            <aside>
+                <div className='card p-6 lg:sticky lg:top-24'>
                     <ProfileData/>
                 </div>
+            </aside>
 
-                <div className='flex flex-col justify-center gap-6 md:flex-row lg:flex-col lg:gap-5 xl:flex-col'>
-                    <MyBookings/>
-                    <MyVenues/>
-                </div>
+            <div className='flex flex-col gap-12'>
+                <MyBookings/>
+                <MyVenues/>
             </div>
-        </>
+        </div>
     )
 }

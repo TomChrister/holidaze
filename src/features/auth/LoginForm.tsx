@@ -25,20 +25,19 @@ export default function LoginForm() {
     };
 
     return (
-        <div className='flex h-screen items-center justify-center p-4'>
-            <div
-                className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-11 py-12 shadow-md space-y-4 lg:p-8 lg:py-14'>
-                <h2 className='text-2xl font-semibold'>Welcome back</h2>
-                <p className='text-gray-400'>Please enter your details to sign in</p>
+        <div className='flex min-h-[calc(100vh-73px)] items-center justify-center px-4 py-10'>
+            <div className='card w-full max-w-md p-6 sm:p-10'>
+                <h1 className='page-heading'>Welcome back</h1>
+                <p className='mt-1 mb-8 text-base text-graphite'>Please enter your details to sign in</p>
                 <form
                     id='login-form'
                     onSubmit={handleSubmit(onSubmit)}
-                    className='mx-auto flex w-full max-w-md flex-col lg:w-96 lg:px-4'>
-                    <label className='mb-1' htmlFor='email'>Email</label>
-                    <div className='relative'>
+                    className='flex w-full flex-col'>
+                    <label className='label' htmlFor='email'>Email</label>
+                    <div className='relative mb-5'>
                         <Mail
                             size={20}
-                            className='absolute top-1/2 left-3 -translate-y-2/2 text-brand-primary'
+                            className='pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-placeholder'
                         />
                         <input
                             id='email'
@@ -50,19 +49,19 @@ export default function LoginForm() {
                                 }
                             })}
                             placeholder='Enter your email'
-                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            className='input pl-11'
                         />
                     </div>
 
                     {errors.email && (
-                        <p className='mb-2 text-sm text-red-500'>{errors.email.message}</p>
+                        <p className='-mt-3 mb-4 text-sm text-red-600'>{errors.email.message}</p>
                     )}
 
-                    <label className='mb-1' htmlFor='password'>Password</label>
-                    <div className='relative'>
+                    <label className='label' htmlFor='password'>Password</label>
+                    <div className='relative mb-5'>
                         <Lock
                             size={20}
-                            className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'
+                            className='pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-placeholder'
                         />
                         <input
                             id='password'
@@ -75,31 +74,25 @@ export default function LoginForm() {
                             })}
                             type='password'
                             placeholder='Enter your password'
-                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                            className='input pl-11'
                         />
                     </div>
 
                     {errors.password && (
-                        <p className='mb-4 text-sm text-red-500'>{errors.password.message}</p>
+                        <p className='-mt-3 mb-4 text-sm text-red-600'>{errors.password.message}</p>
                     )}
 
                     <button
                         type='submit'
-                        className='mb-6 w-full cursor-pointer rounded py-3 text-white bg-brand-primary hover:bg-brand-hover transition-colors duration-200'
+                        className='btn-primary mt-2 w-full py-3'
                     >
                         Sign in
                     </button>
 
-                    <p className='mb-6 flex justify-center'>or</p>
-
-                    <div className='flex justify-center'>
-                        <div>
-                            Go to
-                            <Link to='/register' className='cursor-pointer text-brand-primary pl-1.5 hover:underline'>
-                                register
-                            </Link>
-                        </div>
-                    </div>
+                    <p className='mt-6 text-center text-graphite'>
+                        New to Holidaze?{' '}
+                        <Link to='/register' className='link font-semibold'>Create an account</Link>
+                    </p>
                 </form>
             </div>
         </div>

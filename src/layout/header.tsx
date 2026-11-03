@@ -39,104 +39,93 @@ export function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const logout = () => {
+        localStorage.clear();
+        navigate('/');
+        window.location.reload();
+    };
+
+    const navLink = 'rounded-full px-3 py-2 text-base font-semibold text-ink transition-colors hover:bg-cloud';
+
     return (
         <>
             <header
-                className={`sticky top-0 z-20 bg-white transition-transform duration-300
-            ${showHeader ? 'translate-y-0' : '-translate-y-full'} flex items-center justify-between border-b border-b-gray-200 px-6 py-4 shadow-sm lg:px-20`}
+                className={`sticky top-0 z-20 border-b border-divider bg-white/95 backdrop-blur transition-transform duration-300
+            ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
             >
-            <span
-                onClick={() => navigate('/')}
-                className='cursor-pointer text-2xl font-semibold font-logo text-brand-primary'
-            >
-                Holidaze
-            </span>
+                <div className='container-page flex h-[72px] items-center justify-between'>
+                    <Link to='/' className='font-logo text-2xl font-extrabold tracking-tight text-ink'>
+                        holidaze<span className='text-accent'>.</span>
+                    </Link>
 
-                {!hideLinks && (
-                    <ul className='hidden items-center gap-4 text-lg md:flex'>
-                        <li><Link to='/explore'
-                                  className='hover:text-brand-primary transition-colors duration-200'>Explore</Link>
-                        </li>
-                        <li className='hover:text-brand-primary transition-colors duration-200'><CreateVenueLink/></li>
-                        <li className='hover:text-brand-primary transition-colors duration-200'><ProfileLink/></li>
-                        {loggedIn ? (
-                            <li>
-                                <button
-                                    onClick={() => {
-                                        localStorage.clear();
-                                        navigate('/');
-                                        window.location.reload();
-                                    }}
-                                    className='text-gray-700 cursor-pointer hover:text-red-500 transition-colors duration-200'
-                                >
-                                    Logout
-                                </button>
+                    {!hideLinks && (
+                        <ul className='hidden items-center gap-1 md:flex'>
+                            <li><Link to='/explore' className={navLink}>Explore</Link></li>
+                            <li className={navLink}><CreateVenueLink/></li>
+                            <li className={navLink}><ProfileLink/></li>
+                            <li className='ml-3'>
+                                {loggedIn ? (
+                                    <button onClick={logout} className='btn-secondary py-2'>
+                                        Log out
+                                    </button>
+                                ) : (
+                                    <Link to='/login' className='btn-dark py-2'>Log in</Link>
+                                )}
                             </li>
-                        ) : (
-                            <li><Link to='/login' className='hover:text-brand-primary'>Login</Link></li>
-                        )}
-                    </ul>
-                )}
+                        </ul>
+                    )}
 
-                {!hideLinks && (
-                    <button
-                        className='burger-menu md:hidden'
-                        onClick={toggleMenu}
-                    >
-                        {isMenuOpen ? <X size={24}/> : <AlignJustify size={24}/>}
-                    </button>
-                )}
+                    {!hideLinks && (
+                        <button
+                            className='burger-menu flex h-10 w-10 items-center justify-center rounded-full border border-divider md:hidden'
+                            onClick={toggleMenu}
+                            aria-label='Open menu'
+                        >
+                            <AlignJustify size={20}/>
+                        </button>
+                    )}
+                </div>
             </header>
 
             {!hideLinks && isMenuOpen && (
                 <>
                     <div
-                        className='fixed inset-0 z-[60] bg-black/70'
+                        className='fixed inset-0 z-[60] bg-ink/50'
                         onClick={toggleMenu}
                     />
-                    <aside
-                        className='fixed inset-y-0 right-0 z-[60] w-3/5 border-l border-gray-200 bg-white p-6 shadow-lg'>
-                        <ul className='flex flex-col gap-4'>
-                            {loggedIn && (
-                                <li className='text-sm text-gray-500'>
-                                    Logged in as <span className='font-medium'>{userName}</span>
-                                </li>
-                            )}
+                    <aside className='fixed inset-y-0 right-0 z-[60] flex w-4/5 max-w-sm flex-col bg-white p-6'>
+                        <div className='mb-8 flex items-center justify-between'>
+                            <span className='font-logo text-xl font-extrabold tracking-tight'>
+                                holidaze<span className='text-accent'>.</span>
+                            </span>
+                            <button
+                                onClick={toggleMenu}
+                                aria-label='Close menu'
+                                className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-divider'
+                            >
+                                <X size={20}/>
+                            </button>
+                        </div>
 
-                            <div className='flex justify-between'>
-                                <li>
-                                    <ProfileLink onClick={toggleMenu}/>
-                                </li>
-                                <X size={24} onClick={toggleMenu} className='cursor-pointer'/>
-                            </div>
+                        {loggedIn && (
+                            <p className='mb-4 text-sm text-graphite'>
+                                Logged in as <span className='font-semibold text-ink'>{userName}</span>
+                            </p>
+                        )}
 
-                            <li>
-                                <CreateVenueLink onClick={toggleMenu}/>
-                            </li>
-
-                            <li>
-                                <Link to='/explore' onClick={toggleMenu}>Explore</Link>
-                            </li>
-
-                            {loggedIn ? (
-                                <li>
-                                    <button
-                                        onClick={() => {
-                                            localStorage.clear();
-                                            navigate('/');
-                                            window.location.reload();
-                                        }}
-                                        className='text-gray-700 hover:text-[#F14016]'
-                                    >
-                                        Logout
-                                    </button>
-                                </li>
-                            ) : (
-                                <li>
-                                    <Link to='/login' onClick={toggleMenu} className='text-gray-700'>Login</Link>
-                                </li>
-                            )}
+                        <ul className='flex flex-col divide-y divide-divider border-y border-divider text-lg font-semibold'>
+                            <li className='py-4'><Link to='/explore' onClick={toggleMenu}>Explore</Link></li>
+                            <li className='py-4'><CreateVenueLink onClick={toggleMenu}/></li>
+                            <li className='py-4'><ProfileLink onClick={toggleMenu}/></li>
                         </ul>
+
+                        <div className='mt-auto'>
+                            {loggedIn ? (
+                                <button onClick={logout} className='btn-secondary w-full'>Log out</button>
+                            ) : (
+                                <Link to='/login' onClick={toggleMenu} className='btn-dark w-full'>Log in</Link>
+                            )}
+                        </div>
                     </aside>
                 </>
             )}

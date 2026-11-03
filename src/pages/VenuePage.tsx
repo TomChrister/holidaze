@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { singleVenue } from '../api/venues';
 import { VenueProps } from '../types/venue';
+import { Loader } from '../components/Loader.tsx';
 import { VenueDetails } from '../features/venue/VenueDetails.tsx';
 
 export function VenuePage() {
@@ -15,8 +16,8 @@ export function VenuePage() {
         }
     }, [id]);
 
-    if (notFound) return <p className='p-6 text-center'>Venue not found.</p>;
-    if (!venue) return <p>Loading...</p>;
+    if (notFound) return <p className='container-page py-16 text-center section-heading'>Venue not found.</p>;
+    if (!venue) return <Loader/>;
 
     return (
         <>

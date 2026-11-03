@@ -37,10 +37,10 @@ export function NextArrow(props: CustomArrowProps) {
     const { onClick } = props;
     return (
         <div
-            className='absolute top-1/2 right-2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full bg-white/70 p-2 hover:bg-white/90'
+            className='absolute top-1/2 right-4 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-ink transition-transform hover:scale-105'
             onClick={onClick}
         >
-            <ChevronRight/>
+            <ChevronRight size={20}/>
         </div>
     );
 }
@@ -49,10 +49,10 @@ export function PrevArrow(props: CustomArrowProps) {
     const { onClick } = props;
     return (
         <div
-            className='absolute top-1/2 left-2 z-10 -translate-y-1/2 transform cursor-pointer rounded-full bg-white/70 p-2 hover:bg-white/90'
+            className='absolute top-1/2 left-4 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-ink transition-transform hover:scale-105'
             onClick={onClick}
         >
-            <ChevronLeft/>
+            <ChevronLeft size={20}/>
         </div>
     );
 }

@@ -29,11 +29,13 @@ export function EditVenue() {
 
     return (
         <>
-            <div className='mx-auto max-w-xl px-6 pt-8'>
-                <h1 className='text-2xl font-semibold'>Edit your venue</h1>
-                <hr className='my-4 border-t border-gray-300'/>
+            <div className='container-page'>
+                <div className='mx-auto max-w-2xl pt-10 pb-8'>
+                    <h1 className='page-heading'>Edit your venue</h1>
+                    <p className='mt-2 text-base text-graphite'>Update the details and save your changes.</p>
+                </div>
+                <VenueForm values={venue} onSubmit={onSubmit} submitText='Save changes'/>
             </div>
-            <VenueForm values={venue} onSubmit={onSubmit} submitText='Save changes'/>
         </>
     )
 }

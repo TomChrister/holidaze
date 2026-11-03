@@ -25,18 +25,17 @@ export default function RegisterForm() {
     };
 
     return (
-        <div className='flex h-screen items-center justify-center p-4'>
-            <div
-                className='flex flex-col items-center justify-center rounded-lg border border-brand-primary bg-white p-6 py-8 shadow-md space-y-4'>
-                <h2 className='text-2xl font-semibold'>Create an account</h2>
-                <p className='text-gray-400'>Please enter your details to register</p>
+        <div className='flex min-h-[calc(100vh-73px)] items-center justify-center px-4 py-10'>
+            <div className='card w-full max-w-md p-6 sm:p-10'>
+                <h1 className='page-heading'>Create an account</h1>
+                <p className='mt-1 mb-8 text-base text-graphite'>Please enter your details to register</p>
                 <form
                     id='register-form'
                     onSubmit={handleSubmit(onSubmit)}
-                    className='mx-auto flex w-full max-w-md flex-col px-4'>
-                    <label className='mb-1' htmlFor='register-name'>Name</label>
-                    <div className='relative'>
-                        <User size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
+                    className='flex w-full flex-col'>
+                    <label className='label' htmlFor='register-name'>Name</label>
+                    <div className='relative mb-5'>
+                        <User size={20} className='pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-placeholder'/>
                         <input
                             id='register-name'
                             {...register('name', {
@@ -47,17 +46,17 @@ export default function RegisterForm() {
                                 }
                             })}
                             placeholder='Enter your name'
-                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
+                            className='input pl-11'
                         />
                     </div>
 
                     {errors.name && (
-                        <p className='mb-2 text-sm text-red-500'>{errors.name.message}</p>
+                        <p className='-mt-3 mb-4 text-sm text-red-600'>{errors.name.message}</p>
                     )}
 
-                    <label className='mb-1' htmlFor='register-email'>Email</label>
-                    <div className='relative'>
-                        <Mail size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
+                    <label className='label' htmlFor='register-email'>Email</label>
+                    <div className='relative mb-5'>
+                        <Mail size={20} className='pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-placeholder'/>
                         <input
                             id='register-email'
                             {...register('email', {
@@ -68,17 +67,17 @@ export default function RegisterForm() {
                                 }
                             })}
                             placeholder='yourmail@stud.noroff.no'
-                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
+                            className='input pl-11'
                         />
                     </div>
 
                     {errors.email && (
-                        <p className='mb-4 text-sm text-red-500'>{errors.email.message}</p>
+                        <p className='-mt-3 mb-4 text-sm text-red-600'>{errors.email.message}</p>
                     )}
 
-                    <label className='mb-1' htmlFor='register-password'>Password</label>
-                    <div className='relative'>
-                        <Lock size={20} className='absolute top-1/2 left-3 text-brand-primary -translate-y-2/2'/>
+                    <label className='label' htmlFor='register-password'>Password</label>
+                    <div className='relative mb-5'>
+                        <Lock size={20} className='pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-placeholder'/>
                         <input
                             id='register-password'
                             {...register('password', {
@@ -90,12 +89,12 @@ export default function RegisterForm() {
                             })}
                             type='password'
                             placeholder='Enter your password'
-                            className='mt-1 mb-6 w-full rounded-lg border border-gray-300 px-4 py-3 pl-12 focus:ring-brand-primary focus:outline-none focus:ring-2'
+                            className='input pl-11'
                         />
                     </div>
 
                     {errors.password && (
-                        <p className='mb-6 text-sm text-red-500'>{errors.password.message}</p>
+                        <p className='-mt-3 mb-4 text-sm text-red-600'>{errors.password.message}</p>
                     )}
 
                     <div className='flex items-center gap-2 pb-6'>
@@ -108,22 +107,22 @@ export default function RegisterForm() {
                                 {...register('venueManager')}
                             />
                             <span
-                                className='absolute inset-0 rounded-full bg-gray-300 transition-colors peer-checked:bg-brand-primary'/>
+                                className='absolute inset-0 rounded-full bg-divider transition-colors peer-checked:bg-accent'/>
                             <span
-                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-md transition-transform'/>
+                                className='absolute top-0 left-0 h-6 w-6 peer-checked:translate-x-full rounded-full bg-white shadow-sm ring-1 ring-divider transition-transform'/>
                         </label>
 
-                        <span className='flex items-center gap-1 text-gray-800'>
+                        <span className='flex items-center gap-1 text-ink text-sm'>
                             <label htmlFor='register-venue-manager' className='cursor-pointer'>
                                 I want to register as a venue manager
                             </label>
                             <span className='relative group' onClick={() => setVisible(!visible)}>
                                 <HelpCircle
                                     size={16}
-                                    className='cursor-pointer text-gray-400 hover:text-gray-600'
+                                    className='cursor-pointer text-placeholder hover:text-graphite'
                                 />
                                 <div
-                                    className={`absolute bottom-full left-1/2 -mb-2 w-32 -translate-x-2/2 whitespace-normal rounded bg-gray-700 p-2 text-xs text-white
+                                    className={`absolute bottom-full left-1/2 -mb-2 w-32 -translate-x-2/2 whitespace-normal rounded-control bg-ink p-2 text-xs text-white
                                     ${visible ? 'block' : 'hidden'} group-hover:block`}
                                 >
                                     Venue manager's can create and manage venues and bookings.
@@ -134,17 +133,15 @@ export default function RegisterForm() {
 
                     <button
                         type='submit'
-                        className='mb-6 w-full cursor-pointer rounded py-3 text-white bg-brand-primary hover:bg-brand-hover transition duration-200'
+                        className='btn-primary mt-2 w-full py-3'
                     >
                         Register
                     </button>
 
-                    <div className='text-center'>
-                        Back to{' '}
-                        <Link to='/login' className='cursor-pointer pl-1 text-brand-primary hover:underline'>
-                            login
-                        </Link>
-                    </div>
+                    <p className='mt-6 text-center text-graphite'>
+                        Already have an account?{' '}
+                        <Link to='/login' className='link font-semibold'>Log in</Link>
+                    </p>
                 </form>
             </div>
         </div>
